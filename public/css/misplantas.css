@@ -1,0 +1,508 @@
+
+
+    /* Reset de estilos básicos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  margin: 0;
+  background-image: url('../images/imagendelfondo3.jpg'),
+  linear-gradient(to bottom, rgba(0, 0, 0, 0.106), rgba(0, 0, 0, 0.203));
+		background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+		background-position: center; /* Centra la imagen */
+		/* Configura que la imagen no se repita */
+		/* Configura el orden de superposición de los fondos */
+		background-blend-mode: overlay;
+ 
+  color: #fff; /* Asegura que el texto sea legible sobre el fondo oscuro */
+  padding: 0;
+    box-sizing: border-box
+}
+
+.navbar {
+  background-color: #d2dbd41f; /* Fondo semitransparente para la barra de navegación */
+  color: #fff;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-container .imagen {
+  flex: 1;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  flex: 2;
+  justify-content: center;
+}
+
+.nav-item {
+  margin-left: 20px;
+  position: relative; /* Añadido para alinear los íconos */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ff6347;
+}
+
+/* Estilos para el menú de hamburguesa */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 4px 0;
+  transition: 0.3s;
+}
+/* Estilos para el buscador */
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  padding: 20px;
+  margin-top: 70px; /* Ajuste para evitar que el buscador quede debajo del menú */
+}
+.search-input {
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+.search-button {
+  padding: 10px;
+  background-color: #fff;
+  color: #333;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.search-button i {
+  font-size: 16px;
+}
+/* Estilos para el botón de agregar planta */
+.add-plant-container {
+  display: flex;
+  justify-content:center;
+  margin-top: 20px;
+}
+
+.add-plant-button {
+  padding: 10px 20px;
+  background-color: #2b6535;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-plant-button:hover {
+  background-color: #2b6535;
+}
+
+.add-plant-button i {
+  margin-right: 5px;
+}
+
+/*modal de detalles*/
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-info {
+  text-align:justify;
+  color: #000; /* Color del texto del contenido del modal */
+}
+
+.modal-info img {
+  display: block;
+  margin: 0 auto 20px;
+  width: 100%;
+  max-width: 150px;
+}
+
+
+/* Estilos para la tabla */
+.table-container {
+  margin-top: 70px; /* Ajustado para separar la tabla del menú */
+  margin-bottom: 20px; /* Añadido margen inferior para separar del borde inferior */
+  width: 80%;
+  margin-left: auto; /* Centra la tabla en dispositivos grandes */
+  margin-right: auto; /* Centra la tabla en dispositivos grandes */
+  background-color: #2b6535c8;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #000;
+}
+
+.custom-table td {
+  border: 1px solid #ffffff;
+  padding: 10px;
+  text-align: center;
+}
+
+.custom-table tr:first-child td {
+  border-top: none; /* Elimina la línea superior de la primera fila */
+}
+a {
+            text-decoration: none;
+            color: #ffffff; /* Color del texto */
+            font-weight: bold;
+        }
+        a:hover {
+            color: #ffffffec; /* Color del texto al pasar el mouse por encima */
+        }
+/* Estilos para las tarjetas */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 90%;
+}
+
+.card {
+  background-color: rgba(43, 205, 73, 0.9); /* Fondo semitransparente para las tarjetas */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-content h3 {
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.card-content p {
+  color: #fff;
+}
+/* Estilos para el modal */
+.modal {
+  display: none; /* Ocultar inicialmente el modal */
+  position: fixed; /* Fijar el modal en la pantalla */
+  z-index: 1000; /* Z-index alto para que esté por encima del contenido */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Habilitar desplazamiento si el contenido es largo */
+  background-color: rgba(0,0,0,0.4); /* Fondo semitransparente */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* Centrar verticalmente y ajustar el margen */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px; /* Ancho máximo del modal */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.modal-content .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-content .close:hover,
+.modal-content .close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+.modal-content form {
+  text-align: left;
+}
+
+.modal-content .form-group {
+  margin-bottom: 15px;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.modal-content input,
+.modal-content select {
+  width: calc(100% - 22px); /* Ajuste para el borde */
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.modal-content button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #2bcd49;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button[type="submit"]:hover {
+  background-color: #27b342;
+}
+/*chatttttt booooot*/
+
+.chatbot {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    border: 1px solid #ccc;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.chatbot-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.chatbot-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.user-message, .bot-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.user-message {
+    background-color: #e1ffc7;
+    align-self: flex-end;
+}
+
+.bot-message {
+    background-color: #f1f1f1;
+    align-self: flex-start;
+}
+
+.chatbot-footer {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.chatbot-footer input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.chatbot-footer button {
+    margin-left: 10px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.open-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .chatbot {
+        width: 90%;
+        height: 300px;
+        right: 5%;
+        bottom: 5%;
+        border-radius: 10px;
+    }
+
+    .open-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 14px;
+    }
+}
+/*fin  hat*/
+
+
+@media screen and (max-width: 768px) {
+  .modal-content {
+    width: 90%;
+    margin: 10% auto;
+  }
+}
+
+/* Estilos adicionales para el botón de agregar planta */
+.add-plant-button {
+  margin: 20px;
+  padding: 10px 20px;
+  background-color: #2bcd49;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-plant-button:hover {
+  background-color: #27b342;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: rgba(51, 51, 51, 0.9);
+  }
+
+  .nav-item {
+    margin: 10px 0;
+    position: static; /* Ajuste para el ícono */
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Clase para mostrar el menú cuando está activo */
+.nav-menu.active {
+  display: flex;
+}
+

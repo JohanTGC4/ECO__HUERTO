@@ -1,0 +1,335 @@
+
+/* Reset de estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    margin: 0;
+    background-image: url('../images/imagendelfondo3.jpg'),
+		linear-gradient(to bottom, rgba(0, 0, 0, 0.106), rgba(0, 0, 0, 0.203));
+    background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-attachment: fixed; /* Fija la imagen de fondo */
+    /* Configura el orden de superposición de los fondos */
+    background-blend-mode: overlay;
+    color: #fff;
+}
+
+.navbar {
+  background-color: #d2dbd41f; /* Fondo semitransparente para la barra de navegación */
+  color: #fff;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-container .imagen {
+  flex: 1;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  flex: 2;
+  justify-content: center;
+}
+
+.nav-item {
+  margin-left: 20px;
+  position: relative; /* Añadido para alinear los íconos */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ff6347;
+}
+
+/* Estilos para el menú de hamburguesa */
+.hamburger {
+  display: none; /* Ocultar el menú de hamburguesa en vistas de escritorio */
+  flex-direction: column;
+  cursor: pointer;
+  order: 1; /* Asegurar que el ícono de hamburguesa esté primero en el orden */
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 4px 0;
+  transition: 0.3s;
+}
+
+/* Estilos para el formulario de publicación */
+.blog-form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 20px;
+    max-width: 400px;
+    margin: 0 auto 20px; /* Centrar el formulario */
+}
+
+.blog-form input,
+.blog-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.blog-form input {
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.blog-form textarea {
+    height: 60px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+}
+
+.upload-label {
+    display: inline-block;
+    background-color: #2bcd49;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-label:hover {
+    background-color: #2bcd49;
+}
+
+#image-upload {
+    display: none;
+}
+
+#image-preview {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#preview-image {
+    max-width: 100%;
+    max-height: 100px; /* Tamaño máximo de la vista previa */
+    border-radius: 8px;
+    display: none; /* Ocultar la vista previa inicialmente */
+}
+
+.blog-form button {
+    background-color: #2bcd49;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.blog-form button:hover {
+    background-color: #2bcd49;
+}
+
+/* Estilos para las publicaciones */
+/* Estilos generales */
+.container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.hamburger {
+    cursor: pointer;
+}
+
+.nav-menu {
+    display: flex; /* Asegurar que el menú se muestre por defecto */
+}
+
+.nav-menu.active {
+    display: block;
+}
+
+main {
+    padding: 20px 0;
+}
+
+.form-section {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#preview-image {
+    max-width: 100px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* Estilos para las publicaciones */
+.blog-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.blog-post {
+    background-color:  #d2dbd41f;
+    border: 3px solid #50995b;
+    border-radius: 10px;
+    padding: 9px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.blog-post img {
+    max-width: 70%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.blog-post p {
+    font-size: 15px;
+    line-height: 1.4;
+    margin: 10px 0;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.blog-post .post-meta {
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-align: center;
+}
+ /* Estilos básicos */
+ .container {
+    padding: 20px;
+}
+.add-plant-container {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.add-plant-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+/* Estilos del modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.upload-label {
+    display: inline-block;
+    margin-top: 10px;
+    cursor: pointer;
+}
+#image-preview {
+    margin-top: 10px;
+}
+
+
+
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .navbar-container {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .nav-menu {
+      display: none; /* Ocultar el menú por defecto en móviles */
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background-color: rgba(51, 51, 51, 0.9);
+      padding: 10px 0;
+      z-index: 999; /* Asegurar que el menú sea visible sobre otros contenidos */
+  }
+
+  .nav-item {
+      margin: 10px 20px;
+      position: static;
+  }
+
+  .hamburger {
+      display: flex; /* Mostrar el ícono del menú en dispositivos móviles */
+      order: 2; /* Asegurar que el ícono de hamburguesa esté después del logo */
+      margin-right: 20px; /* Añadir margen para separar del logo */
+  }
+
+  .nav-menu.active {
+      display: flex; /* Mostrar el menú al hacer clic en el ícono del menú */
+  }
+}
