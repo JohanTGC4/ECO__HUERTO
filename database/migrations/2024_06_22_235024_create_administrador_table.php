@@ -13,8 +13,8 @@ class CreateAdministradorTable extends Migration
             $table->string('nombre', 200);
             $table->string('apellidop', 200);
             $table->string('apellidom', 200);
-            $table->string('correo', 200);
-            $table->string('contrasena', 200);
+            $table->string('email', 200);
+            $table->string('password', 200);
             $table->timestamps();
         });
     }

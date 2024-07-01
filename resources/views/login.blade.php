@@ -16,20 +16,24 @@
     
     
 			<div class="signup">
-				<form action="{{ route('home') }}">
+				@csrf
+				<form action="{{ route('loginUsuario') }}" method="POST">
+					@csrf
 					<label for="chk" aria-hidden="true">Iniciar Sesión</label>
 					<input type="email" name="email" placeholder="Correo Electrónico" required="">
-          <input type="password" name="broj" placeholder="Contraseña" required="">
+          <input type="password" name="password" placeholder="Contraseña" required="">
 					<button>Iniciar sesión</button>
 				</form>
 			</div>
 
 			<div class="login">
-				<form>
+				@csrf
+				<form action="{{ route('registrar') }}" method="POST">
+					@csrf
 					<label for="chk" aria-hidden="true">Registar</label>
-          <input type="text" name="txt" placeholder="Nombre " required="">
-					<input type="email" name="email" placeholder="Correo Electrónico" required="">
-					<input type="password" name="pswd" placeholder="Contraseña" required="">
+          <input type="text" name="usuario" placeholder="Nombre " required="">
+					<input type="email" name="correo" placeholder="Correo Electrónico" required="">
+					<input type="password" name="contrasena" placeholder="Contraseña" required="">
 					<button>Registar</button>
 				</form>
 			</div>
