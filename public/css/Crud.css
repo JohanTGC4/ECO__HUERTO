@@ -1,0 +1,155 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: url(../images/fondo-cultivo.jpg);
+    background: cover, no-repeat, center, fixed;
+    height: 100vh;
+}
+
+.main-content{
+    position: relative;
+    /* background-color: #e0dfdf; */
+    min-height: 100vh;
+    top: 0;
+    left: 80px;
+    transition: all 0.5s ease;
+    width: calc(100% - 80px);
+    padding: 1rem;
+}
+
+.main-content h1{
+    margin-bottom: 20px;
+}
+
+button{
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.add{
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #4bc130;
+}
+
+.Inp{
+    padding: 10px 20px;
+    margin: 0 10px;
+    outline: none;
+    border: 1px solid #4bc130;
+    border-radius: 6px;
+    color: #4bc130;
+}
+
+::placeholder{
+    color: #4bc130;
+}
+
+div.table{
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0.4rem 0.8rem #0005;
+    border-radius: 10px;
+}
+
+.table-header{
+    padding: 20px;
+}
+
+.table-header div{
+    margin-bottom: 20px;
+}
+
+.table-header p{
+    font-size: 20px;
+    color: #4bc130;
+    margin-bottom: 20px;
+}
+
+table{
+    background-color: #f2f2f2;
+    width: 100%;
+    table-layout: fixed;
+    min-width: 900px;
+}
+
+table, th, td{
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: center;
+}
+
+thead th{
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #d5d1defe;
+}
+
+tbody tr:nth-child(even){
+    background-color: #d6d6d6;
+}
+
+tbody tr:hover{
+    color: #4bc130;
+    background-color: #fff6;
+}
+
+td img{
+    width: 80px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.table-body{
+    border-radius: 10px;
+    height: 500px;
+    overflow: auto;
+}
+
+.actions{
+    font-size: 15px;
+}
+
+td button:nth-child(1){
+    background-color: #0298cf;
+}
+
+td button:nth-child(2){
+    background-color: #4bc130;
+}
+
+td button:nth-child(3){
+    background-color: #cf0202;
+}
+
+::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb{
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}

@@ -77,7 +77,31 @@ Route::get('/misplantas', [MisPlantasController::class, 'index'])->name('misplan
 });
 
 
+
+Route::group(['prefix' => 'administradores', 'middleware' => 'auth:admin'], function() {
+
+   Route::get('/homeAdmin', function () { 
+       return view('Plantas.homeCrud');
+})->name('homeAdmin');
+Route::get('/categoryCrud', function () { 
+    return view('Plantas.homeCrud');
+})->name('categoryCrud');
+
+Route::get('/productCrud', function () { 
+    return view('Plantas.homeCrud');
+})->name('productCrud');
+
+Route::get('/homeAdmin', function () { 
+    return view('Plantas.homeCrud');
+})->name('homeAdmin');
+ 
+  
+});
+
+
 Route::post('/loginUsuario', [UsuarioController::class, 'login'])->name('loginUsuario');
 
 
 Route::post('/registrar', [UsuarioController::class, 'register'])->name('registrar');
+
+Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');

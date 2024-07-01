@@ -55,10 +55,8 @@ class UsuarioController extends Controller
             $userId = Auth::id();
             $nombre = session('nombre');
         
-            print_r($nombre);
-            print_r($userId);
-            die();
-            return redirect("usuarios/perfilC");
+         
+            return to_route("homeAdmin");
           
             
         }else{
@@ -112,6 +110,6 @@ class UsuarioController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return view('login');
     }
 }
