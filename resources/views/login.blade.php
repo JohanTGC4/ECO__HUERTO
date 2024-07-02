@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
- s
+ 
 	<div class="main">  
     	
 		<input type="checkbox" id="chk" aria-hidden="true">
@@ -16,9 +16,8 @@
     
     
 			<div class="signup">
-				@csrf
-				<form action="{{ route('loginUsuario') }}" method="POST">
-					@csrf
+				
+				<form action="{{ route('home') }}">
 					<label for="chk" aria-hidden="true">Iniciar Sesión</label>
 					<input type="email" name="email" placeholder="Correo Electrónico" required="">
           <input type="password" name="password" placeholder="Contraseña" required="">

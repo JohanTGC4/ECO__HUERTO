@@ -176,6 +176,7 @@ input, select, textarea {
 
 	p {
 		margin: 0 0 2em 0;
+		text-align: center;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -1845,7 +1846,7 @@ input, select, textarea {
 		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		border-radius: 6px;
+		border-radius: 9px;
 		border: 0;
 		cursor: pointer;
 		display: inline-block;
@@ -3676,6 +3677,10 @@ input, select, textarea {
 				box-shadow: none;
 				background-color: #ffffff;
 				color: #46e576 !important;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				
 			}
 
 		#header label {

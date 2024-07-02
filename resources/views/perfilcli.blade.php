@@ -11,23 +11,19 @@
       </head>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-container">
-          <a href="#" class="imagen"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}" width="60" alt=""></a>
-          <ul class="nav-menu">
-            <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"> Mi Huerto </a><i class="fa fa-home" aria-hidden="true"></i></li>
-            <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link">Comprar </a><i class="fa fa-shopping-bag" aria-hidden="true"></i></li>
-            <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link">Blog </a><i class="fa fa-tag" aria-hidden="true"></i></li>
-            <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link">Perfil </i></a><i class="fa fa-user-circle" aria-hidden="true"></i></li>
-          </ul>
-          <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </div>
-        
-        </div>
-      </nav>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="#" class="imagen"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}" style="border-radius: 50%; width: 60px;" alt=""></a>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Blog</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+  </nav>
+  
       <br>
       <br>
       <br>
@@ -36,9 +32,9 @@
     <div class="profile-info">
       <img src="{{ asset('images/avatar1.jpg') }}" alt="Foto de Perfil" class="profile-img">
       <div class="info">
-        <p><strong>Nombre:</strong> <span id="userName">{{ $user['usuario'] }}</span></p>
-        <p><strong>Email:</strong> <span id="userEmail">{{ $user['email'] }}</span></p>
-        <p><strong>Dirección:</strong> <span id="userEmail">{{ $user['direccion'] }}</span></p>
+        <p><strong>Nombre:</strong> <span id="userName">Juan Pérez</span></p>
+        <p><strong>Correo Electrónico :</strong> <span id="userEmail">juan.perez@example.com</span></p>
+        <p><strong>Dirección:</strong> <span id="userEmail">juan.perez@example.com</span></p>
         <button class="edit-btn" onclick="openEditModal()">Editar Información</button>
 
       </div>
@@ -57,8 +53,11 @@
         <label for="editName">Nombre:</label>
         <input type="text" id="editName" name="editName" value="Juan Pérez">
         
-        <label for="editEmail">Email:</label>
+        <label for="editEmail">Correo Electrónico:</label>
         <input type="email" id="editEmail" name="editEmail" value="juan.perez@example.com">
+
+        <label for="editEmail">Dirección:</label>
+        <input type="text" id="editEmail" name="editEmail" value="juan.perez@example.com">
         
         <label for="direccion">Calle:</label>
         <input type="text" id="direccion" name="direccion" value="Hemiciclo a juarez #251">

@@ -16,9 +16,11 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="content">
+					<p><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}"  style="border-radius: 50%; width: 100px;"></p>
 					<h1><a href="#">Bienvenido a Eco Huerto</a></h1>
 					<p> <img src="{{ asset('images/twit2-removebg-preview.png') }}"  width="350"></p>
 					<ul class="actions">
+						<br>
 						<li><a href="{{ route('login') }}" class="button primary  fa fa-arrow-circle-right">Empezar</a></li>
 					</ul>
 				</div>

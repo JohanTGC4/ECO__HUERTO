@@ -11,7 +11,7 @@
 <body>
   <nav class="navbar">
     <div class="navbar-container">
-      <a href="#" class="imagen"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}" width="60" alt=""></a>
+      <a href="{{ route('home') }}" class="imagen"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}"style="border-radius: 50%; width: 60px;" alt=""></a>
       <ul class="nav-menu">
         <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"> Mi Huerto </a><i class="fa fa-home" aria-hidden="true"></i></li>
         <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link">Comprar </a><i class="fa fa-shopping-bag" aria-hidden="true"></i></li>
