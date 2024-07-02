@@ -31,7 +31,7 @@
   <main class="container">
     <section class="card-section">
       <div class="card">
-        <img src="images/tierra.jpg" alt="Imagen 1" class="card-img">
+        <img src="{{ asset('images/tierra.jpg') }}" alt="Imagen 1" class="card-img">
         <div class="card-content">
           <p>Tierra para su plantita</p>
           <p>$300.00</p>

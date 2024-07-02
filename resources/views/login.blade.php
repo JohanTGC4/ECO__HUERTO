@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
- <a href="index.html"> <img  src="images/logoEcoHuerto2-removebg-preview.png" width="200"></a>
+ s
 	<div class="main">  
     	
 		<input type="checkbox" id="chk" aria-hidden="true">
@@ -30,11 +30,11 @@
 				@csrf
 				<form action="{{ route('registrar') }}" method="POST">
 					@csrf
-					<label for="chk" aria-hidden="true">Registar</label>
+					<label for="chk" aria-hidden="true">Registrar</label>
           <input type="text" name="usuario" placeholder="Nombre " required="">
 					<input type="email" name="correo" placeholder="Correo Electrónico" required="">
 					<input type="password" name="contrasena" placeholder="Contraseña" required="">
-					<button>Registar</button>
+					<button>Registrar</button>
 				</form>
 			</div>
 	</div>

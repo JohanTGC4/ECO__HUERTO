@@ -22,7 +22,7 @@
 						<li><a href="{{ route('login') }}" class="button primary  fa fa-arrow-circle-right">Empezar</a></li>
 					</ul>
 				</div>
-				<div class="image phone"><div class="inner"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}" alt="" /></div></div>
+				
 			</header>
 		<!-- Footer -->
 			<footer id="footer">

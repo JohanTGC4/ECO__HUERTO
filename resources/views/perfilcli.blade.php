@@ -36,8 +36,9 @@
     <div class="profile-info">
       <img src="{{ asset('images/avatar1.jpg') }}" alt="Foto de Perfil" class="profile-img">
       <div class="info">
-        <p><strong>Nombre:</strong> <span id="userName">Juan Pérez</span></p>
-        <p><strong>Email:</strong> <span id="userEmail">juan.perez@example.com</span></p>
+        <p><strong>Nombre:</strong> <span id="userName">{{ $user['usuario'] }}</span></p>
+        <p><strong>Email:</strong> <span id="userEmail">{{ $user['email'] }}</span></p>
+        <p><strong>Dirección:</strong> <span id="userEmail">{{ $user['direccion'] }}</span></p>
         <button class="edit-btn" onclick="openEditModal()">Editar Información</button>
 
       </div>
@@ -58,6 +59,9 @@
         
         <label for="editEmail">Email:</label>
         <input type="email" id="editEmail" name="editEmail" value="juan.perez@example.com">
+        
+        <label for="direccion">Calle:</label>
+        <input type="text" id="direccion" name="direccion" value="Hemiciclo a juarez #251">
         
         <button type="button" onclick="saveChanges()">Guardar Cambios</button>
       </form>

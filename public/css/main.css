@@ -2684,6 +2684,8 @@ input, select, textarea {
 	header p {
 		position: relative;
 		margin: 0 0 1.5em 0;
+		justify-content: center;
+		align-items: center;
 	}
 
 		@media screen and (max-width: 736px) {
@@ -3613,7 +3615,7 @@ input, select, textarea {
 	#header {
 	
 		/*background-color: #34b43f;*/
-		background-image: url('../images/fondopri.jpg'),
+		background-image: url('../images/imagendelfondo3.jpg'),
 		linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 		background-size: cover; /* Asegura que la imagen cubra todo el fondo */
 		background-position: center; /* Centra la imagen */

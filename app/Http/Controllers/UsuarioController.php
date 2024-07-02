@@ -15,8 +15,8 @@ class UsuarioController extends Controller
 
         $user = usuario::create([
             'usuario' => $request->usuario,
-            'correo' => $request->correo,
-            'contrasena' => Hash::make($request->contrasena),
+            'email' => $request->correo,
+            'password' => Hash::make($request->contrasena),
         ]);
        
         return view('login');
