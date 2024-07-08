@@ -13,20 +13,15 @@
    
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="{{ route('home') }}" class="imagen"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}"style="border-radius: 50%; width: 60px;" alt=""></a>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"> Mi Huerto </a><i class="fa fa-home" aria-hidden="true"></i></li>
-                <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link">Comprar </a><i class="fa fa-shopping-bag" aria-hidden="true"></i></li>
-                <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link">Blog </a><i class="fa fa-tag" aria-hidden="true"></i></li>
-                <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link">Perfil </i></a><i class="fa fa-user-circle" aria-hidden="true"></i></li>
-              </ul>
+          <a href="#" class="imagen"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}" style="border-radius: 50%; width: 60px;" alt=""></a>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
+            <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+            <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Blog</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+            <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
+          </ul>
         </div>
-    </nav>
+      </nav>
     
     <br><br><br><br><br><br>
     
@@ -83,22 +78,25 @@
         <br> <br>
         <div class="blog-posts" id="blog-posts">
             @foreach($posts as $post)
-            <div class="blog-post">
-                <div class="post-meta">
-                    Publicado por {{ $post->usuario }} el {{ $post->created_at }} 
+                <div class="blog-post">
+                    <div class="post-meta">
+                        Publicado por 
+                            {{ $post->usuario->usuario}} 
+                       
+                        el {{ $post->created_at }}
+                    </div>
+                  
+                    <p class="post-text">{{ $post->comentario }}</p>
+                    
+                    @if(isset($post->imagen))
+                        <img src="{{ asset('storage/' . $post->imagen) }}" alt="Imagen publicada">
+                    @endif
+        
+                    <button class="btn-editar" data-id="{{ $post->id }}" data-comentario="{{ $post->comentario }}" data-imagen="{{ $post->imagen }}">Editar</button>
                 </div>
-              
-                <p class="post-text">{{ $post->comentario }}</p>
-                @if(isset($post->imagen))
-                <img src="{{ asset('storage/' . $post->imagen) }}" alt="Imagen publicada">
-            @endif
-            
-       
-                <button id=".btn-editar" class="btn-editar" data-id="{{ $post->id }}" data-comentario="{{ $post->comentario }}" data-imagen="{{ $post->imagen }}">Editar</button>
-            </div>
             @endforeach     
         </div>
-       
+            
 </main>
 
 <div id="myModal" class="modal">

@@ -11,7 +11,7 @@ class BlogController extends Controller
     public function index()
     {
         $posts = Blog::with('usuario')->latest()->get();
-      
+       
         return view('blog', compact('posts'));
     }
 
@@ -20,7 +20,9 @@ class BlogController extends Controller
 public function show($id)
 {
     
-    $posts = Blog::with('usuario')->latest()->get(); // Cargar la relación 'usuario'
+    $posts = Blog::with('usuario')->latest()->get();
+    
+     // Cargar la relación 'usuario'
     return view('blog', compact('posts'));
 }
 
@@ -32,13 +34,13 @@ public function show($id)
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('assets/images', 'public');
         }
-        $id_usuario = 1; 
+       
         $post = new Blog();
         $post->comentario = $request->comentario;
         $post->imagen = $imagePath;
         $post->fecha = now(); 
         $post->hora = now()->format('H:i:s'); // Asignar la hora actual o el valor que necesites
-        $post->usuario_id_usuario = $id_usuario; // Asignar el ID del usuario existente
+        $post->usuario_id_usuario = Auth::id();// Asignar el ID del usuario existente
        
        
         $post->save();
@@ -75,13 +77,15 @@ public function show($id)
             $imagen = $request->file('imagen');
             $imageName = time() . '.' . $imagen->getClientOriginalExtension();
             // Guardar la nueva imagen
-            $post->imagen = $request->file('imagen')->store('assets/images', 'public');
-            $post->imagen = $imageName;
+          /*  $post->imagen = $request->file('imagen')->store('assets/images', 'public');
+            $post->imagen = $imageName;*/
+            $imagen->storeAs('public/assets/images', $imageName);
+            $post->imagen = 'assets/images/' . $imageName;
         }
 
         $post->save();
 
-      
+        return redirect()->route('blog.index');
     }
 
 }

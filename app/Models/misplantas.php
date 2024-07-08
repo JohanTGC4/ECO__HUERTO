@@ -20,10 +20,10 @@ class MisPlantas extends Model
     }*/
     public function planta()
     {
-        return $this->belongsTo(Planta::class, 'id_planta', 'id_planta');
+        return $this->belongsTo(Planta::class, 'planta_id_planta', 'id_planta');
     }
 
     public function usuario(){
-        return $this->belongsTo(Usuario::class, 'id_usuario');
+        return $this->belongsTo(Usuario::class, 'usuario_id_usuario', 'id_usuario');
     }
 }

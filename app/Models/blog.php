@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\usuario;
 
 class blog extends Model
 {
@@ -19,7 +20,8 @@ class blog extends Model
    
     public function usuario()
 {
-    return $this->belongsTo(Usuario::class, 'id_usuario'); // Ajusta 'id_usuario' según el nombre correcto de tu clave foránea
+    return $this->belongsTo(usuario::class, 'usuario_id_usuario', 'id_usuario');
+    
 }
 
     }

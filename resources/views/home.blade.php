@@ -12,20 +12,13 @@
 <body>
   <nav class="navbar">
     <div class="navbar-container">
-      <a href="{{ route('home') }}" class="imagen"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}"style="border-radius: 50%; width: 60px;" alt=""></a>
+      <a href="#" class="imagen"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}" style="border-radius: 50%; width: 60px;" alt=""></a>
       <ul class="nav-menu">
-        
-        <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"> Mi Huerto </a><i class="fa fa-home" aria-hidden="true"></i></li>
-        <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link">Comprar </a><i class="fa fa-shopping-bag" aria-hidden="true"></i></li>
-        <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link">Blog </a><i class="fa fa-tag" aria-hidden="true"></i></li>
-        <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link">Perfil </i></a><i class="fa fa-user-circle" aria-hidden="true"></i></li>
+        <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Blog</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
       </ul>
-      <div class="hamburger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
-    
     </div>
   </nav>
   <br>
@@ -54,7 +47,7 @@
       <div class="card-content">
         <h3>Lunes,junio 17</h3>
         <p>Regar planta de tomate</p>
-      </div>
+      </div> 
     </div>
   </div>
   <script src="scripts.js"></script>

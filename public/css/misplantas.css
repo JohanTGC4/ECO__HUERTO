@@ -61,11 +61,48 @@ body {
   color: #fff;
   font-size: 18px;
   transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link i {
+  margin-left: 5px;
 }
 
 .nav-link:hover {
   color: #ff6347;
 }
+.button-group {
+  display: flex;
+  justify-content: flex-start; /* Alinea los botones a la izquierda */
+  gap: 10px; /* Espacio entre los botones */
+  margin-top: 20px; /* Espacio superior para separar los botones del contenido anterior */
+}
+
+.custom-button {
+  padding: 8px 16px; /* Ajusta el espacio dentro de los botones */
+  font-size: 14px; /* Tamaño del texto de los botones */
+  cursor: pointer; /* Cambia el cursor al pasar sobre los botones */
+  border: none; /* Sin bordes */
+  border-radius: 5px; /* Bordes redondeados */
+  background-color: #318d34; /* Color de fondo verde claro */
+  color: #fff; /* Color de texto blanco */
+  transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+}
+
+.custom-button:hover {
+  background-color: #6e8d6f; /* Cambio de color al pasar el mouse */
+}
+
+.details-button {
+  background-color: #318d34; /* Color de fondo para el botón de detalles */
+}
+
+.info-button {
+  background-color: #318d34; /* Color de fondo para el botón de información */
+}
+
+
 /* Estilos para el buscador */
 .search-container {
   display: flex;
@@ -101,25 +138,6 @@ body {
   margin-top: 20px;
 }
 
-.add-plant-button {
-  padding: 10px 20px;
-  background-color: #2b6535;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.add-plant-button:hover {
-  background-color: #2b6535;
-}
-
-.add-plant-button i {
-  margin-right: 5px;
-}
-
 /* Estilos para la tabla */
 .table-container {
   margin-top: 70px; /* Ajustado para separar la tabla del menú */
@@ -152,11 +170,13 @@ a {
         }
         a:hover {
             color: #ffffffec; /* Color del texto al pasar el mouse por encima */
+
+
         }
-/* Estilos para las tarjetas */
+      
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
   padding: 20px;
   margin: 0 auto;
@@ -165,7 +185,7 @@ a {
 }
 
 .card {
-  background-color: rgba(43, 205, 73, 0.9); /* Fondo semitransparente para las tarjetas */
+  background-color: rgba(40, 73, 46, 0.9); /* Fondo semitransparente para las tarjetas */
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -301,42 +321,29 @@ a {
   background-color: #27b342;
 }
 
-/* Estilos responsivos */
+
 /* Estilos responsivos */
 @media (max-width: 768px) {
-  .nav-menu {
-      display: none; /* Ocultar el menú por defecto en pantallas pequeñas */
-      flex-direction: column;
-      width: 100%;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      background-color: rgba(51, 51, 51, 0.9);
-      transition: transform 0.3s ease; /* Transición para mostrar/ocultar el menú */
-      transform: translateY(-100%);
+  .nav-link span {
+    display: none; /* Ocultar el texto de los enlaces en dispositivos móviles */
   }
 
-  .nav-menu.active {
-      display: flex; /* Mostrar el menú cuando está activo */
-      transform: translateY(0); /* Mostrar el menú deslizándolo hacia abajo */
+  .imagen {
+    display: none; /* Ocultar el logo en dispositivos móviles */
   }
 
   .nav-item {
-      margin: 10px 0;
-      position: static; /* Ajuste para el ícono */
+    position: relative;
   }
 
-  .mobile-menu-btn {
-      display: block; /* Mostrar el botón del menú en dispositivos móviles */
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 24px;
-      cursor: pointer;
-      padding: 10px;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 1500; /* Asegurar que esté por encima del menú */
+  .nav-menu {
+    gap: 10px;
   }
+
+  .nav-link i {
+    font-size: 30px; /* Ajustar tamaño de íconos en dispositivos móviles */
+  }
+
+
+  
 }

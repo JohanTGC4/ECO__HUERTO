@@ -16,8 +16,9 @@
     
     
 			<div class="signup">
-				
-				<form action="{{ route('home') }}">
+				@csrf
+				<form action="{{ route('loginUsuario') }}" method="post">
+					@csrf
 					<label for="chk" aria-hidden="true">Iniciar Sesión</label>
 					<input type="email" name="email" placeholder="Correo Electrónico" required="">
           <input type="password" name="password" placeholder="Contraseña" required="">

@@ -20,7 +20,6 @@
       </ul>
     </div>
   </nav>
-  
   <br>
   <div class="search-container">
     <input type="text" class="search-input" placeholder="Buscar...">
@@ -69,6 +68,8 @@
     </div>
   </div>
 
+
+
   <!-- Contenedor de la tabla -->
   <div class="table-container">
     <table class="custom-table">
@@ -79,33 +80,46 @@
     </table>
   </div>
 
-  <!-- Sección de tarjetas -->
-   <!-- Sección de tarjetas -->
-   @foreach ($misplantas as $misplanta)
-        <div class="card-container">
-            <div class="card">
-                {{-- Si tienes imagen --}}
-                {{-- <img src="{{ asset(Storage::url($misplanta->planta->imagen)) }}" width="150" alt="{{ $misplanta->planta->nombre }}" class="card-img"> --}}
-                <div class="card-content">
-                    <p>{{ $misplanta->planta->nombre }}</p>
+  <div class="card-container">
+    @foreach ($misplantas as $misplanta)
+    <div class="card">
+        {{-- Imagen predeterminada si no hay imagen en la base de datos --}}
+        <img src="{{ asset('images/zanahoria.jpg') }}" width="150" alt="Imagen Predeterminada" class="card-img">
+        <div class="card-content">
+            @if ($misplanta->planta)
+                <p>{{ $misplanta->planta->nombre }}</p>
+            @endif
+            <div class="button-group">
+                <button class="custom-button details-button" type="button" data-toggle="modal" data-target="#modal-planta-{{ $misplanta->id }}">Detalles</button>
+                <button class="custom-button info-button" type="button">Ver más información</button>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal para detalles de la planta --}}
+    <div class="modal fade" id="modal-planta-{{ $misplanta->id }}" tabindex="-1" role="dialog" aria-labelledby="modalPlantaLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPlantaLabel">{{ $misplanta->planta->nombre }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('images/zanahoria.jpg') }}" width="100%" alt="Imagen de la planta">
+                    <p>{{ $misplanta->planta->descripcion }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
+    </div>
     @endforeach
-  <div class="card-container">
-    <div class="card" onclick="openModal('zanahoria')">
-      <img src="images/zanahoria.jpg" width="150" alt="Zanahoria" class="card-img">
-      <div class="card-content">
-        <p>Planta de zanahoria</p>
-      </div>
-    </div>
-    <div class="card" onclick="openModal('tomate')">
-      <img src="images/tomateplanta.jpg" width="150" alt="Tomate" class="card-img">
-      <div class="card-content">
-        <p>Planta de tomate</p>
-      </div>
-    </div>
-  </div>
+</div>
+
+  
 
   <!-- Modal para detalles de planta -->
   <div id="plantModal" class="modal">
@@ -212,6 +226,8 @@
         const fileInput = $('#imagen');
         const categoriaIdInput = $('#categoria_id'); // Selector para el campo oculto
         const agregarPlantaForm = $('#agregarPlantaForm');
+        const openModalBtn = $('[data-modal-target]');
+        const closeModalBtn = $('.close, #modal-container');
 
         openModalBtn.on('click', function() {
             console.log('Modal abierto');
@@ -303,6 +319,69 @@
             });
         });
     });
+    $(document).ready(function() {
+        const agregarPlantaForm = $('#agregarPlantaForm');
+
+        agregarPlantaForm.on('submit', function(event) {
+            event.preventDefault();
+
+            // Obtener los datos del formulario
+            const formData = new FormData(this);
+
+            // Realizar la solicitud AJAX para guardar la planta
+            $.ajax({
+                url: '{{ route('misPlantas.store') }}',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    console.log('Planta agregada correctamente:', response);
+
+                    // Limpiar el contenedor de tarjetas
+                    $('#card-container').empty();
+
+                    // Recorrer las plantas devueltas y agregarlas como tarjetas
+                    $.each(response, function(index, misplanta) {
+                        const cardHtml = `
+                            <div class="card">
+                                <img src="{{ asset(Storage::url('')) }}/${misplanta.planta.imagen}" width="150" alt="${misplanta.planta.nombre}" class="card-img">
+                                <div class="card-content">
+                                    <p>${misplanta.planta.nombre}</p>
+                                </div>
+                            </div>
+                        `;
+                        $('#card-container').append(cardHtml);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al agregar planta:', error);
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+    const openModalBtn = $('[data-modal-target]');
+    const closeModalBtn = $('.close, #modal-container');
+
+    openModalBtn.on('click', function() {
+      const modalId = $(this).attr('data-modal-target');
+      $(modalId).css('display', 'block');
+    });
+
+    closeModalBtn.on('click', function(event) {
+      if (event.target === this || event.target.className === 'close') {
+        $(this).css('display', 'none');
+      }
+    });
+
+    $(document).keyup(function(event) {
+      if (event.key === "Escape") {
+        closeModalBtn.css('display', 'none');
+      }
+    });
+  });
 </script>
 
 

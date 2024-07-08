@@ -32,6 +32,7 @@ class MisplantasController extends Controller
 
            // Obtener las plantas del usuario autenticado
     $misplantas = MisPlantas::where('usuario_id_usuario', $userId)
+    
     ->with('planta') // Cargar la relación planta
     ->get();
 
@@ -51,14 +52,14 @@ class MisplantasController extends Controller
                 return response()->json([], 400);
             }
         }
-    
+      
         // Si no es una solicitud AJAX, renderizar la vista con las categorías
         return view('misplantas', compact('categorias','misplantas'));
     }
        // Método para almacenar una nueva planta del usuario
        public function store(Request $request)
        {
-        $userId = 1;
+        $userId = Auth::id();
            // Obtener la planta seleccionada por su ID
            $planta = Planta::findOrFail($request->planta);
        
@@ -68,7 +69,11 @@ class MisplantasController extends Controller
                'planta_id_planta' => $planta->id_planta,
                'usuario_id_usuario' => $userId,
            ]);
-       
+           
+         // Obtener las plantas del usuario actualizadas
+    $misplantas = MisPlantas::where('usuario_id_usuario', $userId)
+    ->with('planta') // Cargar la relación planta
+    ->get();
            // Redireccionar o devolver una respuesta según tu lógica
            
            return redirect()->route('misPlantas.index')->with('success', 'Planta agregada correctamente');

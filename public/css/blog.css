@@ -21,64 +21,68 @@ body {
 }
 
 .navbar {
-  background-color: #d2dbd41f; /* Fondo semitransparente para la barra de navegación */
-  color: #fff;
-  padding: 10px 20px;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
+    background-color: #d2dbd41f; /* Fondo semitransparente para la barra de navegación */
+    color: #fff;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-container .imagen {
+    flex: 1;
+  }
+  
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    flex: 2;
+    justify-content: center;
+  }
+  
+  .nav-item {
+    margin-left: 20px;
+    position: relative; /* Añadido para alinear los íconos */
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link i {
+    margin-left: 5px;
+  }
+  
+  .nav-link:hover {
+    color: #ff6347;
+  }
+  /*boton de detalles*/
+  .button-group {
+    display: flex;
 
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar-container .imagen {
-  flex: 1;
-}
-
-.nav-menu {
-  list-style: none;
-  display: flex;
-  flex: 2;
-  justify-content: center;
-}
-
-.nav-item {
-  margin-left: 20px;
-  position: relative; /* Añadido para alinear los íconos */
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #fff;
-  font-size: 18px;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: #ff6347;
-}
-
-/* Estilos para el menú de hamburguesa */
-.hamburger {
-  display: none; /* Ocultar el menú de hamburguesa en vistas de escritorio */
-  flex-direction: column;
-  cursor: pointer;
-  order: 1; /* Asegurar que el ícono de hamburguesa esté primero en el orden */
-}
-
-.bar {
-  width: 25px;
-  height: 3px;
-  background-color: #fff;
-  margin: 4px 0;
-  transition: 0.3s;
-}
-
+    justify-content:center; /* Alinea los botones a la izquierda */
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px; /* Espacio superior para separar los botones del contenido anterior */
+  }
+  
+  .add-plant-button {
+    padding: 15px 30px; /* Aumenta el espacio dentro de los botones para hacerlos más grandes */
+    font-size: 18px; /* Ajusta el tamaño del texto de los botones */
+    cursor: pointer; /* Cambia el cursor al pasar sobre los botones */
+  }
+  
 /* Estilos para el formulario de publicación */
 .blog-form {
     background-color: #fff;
@@ -301,35 +305,23 @@ main {
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
-  .navbar-container {
-      flex-direction: column;
-      align-items: flex-start;
-  }
-
-  .nav-menu {
-      display: none; /* Ocultar el menú por defecto en móviles */
-      flex-direction: column;
-      width: 100%;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      background-color: rgba(51, 51, 51, 0.9);
-      padding: 10px 0;
-      z-index: 999; /* Asegurar que el menú sea visible sobre otros contenidos */
-  }
-
-  .nav-item {
-      margin: 10px 20px;
-      position: static;
-  }
-
-  .hamburger {
-      display: flex; /* Mostrar el ícono del menú en dispositivos móviles */
-      order: 2; /* Asegurar que el ícono de hamburguesa esté después del logo */
-      margin-right: 20px; /* Añadir margen para separar del logo */
-  }
-
-  .nav-menu.active {
-      display: flex; /* Mostrar el menú al hacer clic en el ícono del menú */
-  }
-}
+    .nav-link span {
+      display: none; /* Ocultar el texto de los enlaces en dispositivos móviles */
+    }
+  
+    .imagen {
+      display: none; /* Ocultar el logo en dispositivos móviles */
+    }
+  
+    .nav-item {
+      position: relative;
+    }
+  
+    .nav-menu {
+      gap: 10px;
+    }
+  
+    .nav-link i {
+      font-size: 30px; /* Ajustar tamaño de íconos en dispositivos móviles */
+    }
+}  

@@ -18,7 +18,6 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-
 .navbar {
   background-color: #d2dbd41f; /* Fondo semitransparente para la barra de navegación */
   color: #fff;

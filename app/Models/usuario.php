@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\blog;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 class usuario extends Authenticatable
 {
@@ -29,4 +30,9 @@ class usuario extends Authenticatable
 
     // Configurar el tipo de la clave primaria si es necesario
     protected $keyType = 'int';
+      // Relación uno a muchos con Blog
+      public function blog()
+      {
+          return $this->hasMany(blog::class, 'usuario_id_usuario', 'id_usuario');
+      }
 }

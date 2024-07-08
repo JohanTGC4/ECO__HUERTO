@@ -31,6 +31,10 @@ class UsuarioController extends Controller
             'email' => ['required'],
             'password' => ['required']
         ]);
+
+        // print_r($credenciales);
+        // print_r(Auth::guard('usuario')->attempt($credenciales));
+        // die();
       
         $credenciales = $request->only('email', 'password');
         // print_r($credenciales);
