@@ -38,7 +38,7 @@ class UsuarioController extends Controller
       
         $credenciales = $request->only('email', 'password');
         // print_r($credenciales);
-        // print_r(Auth::guard('usuario')->attempt($credenciales));
+        // print_r(Auth::guard('admin')->attempt($credenciales));
         // die();
         if (Auth::guard('usuario')->attempt($credenciales)) {
             Auth::shouldUse('usuario');

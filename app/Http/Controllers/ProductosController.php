@@ -1,66 +1,67 @@
 <?php
-
 namespace App\Http\Controllers;
+
+use App\Models\categoria;
+use App\Models\productos;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\categoria;
-use App\Models\planta;
 
-class PlantaController extends Controller
-{
+class ProductosController extends Controller{
     public function index(){
-      
-        $plants = planta::with('categoria')->latest()->get();
-        $cats = categoria::all();
-      
-        return view('admin.Plantas.homeCrud', compact('plants'),compact('cats'));
+        $prod = productos::all();
+       
+        return view('admin.Productos.productosCrud', compact('prod'));
     }
 
     public function create(){
-        return view('admin.Plantas.plantaCreate');
+        return view('admin.Categorias.categoryCreate');
     }
 
     public function store(Request $request){
         $request->validate([
             'nombre' => 'required',
+            'precio' => 'required',
+            'stock' => 'required',
             'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2046',
             'descripcion' => 'required',
-            'seleccion' => 'required|integer',
         ]);
 
         if($request->hasFile('imagen')){
             $imagePath = $request->file('imagen')->store('images', 'public');
         }else{
-            print_r("golasada");
-            die();
+            
             return back()->withErrors(['imagen' => 'Error al subir la imagen']);
         }
 
-        planta::create([
+        productos::create([
             'nombre' => $request->nombre,
+            'precio' => $request->precio,
+            'stock' => $request->stock,
             'imagen' => $imagePath,
             'descripcion' => $request->descripcion,
-            'id_categoriaplanta' => $request->seleccion,
         ]);
 
-        return redirect()->route('homeAdmin')->with('success', 'Planta agregada exitosamente');
+        return redirect()->route('productCrud')->with('success', '´Producto agregada exitosamente');
     }
 
     public function show($id){
-        $plant = planta::findOrFail($id);
-        return view('admin.Plantas.plantaShow', compact('plant'));
+        $prod = productos::findOrFail($id);
+        return view('admin.Productos.productoShow', compact('prod'));
     }
 
     public function edit($id){
-        $plant = planta::findOrFail($id);
-        return response()->json($plant);
+        $prod = productos::findOrFail($id);
+     
+        return response()->json($prod);
+    
     }
-   
 
     public function update(Request $request, $id){
-        $plant = planta::find($id);
+        $producto = productos::find($id);
         $request->validate([
             'nombre' => 'required',
+            'precio' => 'required',
+            'stock' => 'required',
             'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2046',
             'descripcion' => 'required',
         ]); 
@@ -71,20 +72,20 @@ class PlantaController extends Controller
             
             return back()->withErrors(['imagen' => 'Error al subir la imagen']);
         }
-        $plant->nombre = $request->nombre;
-        $plant->imagen = $imagePath;
-        $plant->descripcion = $request->descripcion;
+        $producto->nombre = $request->nombre;
+        $producto->precio = $request->precio;
+        $producto->stock = $request->stock;
+        $producto->imagen = $imagePath;
+        $producto->descripcion = $request->descripcion;
 
-        $plant->save();
+        $producto->save();
 
-        return redirect()->route('homeAdmin')->with('success', 'Categoría actualizada exitosamente');
+        return redirect()->route('productCrud')->with('success', 'Categoría actualizada exitosamente');
     }
 
-    
     public function destroy(String $id){
-        $cat = planta::findOrFail($id);
-        planta::where('id_categoriaplanta', $id)->delete();
-        $cat->delete();
+        $prod = productos::find($id);
+        $prod->delete();
         return redirect()->back();
     }
 }

@@ -50,6 +50,7 @@
             margin-top: 10px;
         }
     </style>
+      @laravelPWA
 </head>
 <body>
     <!-- Modal de edición -->

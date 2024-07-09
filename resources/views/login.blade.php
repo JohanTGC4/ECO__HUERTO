@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="slide navbar style.css">
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@laravelPWA
 </head>
 <body>
  
@@ -17,8 +18,9 @@
     
 			<div class="signup">
 				@csrf
-				<form action="{{ route('loginUsuario') }}" method="post">
+				<form action="{{ route('loginUsuario') }}"method="POST">
 					@csrf
+
 					<label for="chk" aria-hidden="true">Iniciar Sesión</label>
 					<input type="email" name="email" placeholder="Correo Electrónico" required="">
           <input type="password" name="password" placeholder="Contraseña" required="">
@@ -32,8 +34,8 @@
 					@csrf
 					<label for="chk" aria-hidden="true">Registrar</label>
           <input type="text" name="usuario" placeholder="Nombre " required="">
-					<input type="email" name="correo" placeholder="Correo Electrónico" required="">
-					<input type="password" name="contrasena" placeholder="Contraseña" required="">
+					<input type="email" name="email" placeholder="Correo Electrónico" required="">
+					<input type="password" name="password" placeholder="Contraseña" required="">
 					<button>Registrar</button>
 				</form>
 			</div>
