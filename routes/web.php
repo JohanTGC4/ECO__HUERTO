@@ -134,4 +134,5 @@ Route::post('/loginUsuario', [UsuarioController::class, 'login'])->name('loginUs
 
 Route::post('/registrar', [UsuarioController::class, 'register'])->name('registrar');
 
+
 Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');

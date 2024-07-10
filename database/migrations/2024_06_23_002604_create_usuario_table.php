@@ -10,9 +10,9 @@ class CreateUsuarioTable extends Migration
     {
         Schema::create('usuario', function (Blueprint $table) {
             $table->id('id_usuario');
+            $table->string('usuario', 200);
             $table->string('email', 200);
             $table->string('password', 200);
-            $table->string('correo', 200);
             $table->string('fotoperfil', 200)->nullable();
             $table->timestamps();
         });

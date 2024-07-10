@@ -16,10 +16,11 @@ class UsuarioController extends Controller
         $user = usuario::create([
             'usuario' => $request->usuario,
             'email' => $request->email,
-            'password' => Hash::make($request->contrasena),
+            'password' => Hash::make($request->password),
         ]);
        
-        return view('login');
+
+        return to_route('login');
     }
 
 
@@ -32,9 +33,9 @@ class UsuarioController extends Controller
             'password' => ['required']
         ]);
 
-        // print_r($credenciales);
-        // print_r(Auth::guard('usuario')->attempt($credenciales));
-        // die();
+        print_r($credenciales);
+        print_r(Auth::guard('usuario')->attempt($credenciales));
+        die();
       
         $credenciales = $request->only('email', 'password');
         // print_r($credenciales);
@@ -45,9 +46,9 @@ class UsuarioController extends Controller
             $userId = Auth::id();
             $nombre = session('nombre');
         
-            // print_r($nombre);
-            // print_r($userId);
-            // die();
+            print_r($nombre);
+            print_r($userId);
+            die();
             // Aquí puedes hacer lo que necesites con el ID y el nombre del usuario
            
             return to_route('perfilcli');
