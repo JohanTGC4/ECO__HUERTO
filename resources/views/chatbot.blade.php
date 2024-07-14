@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot</title>
     <link rel="stylesheet" href="{{ asset('css/chat.css') }}">
+    @laravelPWA
 </head>
 <body>
     <div class="chatbot">

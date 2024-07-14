@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoHuerto</title>
     <link rel="icon" href="{{ asset('images/logoEcoHuerto.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/perfilcli.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+=======
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>EcoHuerto</title>
+        <link rel="icon" href="{{ asset('images/logoEcoHuerto.png') }}" type="image/x-icon">
+        <link rel="stylesheet" href="{{ asset('css/perfilcli.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        @laravelPWA
+      </head>
+>>>>>>> 0dca31550e7abc1b2b14c0750c505789856f6b0a
 </head>
 <body>
 

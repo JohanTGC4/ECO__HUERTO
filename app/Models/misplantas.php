@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MisPlantas extends Model
+class misplantas extends Model
 {
     protected $table = 'misplantas';
     protected $primaryKey = 'id_misplantas'; // Asegúrate de especificar la clave primaria si es diferente a 'id'

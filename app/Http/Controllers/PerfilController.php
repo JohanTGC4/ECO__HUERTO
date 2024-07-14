@@ -70,8 +70,7 @@ class PerfilController extends Controller
            // Actualizar la dirección seleccionada del usuario
            $usuario->direccion_id_seleccionada = $request->input('direccion_select');
     
-        // Guardar los cambios en el usuario
-        $usuario->save();
+       
     
         return redirect()->route('perfilcli')->with('success', 'Perfil actualizado correctamente.');
     }
