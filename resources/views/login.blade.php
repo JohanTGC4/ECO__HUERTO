@@ -18,9 +18,14 @@
     
 			<div class="signup">
 				@csrf
+<<<<<<< Updated upstream
 				<form action="{{ route('loginUsuario') }}"method="POST">
 					@csrf
 
+=======
+				<form action="{{ route('loginUsuario') }}" method="post">
+					@csrf
+>>>>>>> Stashed changes
 					<label for="chk" aria-hidden="true">Iniciar Sesión</label>
 					<input type="email" name="email" placeholder="Correo Electrónico" required="">
           <input type="password" name="password" placeholder="Contraseña" required="">

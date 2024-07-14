@@ -41,6 +41,7 @@
 <div class="profile-container">
     <h2 class="h2">Perfil de {{ $usuario->usuario }}</h2>
     <div class="profile-info">
+<<<<<<< Updated upstream
         <img src="{{ asset('storage/' . $usuario->fotoperfil) }}" alt="Foto de Perfil" class="profile-img">
         <div class="info">
             <p><strong>Nombre:</strong> <span id="userName">{{ $usuario->usuario }}</span></p>
@@ -53,6 +54,16 @@
             <button class="edit-btn" onclick="openEditModal()">Editar Información</button>
             <button onclick="window.location.href='{{ route('login') }}'" class="salir-btn">Cerrar sesión</button>
         </div>
+=======
+      <img src="{{ asset('images/avatar1.jpg') }}" alt="Foto de Perfil" class="profile-img">
+      <div class="info">
+        <p><strong>Nombre:</strong> <span id="userName">{{$user['usuario']}}</span></p>
+        <p><strong>Correo Electrónico :</strong> <span id="userEmail">{{$user['email']}}</span></p>
+        <p><strong>Dirección:</strong> <span id="userEmail">{{$user['direccion']}}</span></p>
+        <button class="edit-btn" onclick="openEditModal()">Editar Información</button>
+
+      </div>
+>>>>>>> Stashed changes
     </div>
 </div>
 
@@ -69,6 +80,7 @@
             <label for="email">Correo Electrónico:</label>
             <input type="email" name="email" id="email" value="{{ $usuario->email }}" required>
 
+<<<<<<< Updated upstream
             <label for="profile_photo">Foto de Perfil:</label>
             <input type="file" name="fotoperfil" id="fotoperfil">
             <label for="direccion_select">Dirección:</label>
@@ -80,6 +92,14 @@
      
             <button type="submit">Guardar</button>
         </form>
+=======
+        <label for="editEmail">Dirección:</label>
+        <input type="text" id="editEmail" name="editEmail" value="juan.perez@example.com">
+        
+        <button type="button" onclick="saveChanges()">Guardar Cambios</button>
+      </form>
+      
+>>>>>>> Stashed changes
     </div>
 </div>
 <style>

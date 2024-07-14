@@ -145,7 +145,12 @@
         const fileInput = $('#imagen');
         const categoriaIdInput = $('#categoria_id'); // Selector para el campo oculto
         const agregarPlantaForm = $('#agregarPlantaForm');
+<<<<<<< Updated upstream
   
+=======
+        const openModalBtn = $('[data-modal-target]');
+        const closeModalBtn = $('.close, #modal-container');
+>>>>>>> Stashed changes
 
         openModalBtn.on('click', function() {
             console.log('Modal abierto');
@@ -279,7 +284,31 @@
         });
     });
 
+<<<<<<< Updated upstream
    
+=======
+    $(document).ready(function() {
+    const openModalBtn = $('[data-modal-target]');
+    const closeModalBtn = $('.close, #modal-container');
+
+    openModalBtn.on('click', function() {
+      const modalId = $(this).attr('data-modal-target');
+      $(modalId).css('display', 'block');
+    });
+
+    closeModalBtn.on('click', function(event) {
+      if (event.target === this || event.target.className === 'close') {
+        $(this).css('display', 'none');
+      }
+    });
+
+    $(document).keyup(function(event) {
+      if (event.key === "Escape") {
+        closeModalBtn.css('display', 'none');
+      }
+    });
+  });
+>>>>>>> Stashed changes
 </script>
 
 

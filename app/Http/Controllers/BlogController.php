@@ -77,13 +77,23 @@ public function show($id)
             $imagen = $request->file('imagen');
             $imageName = time() . '.' . $imagen->getClientOriginalExtension();
             // Guardar la nueva imagen
+<<<<<<< Updated upstream
+=======
+          /*  $post->imagen = $request->file('imagen')->store('assets/images', 'public');
+            $post->imagen = $imageName;*/
+>>>>>>> Stashed changes
             $imagen->storeAs('public/assets/images', $imageName);
             $post->imagen = 'assets/images/' . $imageName;
         }
     
         $post->save();
+<<<<<<< Updated upstream
     
         return redirect()->route('blog.index')->with('success', 'Post actualizado exitosamente');
+=======
+
+        return redirect()->route('blog.index');
+>>>>>>> Stashed changes
     }
     
 
