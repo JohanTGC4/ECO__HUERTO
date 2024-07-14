@@ -52,41 +52,40 @@ public function show($id)
     public function destroy($id)
     {
         $post = Blog::findOrFail($id);
-       
         $post->delete();
-
-        return redirect()->route('blog.index');
+    
+        return redirect()->route('blog.index')->with('success', 'Post eliminado exitosamente');
     }
+    
+
     public function edit($id)
     {
         $post = Blog::findOrFail($id);
       
         return view('blog.edit', compact('post'));
-       
-    
     }
-
+    
     public function update(Request $request, $id)
     {
         $post = Blog::findOrFail($id);
+        
         // Actualizar el comentario
         $post->comentario = $request->input('comentario');
-
+    
         // Actualizar la imagen si se proporciona una nueva
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
             $imageName = time() . '.' . $imagen->getClientOriginalExtension();
             // Guardar la nueva imagen
-          /*  $post->imagen = $request->file('imagen')->store('assets/images', 'public');
-            $post->imagen = $imageName;*/
             $imagen->storeAs('public/assets/images', $imageName);
             $post->imagen = 'assets/images/' . $imageName;
         }
-
+    
         $post->save();
-
-        return redirect()->route('blog.index');
+    
+        return redirect()->route('blog.index')->with('success', 'Post actualizado exitosamente');
     }
+    
 
 }
 

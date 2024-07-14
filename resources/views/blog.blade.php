@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +16,7 @@
           <ul class="nav-menu">
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
             <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
-            <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Blog</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+            <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Publicaciones</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
             <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
           </ul>
         </div>
@@ -72,30 +71,62 @@
     background-color: #0056b3;
 }
 </style>   
-        <div class="add-plant-container">
-            <button id="open-modal-btn" class="add-plant-button"><i class="fa fa-plus"></i> Crear publicación</button>
-        </div>
-        <br> <br>
-        <div class="blog-posts" id="blog-posts">
-            @foreach($posts as $post)
-                <div class="blog-post">
-                    <div class="post-meta">
-                        Publicado por 
-                            {{ $post->usuario->usuario}} 
-                       
-                        el {{ $post->created_at }}
-                    </div>
-                  
-                    <p class="post-text">{{ $post->comentario }}</p>
-                    
-                    @if(isset($post->imagen))
-                        <img src="{{ asset('storage/' . $post->imagen) }}" alt="Imagen publicada">
-                    @endif
+
+<main class="container">
+    <div class="add-plant-container">
+        <button id="open-modal-btn" class="add-plant-button"><i class="fa fa-plus"></i> Crear publicación</button>
+    </div>
+
+    <div class="blog-posts" id="blog-posts">
+        @foreach($posts as $post)
         
-                    <button class="btn-editar" data-id="{{ $post->id }}" data-comentario="{{ $post->comentario }}" data-imagen="{{ $post->imagen }}">Editar</button>
+            <div class="blog-post">
+                <div class="dropdown">
+                    <button class="dropbtn"><i class="fas fa-ellipsis-v"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#" class="edit-btn" onclick="openEditModal('{{ $post->id }}', '{{ $post->comentario }}', '{{ asset('storage/' . $post->imagen) }}')">Editar</a>
+                        <a href="#">Eliminar</a>
+                    </div>
                 </div>
-            @endforeach     
-        </div>
+                <div class="post-meta">
+                    Publicado por {{ $post->usuario->usuario }} el {{ $post->created_at }}
+                </div>
+                
+                <p class="post-text">{{ $post->comentario }}</p>
+                @if(isset($post->imagen))
+                    <img src="{{ asset('storage/' . $post->imagen) }}" alt="Imagen publicada">
+                @endif
+              
+                <div class="comments-section">
+                    <form method="POST">
+                        @csrf
+                        <textarea name="comentario" placeholder="Escribe un comentario..." required></textarea>
+                        <button type="submit">Comentar</button>
+                    </form>
+                    <div class="comments-list">
+                        <!-- Aquí se listarían los comentarios -->
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</main>
+                    <form method="POST">
+                        @csrf
+                        <textarea name="comentario" placeholder="Escribe un comentario..." required></textarea>
+                        <button type="submit">Comentar</button>
+                    </form>
+                    <div class="comments-list">
+                       
+                            <div class="comment">
+                                <div class="comment-meta">
+                                   
+                                </div>
+                                <p class="comment-text"></p>
+                            </div>
+                      
+                    </div>
+                </div>
             
 </main>
 
@@ -349,4 +380,5 @@ if (imagen) {
     </script>
 </body>
 </html>
+
 

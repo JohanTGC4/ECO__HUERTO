@@ -7,6 +7,7 @@
   <link rel="icon" href="{{ asset('css/images/logoEcoHuerto.png') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ asset('css/misplantas.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  @laravelPWA
 </head>
 <body>
   <nav class="navbar">
@@ -15,7 +16,7 @@
       <ul class="nav-menu">
         <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
-        <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Blog</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Publicaciones</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
       </ul>
     </div>
@@ -131,88 +132,6 @@
     </div>
   </div>
 
- <!-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    const openModalBtn = document.getElementById('open-modal-btn');
-    const modal = document.getElementById('plant-modal');
-    const closeModalBtn = document.querySelector('.close');
-    const categoriaSelect = document.getElementById('categoria');
-    const plantaSelect = document.getElementById('planta');
-    const previewImage = document.getElementById('preview-image');
-
-    // Función para abrir el modal al hacer clic en "Agregar Planta"
-    openModalBtn.addEventListener('click', function() {
-        modal.style.display = 'block';
-    });
-
-    // Función para cerrar el modal al hacer clic en la X
-    closeModalBtn.addEventListener('click', function() {
-        modal.style.display = 'none';
-    });
-
-    // Cerrar el modal haciendo clic fuera del contenido
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-
-    // Previsualizar imagen seleccionada
-    const fileInput = document.getElementById('imagen');
-    fileInput.addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                previewImage.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    // Cargar plantas basado en la categoría seleccionada
-    categoriaSelect.addEventListener('change', function() {
-        const categoriaId = this.value;
-        fetch('{{ route('misplantas.getPlantasByCategoria') }}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ categoria_id: categoriaId })
-        })
-        .then(response => response.json())
-        .then(data => {
-            plantaSelect.innerHTML = '<option value="" disabled selected>Selecciona la planta</option>';
-            data.forEach(planta => {
-                plantaSelect.innerHTML += `<option value="${planta.id}">${planta.nombre}</option>`;
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching plantas:', error);
-        });
-    });
-
-    // Obtener detalles de la planta seleccionada
-    plantaSelect.addEventListener('change', function() {
-        const plantaId = this.value;
-        fetch('{{ route('misplantas.getPlantaDetails') }}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ planta_id: plantaId })
-        })
-        .then(response => response.json())
-        .then(data => {
-            previewImage.src = '{{ asset('storage/images/') }}/' + data.imagen;
-        })
-        .catch(error => {
-            console.error('Error fetching planta details:', error);
-        });
-    });
-});-->
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -226,8 +145,7 @@
         const fileInput = $('#imagen');
         const categoriaIdInput = $('#categoria_id'); // Selector para el campo oculto
         const agregarPlantaForm = $('#agregarPlantaForm');
-        const openModalBtn = $('[data-modal-target]');
-        const closeModalBtn = $('.close, #modal-container');
+  
 
         openModalBtn.on('click', function() {
             console.log('Modal abierto');
@@ -361,27 +279,7 @@
         });
     });
 
-    $(document).ready(function() {
-    const openModalBtn = $('[data-modal-target]');
-    const closeModalBtn = $('.close, #modal-container');
-
-    openModalBtn.on('click', function() {
-      const modalId = $(this).attr('data-modal-target');
-      $(modalId).css('display', 'block');
-    });
-
-    closeModalBtn.on('click', function(event) {
-      if (event.target === this || event.target.className === 'close') {
-        $(this).css('display', 'none');
-      }
-    });
-
-    $(document).keyup(function(event) {
-      if (event.key === "Escape") {
-        closeModalBtn.css('display', 'none');
-      }
-    });
-  });
+   
 </script>
 
 

@@ -47,13 +47,17 @@ Route::get('/login', function () {
 
 Route::group(['prefix' => 'usuarios', 'middleware' => 'auth:usuario'], function() {
      Route::get('/perfilC', [PerfilController::class, 'index'])->name('perfilcli');
-    Route::get('/blog', [blogController::class, 'index'])->name('blog');
-   
-
-    Route::resource('/misPlantas', MisplantasController::class);
-
+     Route::put('/perfilcli/update', [PerfilController::class, 'update'])->name('perfilcli.update');
+     Route::post('/perfilcli/store', [PerfilController::class, 'store'])->name('perfilcli.store'); // Definición de la ruta para almacenar la dirección
+     Route::delete('/direccion/{id}', [PerfilController::class, 'destroy'])->name('direccion.destroy');
+     Route::get('/blog', [blogController::class, 'index'])->name('blog');
+    
+     Route::post('/perfilC/update', [PerfilController::class, 'update'])->name('perfilC.update');
+     Route::resource('/misPlantas', MisplantasController::class);
+     
 Route::resource('/blog', BlogController::class);
 Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
+Route::get('/blog/{id}',[BlogController::class, 'edit'])->name('blog.edit');
 
 Route::delete('blog/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
 
