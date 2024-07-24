@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/Crud.css')}}">
     <link rel="stylesheet" href="{{ asset('css/modalForm.css')}}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     @include('layouts.sidebar')
@@ -20,6 +21,42 @@
     <div class="main-content">
         <div class="container">
             <h1>Panel de administración</h1>
+
+            @if(session('success'))
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Éxito!',
+                        text: "{{ session('success') }}",
+                        confirmButtonColor: '#3085d6',
+                    });
+                </script>
+            @endif
+
+            @if($errors->any())
+        @foreach ($errors->all() as $error)
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    text: '{{ $error }}',
+                    confirmButtonColor: '#d33',
+                });
+            </script>
+        @endforeach
+        @endif
+
+          @if(session('error'))
+          <script>
+           Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            text: "{{ session('error') }}",
+            confirmButtonColor: '#d33',
+            });
+        </script>
+        @endif
+
             <!----- Aquí empieza el div de las tablas ----->
             <div class="table">
                 <div class="table-header">
@@ -53,9 +90,10 @@
                                     <td>
                                         <button class="btn-editar" data-id="{{ $cat->id_categoriaplanta }}"><i class="fa-solid fa-pen-to-square"></i></button>
                                         <p></p>
-                                        <form action="{{ route('admin.Categorias.category', $cat->id_categoriaplanta) }}" method="post">
-                                            @csrf
-                                            <button class="actions delete" ><i class="fa-solid fa-trash"></i></button>
+                                        <form action="{{ route('admin.Categorias.category', $cat->id_categoriaplanta) }}" method="post" class="delete-form">
+                                         @csrf
+                                         @method('DELETE')
+                                           <button class="actions delete" type="submit"><i class="fa-solid fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -146,9 +184,36 @@
 
     // Mostrar la vista previa de la imagen seleccionada
    
-});
+    });
+
+    // :::::::::::::::::::::::: ELIMINAR CATEGORIA ::::::::::::::::::::::::::
+
+    document.querySelectorAll('.delete').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); 
+
+            const form = this.closest('.delete-form'); 
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit(); 
+                }
+            });
+        });
+    });
+
+
             
-        </script>
+    </script>
 
 
     <script src="{{ asset('js/Sidebar.js')}}"></script>

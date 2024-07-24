@@ -20,31 +20,39 @@ class PlantaController extends Controller
         return view('admin.Plantas.plantaCreate');
     }
 
-    public function store(Request $request){
+    public function store(Request $request) {
         $request->validate([
-            'nombre' => 'required',
+            'nombre' => 'required|alpha|max:255',
             'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2046',
             'descripcion' => 'required',
             'seleccion' => 'required|integer',
+        ], [
+            'nombre.required' => 'El nombre debe tener datos validos.',
+            'imagen.required' => 'La imagen es obligatoria.',
+            'descripcion.required' => 'La descripción es obligatoria.',
+            'seleccion.required' => 'Debes seleccionar una categoría.',
         ]);
-
-        if($request->hasFile('imagen')){
-            $imagePath = $request->file('imagen')->store('images', 'public');
-        }else{
-            print_r("golasada");
-            die();
-            return back()->withErrors(['imagen' => 'Error al subir la imagen']);
+    
+        try {
+            if($request->hasFile('imagen')){
+                $imagePath = $request->file('imagen')->store('images', 'public');
+            } else {
+                return back()->withErrors(['imagen' => 'Error al subir la imagen']);
+            }
+    
+            planta::create([
+                'nombre' => $request->nombre,
+                'imagen' => $imagePath,
+                'descripcion' => $request->descripcion,
+                'id_categoriaplanta' => $request->seleccion,
+            ]);
+    
+            return redirect()->route('homeAdmin')->with('success', 'Planta agregada exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->route('homeAdmin')->with('error', 'Hubo un problema al agregar la planta');
         }
-
-        planta::create([
-            'nombre' => $request->nombre,
-            'imagen' => $imagePath,
-            'descripcion' => $request->descripcion,
-            'id_categoriaplanta' => $request->seleccion,
-        ]);
-
-        return redirect()->route('homeAdmin')->with('success', 'Planta agregada exitosamente');
     }
+    
 
     public function show($id){
         $plant = planta::findOrFail($id);
@@ -57,27 +65,33 @@ class PlantaController extends Controller
     }
    
 
-    public function update(Request $request, $id){
-        $plant = planta::find($id);
+    public function update(Request $request, $id)
+    {
         $request->validate([
-            'nombre' => 'required',
-            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2046',
+            'nombre' => 'required|regex:/^[\p{L} ]+$/u|max:255',
             'descripcion' => 'required',
-        ]); 
-
-        if($request->hasFile('imagen')){
-            $imagePath = $request->file('imagen')->store('images', 'public');
-        }else{
-            
-            return back()->withErrors(['imagen' => 'Error al subir la imagen']);
+            'categoria_id' => 'required|exists:categorias,id',
+            'imagen' => 'nullable|image'
+        ], [
+            'nombre.regex' => 'El nombre solo puede contener letras y espacios.',
+            'nombre.required' => 'El nombre es obligatorio.',
+            'descripcion.required' => 'La descripción es obligatoria.',
+            'categoria_id.required' => 'Debes seleccionar una categoría.',
+            'categoria_id.exists' => 'La categoría seleccionada no es válida.'
+        ]);
+    
+        $planta = Planta::findOrFail($id);
+        $planta->nombre = $request->nombre;
+        $planta->descripcion = $request->descripcion;
+        $planta->categoria_id = $request->categoria_id;
+    
+        if ($request->hasFile('imagen')) {
+            $planta->imagen = $request->file('imagen')->store('imagenes');
         }
-        $plant->nombre = $request->nombre;
-        $plant->imagen = $imagePath;
-        $plant->descripcion = $request->descripcion;
-
-        $plant->save();
-
-        return redirect()->route('homeAdmin')->with('success', 'Categoría actualizada exitosamente');
+    
+        $planta->save();
+    
+        return redirect()->route('ruta.donde.redirigir')->with('success', 'Planta actualizada correctamente.');
     }
 
     

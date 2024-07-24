@@ -1,23 +1,4 @@
-{{-- <div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-           
-            <form action="{{route('admin.Plantas.plantaCreate')}}" method="POST" enctype="multipart/form-data">
-            @csrf
-           
-            <textarea name="comentario" id="comentario" placeholder="¿Qué quieres compartir hoy?" required></textarea>
-            <label for="image-upload" class="upload-label">
-                <i class="fas fa-camera"></i> Subir foto
-            </label>
-            <input type="file" name="image" id="image-upload">
-            <div id="image-preview" class="image-preview">
-                <img id="preview-image" src="#" alt="Vista previa de la imagen" style="display: none;">
-            </div>
-            <button type="button " id="post-btn">Publicar</button>
-        </form>
-       
-    </div>
-</div> --}}
+
 <style>
     .image-preview {
         max-width: 100%;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@
     <div class="modal-content">
         Información de planta
         <div class="show">
-            {{-- @foreach($plants as $plant) --}}
+            {{-- @foreach($plants as $plant) 
                 <h2>ID: {{$plant->id_planta}}</h2>
                 <div class="imagen">
                     <h1>Nombre: {{$plant->nombre}}</h1>
@@ -30,9 +30,10 @@
         </div>
         <button class="btn btn-primary" onclick="window.location='{{route('homeAdmin')}}'">Volver</button>
     </div>
-</div>
+</div> 
 <script>
 // Script para manejar el modal
+
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('myModal');
     const btn = document.getElementById('open-modal-btn');
@@ -68,4 +69,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-</script>
+</script> 

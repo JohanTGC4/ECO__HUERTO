@@ -17,17 +17,20 @@ class CategoriaController extends Controller{
         return view('admin.Categorias.categoryCreate');
     }
 
-    public function store(Request $request){
-        $request->validate([
-            'nombre' => 'required',
-        ]);
+   public function store(Request $request) {
+    $request->validate([
+        'nombre' => 'required|alpha|max:255',
+    ],[
+        'nombre.required' => 'El nombre es obligatorio.',
+        'nombre.alpha' => 'El nombre solo puede contener letras.',
+    ]);
 
-        categoria::create([
-            'nombre' => $request->nombre,
-        ]);
-        return redirect()->route('categoryCrud')->with('success', 'Categoría agregada exitosamente');
-    }
+    Categoria::create([
+        'nombre' => $request->nombre,
+    ]);
 
+    return redirect()->route('categoryCrud')->with('success', 'Categoría agregada exitosamente');
+}
     public function show($id){
         $cat = categoria::findOrFail($id);
         return view('admin.Categorias.categoryShow', compact('cat'));
@@ -38,26 +41,37 @@ class CategoriaController extends Controller{
         return response()->json($cat);
     }
     public function update(Request $request, $id){
-        $cat = categoria::find($id);
-        $request->validate([
-            'nombre' => 'required',
-         
-        ]); 
+    $cat = Categoria::find($id);
 
-       
-        $cat->nombre = $request->nombre;
-      
-
-        $cat->save();
-
-        return redirect()->route('categoryCrud')->with('success', 'Categoría actualizada exitosamente');
+    if (!$cat) {
+        return redirect()->route('categoryCrud')->with('error', 'Categoría no encontrada');
     }
-   
 
-    public function destroy(String $id){
-        $cat = categoria::find($id);
-        planta::where('id_categoriaplanta', $id)->delete();
+    $request->validate([
+        'nombre' => 'required|alpha',
+    ], [
+        'nombre.required' => 'El nombre es obligatorio.',
+        'nombre.alpha' => 'El nombre solo debe contener letras.',
+    ]);
+
+    $cat->nombre = $request->nombre;
+    $cat->save();
+
+    return redirect()->route('categoryCrud')->with('success', 'Categoría actualizada exitosamente');
+
+    }
+    public function destroy(String $id) {
+        // Verificar si la categoría está en uso
+        $isUsed = Planta::where('id_categoriaplanta', $id)->exists();
+        if ($isUsed) {
+            return redirect()->route('categoryCrud')->with('error', 'No se puede eliminar la categoría porque está siendo utilizada en un registro.');
+        }
+    
+        $cat = Categoria::find($id);
         $cat->delete();
-        return redirect()->back();
+    
+        return redirect()->route('categoryCrud')->with('success', 'Categoría eliminada exitosamente');
     }
+
+    
 }

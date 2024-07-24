@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/Crud.css')}}">
     <link rel="stylesheet" href="{{ asset('css/modalForm.css')}}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    
 </head>
 <style>
@@ -50,6 +51,42 @@
     <div class="main-content">
         <div class="container">
             <h1>Panel de administración</h1>
+
+            @if(session('success'))
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Éxito!',
+                        text: "{{ session('success') }}",
+                        confirmButtonColor: '#3085d6',
+                    });
+                </script>
+            @endif
+
+            @if($errors->any())
+        @foreach ($errors->all() as $error)
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    text: '{{ $error }}',
+                    confirmButtonColor: '#d33',
+                });
+            </script>
+        @endforeach
+        @endif
+
+          @if(session('error'))
+          <script>
+           Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            text: "{{ session('error') }}",
+            confirmButtonColor: '#d33',
+            });
+        </script>
+        @endif
+
             <!----- Aquí empieza el div de las tablas ----->
             <div class="table">
                 <div class="table-header">
@@ -89,16 +126,21 @@
                                     <td>{{$producto->precio}}</td>
                                     <td>{{$producto->stock}}</td>
                                     <td>
-                                        {{-- <button id="open-modal-btn" class="actions view" onclick="window.location='{{ route('plantaShow', $producto->id_producto) }}'"
-                                        
-                                        data-toggle="show" data-target="#ModalShow"><i class="fa-regular fa-eye"></i></button> --}}
                                         <button class="btn-editar" data-id="{{ $producto->id_producto }}"><i class="fa-solid fa-pen-to-square"></i></button>
-                                        {{-- <button id=".btn-editar" class="btn-editar" ><i class="fa-solid fa-pen-to-square"></i></button> --}}
+
                                         <p></p>
-                                        <form action="{{ route('productDestroy', $producto->id_producto) }}" method="post">
+
+                                      <!--  <form action="{{ route('productDestroy', $producto->id_producto) }}" method="post">
                                             @csrf
                                             <button class="actions delete" ><i class="fa-solid fa-trash"></i></button>
-                                        </form>
+                                        </form> -->
+
+                                        <form action="{{ route('productDestroy', $producto->id_producto) }}" method="post" class="delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                         <button class="actions delete" type="submit"><i class="fa-solid fa-trash"></i></button>
+                                        </form> 
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -232,43 +274,33 @@
         }
     });
 });
+// :::::::::::::::::::::::: ELIMINAR PLANTA ::::::::::::::::::::::::::
+
+document.querySelectorAll('.delete').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); 
+
+            const form = this.closest('.delete-form'); 
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit(); 
+                }
+            });
+        });
+    });
             
         </script>
-
-
-
-    <!-- :::::::::::::::::::: MODAL AGREGAR :::::::::::::::::: -->
-    {{-- <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <form action="{{ route('admin.Plantas.plantaStore') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" required>
-                </div>
-                <div class="form-group">
-                    <label for="imagen">Imagen</label>
-                    <input type="file" class="form-control" id="imagen" name="imagen" required>
-                </div>
-                <div class="form-group">
-                    <label for="descripcion">Imagen</label>
-                    <textarea type="textarea" class="form-control" id="descripcion" name="descripcion" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="seleccion">ID Categoría</label>
-                    <select class="form-control" id="seleccion" name="seleccion" required>
-                        <option value="Seleccion" disabled selected>Selecciona ID Categoría</option>
-                        <option value="1">1 - Hortalizas</option>
-                        <option value="2">2 - Legumbres</option>
-                        <option value="3">3 - Medicinal</option>
-                        <option value="4">4 - Verduras</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </form>
-        </div>
-    </div> --}}
+        
     <script src="{{ asset('js/Sidebar.js')}}"></script>
     @include('admin.Productos.productoCreate')
     @include('admin.Productos.productoShow')

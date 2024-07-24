@@ -37,7 +37,7 @@
 <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <form action="{{ route('plantaStore') }}" method="POST" enctype="multipart/form-data">
+            <form id="create-plant-form" action="{{ route('plantaStore') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <h2>Agregar Planta</h2>
                 <div class="form-group">
@@ -63,10 +63,6 @@
                         @foreach($cats as $cat)
                             <option value="{{ $cat->id_categoriaplanta }}">{{ $cat->id_categoriaplanta }} - {{ $cat->nombre }}</option>
                         @endforeach
-                        {{-- <option value="1">1 - Hortalizas</option>
-                        <option value="2">2 - Legumbres</option>
-                        <option value="3">3 - Medicinal</option>
-                        <option value="4">4 - Verduras</option> --}}
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
@@ -110,4 +106,11 @@
             }
         });
     });
+</script>
+
+<script>
+document.getElementById('create-plant-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    this.submit(); // Enviar el formulario directamente
+});
 </script>
