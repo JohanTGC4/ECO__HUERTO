@@ -16,6 +16,13 @@ class MisplantasController extends Controller
         $userId = Auth::id();
         $misplantas = MisPlantas::where('usuario_id_usuario', $userId)->with('planta')->get();
 
+           // Obtener las plantas del usuario autenticado
+    $misplantas = MisPlantas::where('usuario_id_usuario', $userId)
+    
+    ->with('planta') // Cargar la relación planta
+    ->get();
+
+        // Verificar si se está haciendo una solicitud AJAX
         if ($request->ajax()) {
             if ($request->has('categoria')) {
                 $categoriaId = $request->input('categoria');
@@ -23,35 +30,31 @@ class MisplantasController extends Controller
                 return response()->json($plantas);
             }
         }
-
-        return view('misplantas', compact('categorias', 'misplantas'));
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'usuario_id_usuario' => 'required|integer',
-            'planta' => 'required|integer',
-            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validación para la imagen
-        ]);
-
-        $misplanta = new MisPlantas();
-        $misplanta->usuario_id_usuario = $request->usuario_id_usuario;
-        $misplanta->planta_id_planta = $request->planta;
       
-
-        if ($request->hasFile('imagen')) {
-            $image = $request->file('imagen');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName); // Mueve la imagen al directorio public/images
-            $misplanta->imagen = $imageName; // Guarda el nombre de la imagen en la base de datos
-        }
-        $misplanta->save();
-        // Obtén todas las plantas asociadas al usuario
-        $misplantas = MisPlantas::where('usuario_id_usuario', $request->usuario_id_usuario)
-                                ->with('planta')
-                                ->get();
-
-        return response()->json(['misplantas' => $misplantas]);
+        // Si no es una solicitud AJAX, renderizar la vista con las categorías
+        return view('misplantas', compact('categorias','misplantas'));
     }
+       // Método para almacenar una nueva planta del usuario
+       public function store(Request $request)
+       {
+        $userId = Auth::id();
+           // Obtener la planta seleccionada por su ID
+           $planta = Planta::findOrFail($request->planta);
+       
+       
+           // Guardar la relación en misplantas
+           MisPlantas::create([
+               'planta_id_planta' => $planta->id_planta,
+               'usuario_id_usuario' => $userId,
+           ]);
+           
+         // Obtener las plantas del usuario actualizadas
+    $misplantas = MisPlantas::where('usuario_id_usuario', $userId)
+    ->with('planta') // Cargar la relación planta
+    ->get();
+           // Redireccionar o devolver una respuesta según tu lógica
+           
+           return redirect()->route('misPlantas.index')->with('success', 'Planta agregada correctamente');
+       }
+       
 }

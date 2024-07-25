@@ -16,7 +16,11 @@
           <ul class="nav-menu">
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
             <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+<<<<<<< Updated upstream
             <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Publicaciones</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+=======
+            <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Blog</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+>>>>>>> Stashed changes
             <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
           </ul>
         </div>
@@ -71,6 +75,7 @@
     background-color: #0056b3;
 }
 </style>   
+<<<<<<< Updated upstream
 
 <main class="container">
     <div class="add-plant-container">
@@ -127,6 +132,32 @@
                       
                     </div>
                 </div>
+=======
+        <div class="add-plant-container">
+            <button id="open-modal-btn" class="add-plant-button"><i class="fa fa-plus"></i> Crear publicación</button>
+        </div>
+        <br> <br>
+        <div class="blog-posts" id="blog-posts">
+            @foreach($posts as $post)
+                <div class="blog-post">
+                    <div class="post-meta">
+                        Publicado por 
+                            {{ $post->usuario->usuario}} 
+                       
+                        el {{ $post->created_at }}
+                    </div>
+                  
+                    <p class="post-text">{{ $post->comentario }}</p>
+                    
+                    @if(isset($post->imagen))
+                        <img src="{{ asset('storage/' . $post->imagen) }}" alt="Imagen publicada">
+                    @endif
+        
+                    <button class="btn-editar" data-id="{{ $post->id }}" data-comentario="{{ $post->comentario }}" data-imagen="{{ $post->imagen }}">Editar</button>
+                </div>
+            @endforeach     
+        </div>
+>>>>>>> Stashed changes
             
 </main>
 

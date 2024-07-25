@@ -19,18 +19,9 @@ class usuario extends Authenticatable
 
     public $incrementing = true;
     protected $keyType = 'int';
-
-    public function blog()
-    {
-        return $this->hasMany(blog::class, 'usuario_id_usuario', 'id_usuario');
-    }
-    public function direcciones()
-    {
-        return $this->hasMany(Direccion::class, 'usuario_id_usuario', 'id_usuario');
-    }
-    public function direccionSeleccionada()
-    {
-        return $this->belongsTo(Direccion::class, 'direccion_id_seleccionada');
-    }
-
+      // Relación uno a muchos con Blog
+      public function blog()
+      {
+          return $this->hasMany(blog::class, 'usuario_id_usuario', 'id_usuario');
+      }
 }

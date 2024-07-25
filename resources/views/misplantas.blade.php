@@ -33,12 +33,27 @@
         <input type="text" class="search-input" placeholder="Buscar...">
         <button class="search-button"><i class="fa fa-search"></i></button>
     </div>
+<<<<<<< Updated upstream
+=======
+  </nav>
+  <br>
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Buscar...">
+    <button class="search-button"><i class="fa fa-search"></i></button>
+  </div>
+  
+  <!-- Botón para agregar plantas -->
+  <div class="add-plant-container">
+    <button id="open-modal-btn" class="add-plant-button"><i class="fa fa-plus"></i> Agregar Planta</button>
+  </div>
+>>>>>>> Stashed changes
 
     <!-- Botón para agregar plantas -->
     <div class="add-plant-container">
         <button id="open-modal-btn" class="add-plant-button"><i class="fa fa-plus"></i> Agregar Planta</button>
     </div>
 
+<<<<<<< Updated upstream
     <!-- Modal -->
     <div id="plant-modal" class="modal">
         <div class="modal-content">
@@ -126,6 +141,60 @@
             </div>
         @endforeach
     </div>
+=======
+
+
+  <!-- Contenedor de la tabla -->
+  <div class="table-container">
+    <table class="custom-table">
+      <tr>
+        <td><a href="{{ route('home') }}">Por hacer <i class="fa fa-history" aria-hidden="true"></i></a></td>
+        <td><a href="{{ route('misplantas') }}" >Mis plantas <i class="fa fa-leaf" aria-hidden="true"></i></a></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card-container">
+    @foreach ($misplantas as $misplanta)
+    <div class="card">
+        {{-- Imagen predeterminada si no hay imagen en la base de datos --}}
+        <img src="{{ asset('images/zanahoria.jpg') }}" width="150" alt="Imagen Predeterminada" class="card-img">
+        <div class="card-content">
+            @if ($misplanta->planta)
+                <p>{{ $misplanta->planta->nombre }}</p>
+            @endif
+            <div class="button-group">
+                <button class="custom-button details-button" type="button" data-toggle="modal" data-target="#modal-planta-{{ $misplanta->id }}">Detalles</button>
+                <button class="custom-button info-button" type="button">Ver más información</button>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal para detalles de la planta --}}
+    <div class="modal fade" id="modal-planta-{{ $misplanta->id }}" tabindex="-1" role="dialog" aria-labelledby="modalPlantaLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPlantaLabel">{{ $misplanta->planta->nombre }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('images/zanahoria.jpg') }}" width="100%" alt="Imagen de la planta">
+                    <p>{{ $misplanta->planta->descripcion }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+</div>
+
+  
+>>>>>>> Stashed changes
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -142,9 +211,61 @@
             openModalBtn.on('click', function() {
                 modal.css('display', 'block');
             });
-    
-            // Cerrar el modal
-            closeModalBtn.on('click', function() {
+        })
+        .catch(error => {
+            console.error('Error fetching plantas:', error);
+        });
+    });
+
+    // Obtener detalles de la planta seleccionada
+    plantaSelect.addEventListener('change', function() {
+        const plantaId = this.value;
+        fetch('{{ route('misplantas.getPlantaDetails') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ planta_id: plantaId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            previewImage.src = '{{ asset('storage/images/') }}/' + data.imagen;
+        })
+        .catch(error => {
+            console.error('Error fetching planta details:', error);
+        });
+    });
+});-->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        const openModalBtn = $('#open-modal-btn');
+        const closeModalBtn = $('.close');
+        const modal = $('#plant-modal');
+        const categoriaSelect = $('#categoria');
+        const plantaSelect = $('#planta');
+        const previewImage = $('#preview-image');
+        const fileInput = $('#imagen');
+        const categoriaIdInput = $('#categoria_id'); // Selector para el campo oculto
+        const agregarPlantaForm = $('#agregarPlantaForm');
+        const openModalBtn = $('[data-modal-target]');
+        const closeModalBtn = $('.close, #modal-container');
+
+        openModalBtn.on('click', function() {
+            console.log('Modal abierto');
+            modal.css('display', 'block');
+        });
+
+        closeModalBtn.on('click', function() {
+            console.log('Modal cerrado');
+            modal.css('display', 'none');
+        });
+
+        $(window).on('click', function(event) {
+            if (event.target === modal[0]) {
+                console.log('Modal cerrado por clic fuera del contenido');
                 modal.css('display', 'none');
             });
     
@@ -238,8 +359,78 @@
                 });
             });
         });
+<<<<<<< Updated upstream
     </script>
     
+=======
+    });
+    $(document).ready(function() {
+        const agregarPlantaForm = $('#agregarPlantaForm');
+
+        agregarPlantaForm.on('submit', function(event) {
+            event.preventDefault();
+
+            // Obtener los datos del formulario
+            const formData = new FormData(this);
+
+            // Realizar la solicitud AJAX para guardar la planta
+            $.ajax({
+                url: '{{ route('misPlantas.store') }}',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    console.log('Planta agregada correctamente:', response);
+
+                    // Limpiar el contenedor de tarjetas
+                    $('#card-container').empty();
+
+                    // Recorrer las plantas devueltas y agregarlas como tarjetas
+                    $.each(response, function(index, misplanta) {
+                        const cardHtml = `
+                            <div class="card">
+                                <img src="{{ asset(Storage::url('')) }}/${misplanta.planta.imagen}" width="150" alt="${misplanta.planta.nombre}" class="card-img">
+                                <div class="card-content">
+                                    <p>${misplanta.planta.nombre}</p>
+                                </div>
+                            </div>
+                        `;
+                        $('#card-container').append(cardHtml);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al agregar planta:', error);
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+    const openModalBtn = $('[data-modal-target]');
+    const closeModalBtn = $('.close, #modal-container');
+
+    openModalBtn.on('click', function() {
+      const modalId = $(this).attr('data-modal-target');
+      $(modalId).css('display', 'block');
+    });
+
+    closeModalBtn.on('click', function(event) {
+      if (event.target === this || event.target.className === 'close') {
+        $(this).css('display', 'none');
+      }
+    });
+
+    $(document).keyup(function(event) {
+      if (event.key === "Escape") {
+        closeModalBtn.css('display', 'none');
+      }
+    });
+  });
+</script>
+
+
+>>>>>>> Stashed changes
 
 
 </body>
