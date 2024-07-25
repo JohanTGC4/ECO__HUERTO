@@ -19,29 +19,38 @@ class ProductosController extends Controller{
 
     public function store(Request $request){
         $request->validate([
-            'nombre' => 'required',
-            'precio' => 'required',
-            'stock' => 'required',
+            'nombre' => 'required|alpha|max:255',
+            'precio' => 'required|numeric',
+            'stock' => 'required|integer',
             'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2046',
             'descripcion' => 'required',
+        ],[
+            'nombre.required' => 'El nombre debe tener datos válidos.',
+            'nombre.alpha' => 'El nombre solo puede contener letras.',
+            'precio.required' => 'Debes agregar un precio.',
+            'precio.numeric' => 'El precio debe ser un número válido.',
+            'stock.required' => 'Debes agregar un stock.',
+            'stock.integer' => 'El stock debe ser un número entero.',
+            'imagen.required' => 'La imagen es obligatoria.',
+            'imagen.image' => 'El archivo debe ser una imagen.',
+            'descripcion.required' => 'La descripción es obligatoria.',
         ]);
-
-        if($request->hasFile('imagen')){
+    
+        if ($request->hasFile('imagen')) {
             $imagePath = $request->file('imagen')->store('images', 'public');
-        }else{
-            
+        } else {
             return back()->withErrors(['imagen' => 'Error al subir la imagen']);
         }
-
-        productos::create([
+    
+        Productos::create([
             'nombre' => $request->nombre,
             'precio' => $request->precio,
             'stock' => $request->stock,
             'imagen' => $imagePath,
             'descripcion' => $request->descripcion,
         ]);
-
-        return redirect()->route('productCrud')->with('success', '´Producto agregada exitosamente');
+    
+        return redirect()->route('productCrud')->with('success', 'Producto agregado exitosamente');
     }
 
     public function show($id){
@@ -58,33 +67,44 @@ class ProductosController extends Controller{
 
     public function update(Request $request, $id){
         $producto = productos::find($id);
+        
         $request->validate([
-            'nombre' => 'required',
-            'precio' => 'required',
-            'stock' => 'required',
-            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2046',
+            'nombre' => 'required|alpha|max:255',
+            'precio' => 'required|numeric',
+            'stock' => 'required|integer',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2046',
             'descripcion' => 'required',
+        ], [
+            'nombre.required' => 'El nombre debe tener datos válidos.',
+            'nombre.alpha' => 'El nombre solo puede contener letras.',
+            'precio.required' => 'Debes agregar un precio.',
+            'precio.numeric' => 'El precio debe ser un número válido.',
+            'stock.required' => 'Debes agregar un stock.',
+            'stock.integer' => 'El stock debe ser un número entero.',
+            'imagen.image' => 'El archivo debe ser una imagen.',
+            'descripcion.required' => 'La descripción es obligatoria.',
         ]); 
-
+    
         if($request->hasFile('imagen')){
             $imagePath = $request->file('imagen')->store('images', 'public');
-        }else{
-            
-            return back()->withErrors(['imagen' => 'Error al subir la imagen']);
+        } else {
+            $imagePath = $producto->imagen; // Mantener la imagen actual si no se carga una nueva
         }
-        $producto->nombre = $request->nombre;
-        $producto->precio = $request->precio;
-        $producto->stock = $request->stock;
-        $producto->imagen = $imagePath;
-        $producto->descripcion = $request->descripcion;
-
-        $producto->save();
-
-        return redirect()->route('productCrud')->with('success', 'Categoría actualizada exitosamente');
+    
+        $producto->update([
+            'nombre' => $request->nombre,
+            'precio' => $request->precio,
+            'stock' => $request->stock,
+            'imagen' => $imagePath,
+            'descripcion' => $request->descripcion,
+        ]);
+    
+        return redirect()->route('productCrud')->with('success', 'Producto actualizado exitosamente');
     }
 
     public function destroy(String $id){
-        $prod = productos::find($id);
+        $prod = productos::findOrFail($id);
+        productos::where('id_producto', $id)->delete();
         $prod->delete();
         return redirect()->back();
     }

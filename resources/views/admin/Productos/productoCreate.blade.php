@@ -1,23 +1,3 @@
-{{-- <div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-           
-            <form action="{{route('admin.Plantas.plantaCreate')}}" method="POST" enctype="multipart/form-data">
-            @csrf
-           
-            <textarea name="comentario" id="comentario" placeholder="¿Qué quieres compartir hoy?" required></textarea>
-            <label for="image-upload" class="upload-label">
-                <i class="fas fa-camera"></i> Subir foto
-            </label>
-            <input type="file" name="image" id="image-upload">
-            <div id="image-preview" class="image-preview">
-                <img id="preview-image" src="#" alt="Vista previa de la imagen" style="display: none;">
-            </div>
-            <button type="button " id="post-btn">Publicar</button>
-        </form>
-       
-    </div>
-</div> --}}
 <style>
     .image-preview {
         max-width: 100%;
@@ -38,7 +18,7 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="closee">&times;</span>
-        <form action="{{ route('productStore') }}" method="POST" enctype="multipart/form-data">
+        <form id="create-product" action="{{ route('productStore') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <h2>Agregar Producto</h2>
             <div class="form-group">
@@ -73,6 +53,12 @@
 </div>
 
 <script>
+// ::::::::::::::::::::::::: GUARDAR PRODUCTO ::::::::::::::::::::::
+document.getElementById('create-product').addEventListener('submit', function(event) {
+    event.preventDefault();
+    this.submit(); // Enviar el formulario directamente
+});
+
 // Script para manejar el modal
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('myModal');

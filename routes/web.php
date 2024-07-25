@@ -113,6 +113,8 @@ Route::post('/categoryStore', [CategoriaController::class, 'store'])->name('admi
 Route::get('/categoryEdit/{id}', [CategoriaController::class, 'edit'])->name('admin.Categorias.categoryEdit');
 Route::put('/categoryUpdate/{id}', [CategoriaController::class, 'update'])->name('productUpdate');
 Route::post('/categoryDestroy/{id}', [CategoriaController::class, 'destroy'])->name('admin.Categorias.category');
+Route::delete('/admin/Categorias/category/{id}', [CategoriaController::class, 'destroy'])->name('admin.Categorias.category');
+
 
 
 Route::get('/productCrud', [ProductosController::class, 'index'])->name('productCrud');
@@ -121,6 +123,8 @@ Route::post('/productStore', [ProductosController::class, 'store'])->name('produ
 Route::get('/productEdit/{id}', [ProductosController::class, 'edit'])->name('productEdit');
 Route::put('/productUpdate/{id}', [ProductosController::class, 'update'])->name('productUpdate');
 Route::post('/productDestroy/{id}', [ProductosController::class, 'destroy'])->name('productDestroy');
+Route::delete('/administradores/productDestroy/{id}', [ProductosController::class, 'destroy'])->name('productDestroy');
+
 
 
 });
