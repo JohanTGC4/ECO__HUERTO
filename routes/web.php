@@ -56,35 +56,28 @@ Route::group(['prefix' => 'usuarios', 'middleware' => 'auth:usuario'], function(
      Route::put('/perfilcli/update', [PerfilController::class, 'update'])->name('perfilcli.update');
      Route::post('/perfilcli/store', [PerfilController::class, 'store'])->name('perfilcli.store'); // Definición de la ruta para almacenar la dirección
      Route::delete('/direccion/{id}', [PerfilController::class, 'destroy'])->name('direccion.destroy');
-     Route::get('/blog', [blogController::class, 'index'])->name('blog');
-    
      Route::post('/perfilC/update', [PerfilController::class, 'update'])->name('perfilC.update');
-     Route::resource('/misPlantas', MisplantasController::class);
-     
-Route::resource('/blog', BlogController::class);
-Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
-Route::get('/blog/{id}',[BlogController::class, 'edit'])->name('blog.edit');
+    
+        Route::get('/blog', [blogController::class, 'index'])->name('blog');
+        Route::resource('/blog', BlogController::class);
+        Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
+        Route::get('/blog/{id}',[BlogController::class, 'edit'])->name('blog.edit');
+        Route::delete('blog/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
 
-Route::delete('blog/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
+        Route::resource('/misPlantas', MisplantasController::class);
+        Route::post('/get-plantas-by-categoria', [MisPlantasController::class, 'getPlantasByCategoria'])->name('misplantas.getPlantasByCategoria');
+        Route::post('/get-planta-details', [MisPlantasController::class, 'getPlantaDetails'])->name('misplantas.getPlantaDetails');
+        Route::get('/misplantas', [MisPlantasController::class, 'index'])->name('misplantas');
+        Route::post('/misPlantas', [MisplantasController::class, 'store'])->name('misPlantas.store');
 
-
-
-Route::post('/get-plantas-by-categoria', [MisPlantasController::class, 'getPlantasByCategoria'])->name('misplantas.getPlantasByCategoria');
-Route::post('/get-planta-details', [MisPlantasController::class, 'getPlantaDetails'])->name('misplantas.getPlantaDetails');
-// En routes/web.php
-
-Route::get('/misplantas', [MisPlantasController::class, 'index'])->name('misplantas');
-
-
-
-     Route::get('/comprar', [ComprarController::class, 'index'])->name('comprar');
-    //  Route::get('/home', [PerfilController::class, 'home'])->name('home');
-    Route::get('/home', function () { 
-        return view('home');
-})->name('home');
-  
-   
-});
+                    Route::get('/comprar', [ComprarController::class, 'index'])->name('comprar');
+                //  Route::get('/home', [PerfilController::class, 'home'])->name('home');
+                    Route::get('/home', function () { 
+                    return view('home');
+            })->name('home');
+            
+            
+            });
 
 
 

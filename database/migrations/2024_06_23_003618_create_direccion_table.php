@@ -16,6 +16,7 @@ class CreateDireccionTable extends Migration
             $table->string('municipio', 200);
             $table->string('estado', 200);
             $table->foreignId('usuario_id_usuario')->references('id_usuario')->on('usuario');
+            $table->boolean('selected')->default(false); // Campo para marcar la dirección seleccionada
             $table->timestamps();
         });
     }

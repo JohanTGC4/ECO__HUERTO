@@ -3,13 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-<<<<<<< Updated upstream
-=======
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use App\Models\blog;
->>>>>>> Stashed changes
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\blog;
@@ -26,22 +19,18 @@ class usuario extends Authenticatable
 
     public $incrementing = true;
     protected $keyType = 'int';
-<<<<<<< Updated upstream
 
     public function blog()
     {
         return $this->hasMany(blog::class, 'usuario_id_usuario', 'id_usuario');
     }
-
-    public function direccion()
+    public function direcciones()
     {
-        return $this->hasOne(Direccion::class, 'usuario_id_usuario', 'id_usuario');
+        return $this->hasMany(Direccion::class, 'usuario_id_usuario', 'id_usuario');
     }
-=======
-      // Relación uno a muchos con Blog
-      public function blog()
-      {
-          return $this->hasMany(blog::class, 'usuario_id_usuario', 'id_usuario');
-      }
->>>>>>> Stashed changes
+    public function direccionSeleccionada()
+    {
+        return $this->belongsTo(Direccion::class, 'direccion_id_seleccionada');
+    }
+
 }

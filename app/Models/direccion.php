@@ -17,4 +17,10 @@ class Direccion extends Model
     {
         return $this->belongsTo(Usuario::class, 'usuario_id_usuario', 'id_usuario');
     }
+    public function direccionSeleccionada()
+    {
+        // Implementa la lógica para obtener la dirección seleccionada
+        // Puedes definir tus propios criterios para determinar cuál es la dirección seleccionada
+        return $this->direcciones()->first(); // Ejemplo básico: obtiene la primera dirección
+    }
 }

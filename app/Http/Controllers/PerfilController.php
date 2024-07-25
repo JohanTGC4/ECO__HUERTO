@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Direccion;
-use App\Models\Usuario; // Corregido: debería ser 'Usuario'
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
 
@@ -15,10 +16,23 @@ class PerfilController extends Controller
     {
         $usuario = Auth::user();
         $direcciones = Direccion::where('usuario_id_usuario', $usuario->id_usuario)->get();
-        // Obtén la primera dirección como la dirección seleccionada inicialmente
-        $direccionSeleccionada = $direcciones->first();
+        $direccionSeleccionada = $usuario->direccionSeleccionada;
+          // Verifica si hay una dirección seleccionada
+    if (!$direccionSeleccionada) {
+        // No hay dirección seleccionada, establece una dirección predeterminada
+        $direccionPredeterminada = new Direccion();
+        $direccionPredeterminada->calle = 'Calle Predeterminada';
+        $direccionPredeterminada->numero = 'Número Predeterminado';
+        $direccionPredeterminada->colonia = 'Colonia Predeterminada';
+        $direccionPredeterminada->municipio = 'Municipio Predeterminado';
+        $direccionPredeterminada->estado = 'Estado Predeterminado';
+
+        // Asigna la dirección predeterminada a $direccionSeleccionada
+        $direccionSeleccionada = $direccionPredeterminada;
+    }
+
         
-        return view('perfilcli', ['usuario' => $usuario, 'direcciones' => $direcciones, 'direccionSeleccionada'=>$direccionSeleccionada]);
+        return view('perfilcli', compact('usuario', 'direcciones', 'direccionSeleccionada'));
     }
   
 
@@ -46,7 +60,7 @@ class PerfilController extends Controller
         $request->validate([
             'usuario' => 'required',
             'email' => 'required|email',
-            'direccion_select' => 'required', // Asegúrate de que el campo dirección_select sea requerido
+            'direccion_select' => 'required', // Asegúrate de que el campo direccion_select sea requerido
         ]);
     
         // Obtener el usuario autenticado
@@ -67,10 +81,14 @@ class PerfilController extends Controller
             $imagePath = $request->file('fotoperfil')->store('assets/images', 'public');
             $usuario->fotoperfil = $imagePath;
         }
-           // Actualizar la dirección seleccionada del usuario
-           $usuario->direccion_id_seleccionada = $request->input('direccion_select');
     
-       
+       // Obtener el ID de la dirección seleccionada desde el formulario
+    $direccionSeleccionadaId = $request->input('direccion_select');
+
+    // Almacenar el ID de la dirección seleccionada en la sesión
+    session(['direccion_id_seleccionada' => $direccionSeleccionadaId]);
+        // Guardar los cambios en el usuario
+        $usuario->save();
     
         return redirect()->route('perfilcli')->with('success', 'Perfil actualizado correctamente.');
     }
