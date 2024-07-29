@@ -22,8 +22,7 @@ class planta extends Model
     }
     public function misplantas()
     {
-        return $this->hasMany(MisPlantas::class, 'id_planta', 'id_planta');
+        return $this->hasMany(MisPlantas::class, 'planta_id_planta', 'id_planta');
     }
-
     protected $fillable = ['nombre','imagen','descripcion', 'id_categoriaplanta']; // Asegúrate de incluir todos los campos necesarios
 }

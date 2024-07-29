@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <title>Publicación</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoHuerto</title>
@@ -9,407 +10,242 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-   
     <nav class="navbar">
         <div class="navbar-container">
-          <a href="#" class="imagen"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}" style="border-radius: 50%; width: 60px;" alt=""></a>
-          <ul class="nav-menu">
-            <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
-            <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
-<<<<<<< Updated upstream
-            <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Publicaciones</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
-=======
-            <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Blog</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
->>>>>>> Stashed changes
-            <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
-          </ul>
+            <a href="#" class="imagen"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}" style="border-radius: 50%; width: 60px;" alt=""></a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+                <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Publicaciones</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+                <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
+            </ul>
         </div>
-      </nav>
+    </nav>
     
-    <br><br><br><br><br><br>
-    
+  <style>
+    /* blog.css */
+/* blog.css */
 
-<main class="container">
-   <style>
-    .add-plant-button {
-    background-color: #4CAF50; /* Color de fondo */
-    color: white; /* Color del texto */
-    border: none; /* Sin borde */
-    padding: 12px 24px; /* Espacio dentro del botón */
-    text-align: center; /* Alinear texto al centro */
-    text-decoration: none; /* Sin decoración de texto */
-    display: inline-block; /* Mostrar como bloque en línea */
-    font-size: 16px; /* Tamaño de fuente */
-    margin: 4px 2px; /* Márgenes */
-    cursor: pointer; /* Cambiar a cursor de puntero al pasar el ratón */
-    border-radius: 4px; /* Bordes redondeados */
-}
-
-.add-plant-button:hover {
-    background-color: #45a049; /* Color de fondo al pasar el ratón */
-}
-
-.add-plant-button i {
-    margin-right: 8px; /* Espacio a la derecha del icono */
-}
-.post-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.post-actions {
-    text-align: right;
-}
-
-.btn-editar {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.btn-editar:hover {
-    background-color: #0056b3;
-}
-</style>   
-<<<<<<< Updated upstream
-
-<main class="container">
-    <div class="add-plant-container">
-        <button id="open-modal-btn" class="add-plant-button"><i class="fa fa-plus"></i> Crear publicación</button>
-    </div>
-
-    <div class="blog-posts" id="blog-posts">
-        @foreach($posts as $post)
-        
-            <div class="blog-post">
-                <div class="dropdown">
-                    <button class="dropbtn"><i class="fas fa-ellipsis-v"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#" class="edit-btn" onclick="openEditModal('{{ $post->id }}', '{{ $post->comentario }}', '{{ asset('storage/' . $post->imagen) }}')">Editar</a>
-                        <a href="#">Eliminar</a>
-                    </div>
-                </div>
-                <div class="post-meta">
-                    Publicado por {{ $post->usuario->usuario }} el {{ $post->created_at }}
-                </div>
-                
-                <p class="post-text">{{ $post->comentario }}</p>
-                @if(isset($post->imagen))
-                    <img src="{{ asset('storage/' . $post->imagen) }}" alt="Imagen publicada">
-                @endif
-              
-                <div class="comments-section">
-                    <form method="POST">
-                        @csrf
-                        <textarea name="comentario" placeholder="Escribe un comentario..." required></textarea>
-                        <button type="submit">Comentar</button>
-                    </form>
-                    <div class="comments-list">
-                        <!-- Aquí se listarían los comentarios -->
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-</main>
-                    <form method="POST">
-                        @csrf
-                        <textarea name="comentario" placeholder="Escribe un comentario..." required></textarea>
-                        <button type="submit">Comentar</button>
-                    </form>
-                    <div class="comments-list">
-                       
-                            <div class="comment">
-                                <div class="comment-meta">
-                                   
-                                </div>
-                                <p class="comment-text"></p>
-                            </div>
-                      
-                    </div>
-                </div>
-=======
-        <div class="add-plant-container">
-            <button id="open-modal-btn" class="add-plant-button"><i class="fa fa-plus"></i> Crear publicación</button>
-        </div>
-        <br> <br>
-        <div class="blog-posts" id="blog-posts">
-            @foreach($posts as $post)
-                <div class="blog-post">
-                    <div class="post-meta">
-                        Publicado por 
-                            {{ $post->usuario->usuario}} 
-                       
-                        el {{ $post->created_at }}
-                    </div>
-                  
-                    <p class="post-text">{{ $post->comentario }}</p>
-                    
-                    @if(isset($post->imagen))
-                        <img src="{{ asset('storage/' . $post->imagen) }}" alt="Imagen publicada">
-                    @endif
-        
-                    <button class="btn-editar" data-id="{{ $post->id }}" data-comentario="{{ $post->comentario }}" data-imagen="{{ $post->imagen }}">Editar</button>
-                </div>
-            @endforeach     
-        </div>
->>>>>>> Stashed changes
-            
-</main>
-
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        
-        <span class="close">&times;</span>
-        <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            
-            <textarea name="comentario" id="comentario" placeholder="¿Qué quieres compartir hoy?" required></textarea>
-            <label for="image-upload" class="upload-label">
-                <i class="fas fa-camera"></i> Subir foto
-            </label>
-            <input type="file" name="image" id="image-upload">
-            <div id="image-preview" class="image-preview">
-                <img id="preview-image" src="#" alt="Vista previa de la imagen" style="display: none;">
-            </div>
-            <button type="submit" id="post-btn">Publicar</button>
-        </form>
-    </div>
-</div>
-<style>
-    .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-    padding-top: 60px;
-}
-.image-upload{
-    background-color: #0056b3;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 10% auto; /* Ajuste el margen superior para centrar verticalmente */
+/* General container */
+.container {
+    max-width: 600px;
+    margin: auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px; /* Aumenté el ancho máximo para un mejor diseño en pantallas más grandes */
-    border-radius: 10px;
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+/* Formulario de publicación */
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+/* Estilos de inputs y botones */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-.upload-label {
-    display: block; /* Cambiado a bloque para que esté debajo del textarea */
-    margin-top: 10px;
-    cursor: pointer;
+.form-control-file {
+    padding: 5px;
 }
 
-#image-preview {
-    margin-top: 10px;
-}
-
-#comentario {
-    width: 100%; /* Ajustado el ancho del textarea al 100% */
-    height: 100px; /* Aumentado la altura del textarea */
-    resize: vertical; /* Permitir redimensionamiento vertical */
-}
-
-#post-btn {
-    margin-top: 10px; /* Margen superior para separar el botón del resto del formulario */
-}
-#post-btn {
-    margin-top: 10px; /* Margen superior para separar el botón del resto del formulario */
-    padding: 10px 20px; /* Ajustar el padding para un tamaño adecuado */
-    background-color: #007bff; /* Color de fondo del botón */
-    color: white; /* Color del texto */
-    border: none; /* Eliminar borde */
-    border-radius: 5px; /* Borde redondeado */
-    cursor: pointer; /* Cambiar cursor a pointer al pasar sobre el botón */
-    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
-}
-
-#post-btn:hover {
-    background-color: #0056b3; /* Color de fondo más oscuro al pasar sobre el botón */
-}
-
-/* Estilos adicionales si estás usando Bootstrap */
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #1A9C11;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: #47CF59;
 }
 
-</style>
-<script>
-    // Script para manejar el modal
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('myModal');
-        const btn = document.getElementById('open-modal-btn');
-        const span = document.getElementsByClassName('close')[0];
+.alert {
+    padding: 15px;
+    background-color: #f44336;
+    color: white;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
 
-        btn.onclick = function() {
-            modal.style.display = 'block';
-        }
+.alert-success {
+    background-color: #4CAF50;
+}
 
-        span.onclick = function() {
-            modal.style.display = 'none';
-        }
+/* General styles for the card */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #FFFFFF;
+}
 
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
+/* Header of the post */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    background-color: #1A9C11;
+}
 
-        const imageUpload = document.getElementById('image-upload');
-        const previewImage = document.getElementById('preview-image');
+/* User info */
+.card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+    color: #FFFFFF;
+}
 
-        // Mostrar la vista previa de la imagen seleccionada
-        imageUpload.addEventListener('change', function() {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    previewImage.src = event.target.result;
-                    previewImage.style.display = 'block'; // Mostrar la vista previa
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    });
-</script>
-    <!-- Modal de edición -->
-    <div id="modaledit" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
+/* Card body styles */
+.card-body {
+    padding: 15px;
+}
+
+/* Card text styles */
+.card-text {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    color: black;
+}
+
+/* Image styles */
+.card-img-top {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+/* Small text styles */
+.text-muted {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Dropdown menu styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a,
+.dropdown-content button {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+    background-color: #B9E8D3;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Three dots button */
+.three-dots {
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 5px;
+}
+
+
+  </style>
+  <br>
+  <br>
+  <br>
+  <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h2>Publicar algo</h2>
+
+                <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <textarea name="comentario" class="form-control" placeholder="¿Qué estás pensando?" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" name="imagen" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Publicar</button>
+                </form>
+                <div class="container">
+                    <h1>Publicaciones </h1>
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    <br>
+                    
+                    @foreach ($blogs as $blog)
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h5 class="card-title">  Publicado por {{ $blog->usuario->usuario }}</h5>
+                                <div class="dropdown">
+                                    <span class="three-dots">⋮</span>
+                                    <div class="dropdown-content">
+                                        <a href="{{ route('blog.editb', ['id_blog' => $blog->id_blog]) }}">Editar</a>
+                                        <form action="{{ route('blog.destroy', ['id_blog' => $blog->id_blog]) }}" method="POST" style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" >Eliminar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ $blog->comentario }}</p>
+                                @if ($blog->imagen)
+                                    <img src="{{ $blog->imagen }}" class="card-img-top" alt="Imagen de publicación">
+                                @endif
+                                <p class="card-text">
+                                    <small class="text-muted">Publicado el {{ $blog->created_at->format('d/m/Y') }} a las {{ $blog->created_at->format('H:i') }}</small>
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             
-            <form id="edit-form"  method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                
-                <input type="hidden" name="id" id="post-id">
-                <textarea name="comentario" id="comentario" placeholder="¿Qué quieres compartir hoy?" required></textarea>
-                
-                <!-- Vista previa de la imagen actual -->
-                <div id="current-image">
-                    <img id="current-image-preview" src="#" alt="Imagen publicada" style="display: none;">
-                </div>
-                
-                <label for="image-upload" class="upload-label">
-                    <i class="fas fa-camera"></i> Cambiar foto
-                </label>
-                <input type="file" name="imagen" id="image-upload">
-                
-                <div id="image-preview" class="image-preview">
-                    <img id="preview-image" src="#" alt="Vista previa de la imagen" style="width: 70%" style="display: none;">
-                </div>
-                
-                <button type="submit" id="post-btn">Guardar cambios</button>
-            </form>
+            </div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('modaledit');
-            const closeBtn = document.querySelector('.modal-content .close');
-            const editButtons = document.querySelectorAll('.btn-editar');
-
-            editButtons.forEach(button => {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault(); // Evitar comportamiento por defecto del botón
-
-                    const postId = this.getAttribute('data-id');
-                    const comentario = this.getAttribute('data-comentario');
-                    const imagen = this.getAttribute('data-imagen');
-
-                    // Poblar el formulario con los datos de la publicación
-                    document.getElementById('post-id').value = postId;
-                    document.getElementById('comentario').value = comentario;
-
-                    // Establecer la acción del formulario con el ID del post
-                    const formAction = "{{ url('blog') }}/" + postId;
-                    document.getElementById('edit-form').action = formAction;
-
-                    // Mostrar la imagen actual si existe
-                    const currentImagePreview = document.getElementById('current-image-preview');
-                    if (imagen) {
-                        currentImagePreview.src = "{{ asset('storage') }}/" + imagen;
-                        currentImagePreview.style.display = 'block';
-                    } else {
-                        currentImagePreview.style.display = 'none';
-                    }
-
-                    modal.style.display = 'block'; // Mostrar el modal
-                });
-            });
-
-            // Cerrar modal al hacer clic en el botón de cerrar
-            closeBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-
-            // Cerrar modal al hacer clic fuera del modal
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-
-            // Mostrar la vista previa de la imagen seleccionada
-            const imageUpload = document.getElementById('image-upload');
-            const previewImage = document.getElementById('preview-image');
-
-            imageUpload.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        previewImage.src = event.target.result;
-                        previewImage.style.display = 'block'; // Mostrar la vista previa
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-            const currentImagePreview = document.getElementById('current-image-preview');
-if (imagen) {
-    currentImagePreview.src = "{{ asset('storage') }}/" + imagen;
-    currentImagePreview.style.display = 'block';
-} else {
-    currentImagePreview.style.display = 'none';
-}
-
-        });
-        
-    </script>
 </body>
 </html>
-
-

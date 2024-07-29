@@ -8,7 +8,7 @@ use App\Http\Controllers\ComprarController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\PlantaController;
 use App\Http\Controllers\CategoriaController;
-
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -58,17 +58,47 @@ Route::group(['prefix' => 'usuarios', 'middleware' => 'auth:usuario'], function(
      Route::delete('/direccion/{id}', [PerfilController::class, 'destroy'])->name('direccion.destroy');
      Route::post('/perfilC/update', [PerfilController::class, 'update'])->name('perfilC.update');
     
-        Route::get('/blog', [blogController::class, 'index'])->name('blog');
+       /* Route::get('/blog', [blogController::class, 'index'])->name('blog');
         Route::resource('/blog', BlogController::class);
         Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
         Route::get('/blog/{id}',[BlogController::class, 'edit'])->name('blog.edit');
-        Route::delete('blog/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
+        Route::delete('blog/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');*/
 
-        Route::resource('/misPlantas', MisplantasController::class);
-        Route::post('/get-plantas-by-categoria', [MisPlantasController::class, 'getPlantasByCategoria'])->name('misplantas.getPlantasByCategoria');
-        Route::post('/get-planta-details', [MisPlantasController::class, 'getPlantaDetails'])->name('misplantas.getPlantaDetails');
-        Route::get('/misplantas', [MisPlantasController::class, 'index'])->name('misplantas');
-        Route::post('/misPlantas', [MisplantasController::class, 'store'])->name('misPlantas.store');
+    Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+    Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
+    Route::get('/blog/{id_blog}/editb', [BlogController::class, 'edit'])->name('blog.editb');
+    Route::put('/blog/{id_blog}', [BlogController::class, 'update'])->name('blog.update');
+    Route::delete('/blog/{id_blog}', [BlogController::class, 'destroy'])->name('blog.destroy');
+
+    Route::resource('misplantas', MisplantasController::class);
+    Route::get('/misplantas', [MisplantasController::class, 'index'])->name('misplantas.index');
+    Route::post('/misplantas/getPlantasByCategoria', [MisplantasController::class, 'getPlantasByCategoria'])->name('misplantas.getPlantasByCategoria');
+    Route::post('/misplantas/getPlantaDetails', [MisplantasController::class, 'getPlantaDetails'])->name('misplantas.getPlantaDetails');
+    Route::post('/misplantas', [MisplantasController::class, 'store'])->name('misPlantas.store');
+    Route::delete('/misplantas/{id_misplanta}', [MisplantasController::class, 'destroy'])->name('misplantas.destroy');
+    Route::get('/search', [MisplantasController::class, 'search'])->name('search');
+    
+  
+
+    /*
+    Route::post('/get-plantas-by-categoria', [MisPlantasController::class, 'getPlantasByCategoria'])->name('misplantas.getPlantasByCategoria');
+   Route::post('/get-planta-details', [MisPlantasController::class, 'getPlantaDetails'])->name('misplantas.getPlantaDetails');
+   Route::get('/misplantas', [MisPlantasController::class, 'index'])->name('misplantas');
+    Route::post('/misPlantas', [MisplantasController::class, 'store'])->name('misPlantas.store');
+    Route::get('/misplantas', [MisPlantasController::class, 'index'])->name('misplantas.index');
+   Route::post('/misplantas/getPlantaDetails', [MisplantasController::class, 'getPlantaDetails'])->name('misplantas.getPlantaDetails');
+
+
+Route::post('/get-plantas-by-categoria', [MisPlantasController::class, 'getPlantasByCategoria'])->name('misplantas.getPlantasByCategoria');
+Route::post('/get-planta-details', [MisPlantasController::class, 'getPlantaDetails'])->name('misplantas.getPlantaDetails');
+// En routes/web.php
+
+Route::get('/misplantas', [MisPlantasController::class, 'index'])->name('misplantas');*/
+
+/*Route::get('/misplantas/planta/{id}', [MisPlantasController::class, 'getPlantasByCategoria']);
+Route::get('/misplantas/planta/{id}', [MisPlantasController::class, 'getPlanta']);
+Route::post('/misplantas', [MisPlantasController::class, 'store'])->name('misplantas.store');
+Route::delete('/misplantas/{id}', [MisPlantasController::class, 'destroy'])->name('misplantas.destroy');*/
 
                     Route::get('/comprar', [ComprarController::class, 'index'])->name('comprar');
                 //  Route::get('/home', [PerfilController::class, 'home'])->name('home');

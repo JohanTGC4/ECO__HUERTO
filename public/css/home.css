@@ -1,292 +1,333 @@
 
     /* Reset de estilos básicos */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      background-image: url('../images/imagendelfondo3.jpg'),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.106), rgba(0, 0, 0, 0.203));
+        background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+        background-position: center; /* Centra la imagen */
+        /* Configura que la imagen no se repita */
+        
+        /* Configura el orden de superposición de los fondos */
+        background-blend-mode: overlay;
+      color: #ffffff; /* Asegura que el texto sea legible sobre el fondo oscuro */
+        padding: 0;
+        box-sizing: border-box
+    }
+    
+    .navbar {
+      background-color: #c2dcc838; /* Fondo semitransparente para la barra de navegación */
+      color: #fff;
+      padding: 10px 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .navbar-container .imagen {
+      flex: 1;
+    }
+    
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      flex: 2;
+      justify-content: center;
+    }
+    
+    .nav-item {
+      margin-left: 20px;
+      position: relative; /* Añadido para alinear los íconos */
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: #ff6347;
+    }
+    
+    
+    /* Estilos para la tabla */
+    .table-container {
+      margin-top: 100px; /* Ajustado para separar la tabla del menú */
+      margin-bottom: 20px; /* Añadido margen inferior para separar del borde inferior */
+      width: 80%;
+      margin-left: auto; /* Centra la tabla en dispositivos grandes */
+      margin-right: auto; /* Centra la tabla en dispositivos grandes */
+      background-color: #2b6535c8;
+    }
+    
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      color: black;
+    }
+    
+    .custom-table td {
+      border: 1px solid #ffffff;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .custom-table tr:first-child td {
+      border-top: none; /* Elimina la línea superior de la primera fila */
+    }
+    a {
+                text-decoration: none;
+                color: #fffcfc; /* Color del texto */
+                font-weight: bold;
+            }
+            a:hover {
+                color: #000000ec; /* Color del texto al pasar el mouse por encima */
+            }
+    /* Estilos para las tarjetas */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      margin: 0 auto;
+      margin-bottom: 20px;
+      width: 90%;
+    }
+    
+    .card {
+      background-color: rgba(43, 205, 73, 0.9); /* Fondo semitransparente para las tarjetas */
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .card-content {
+      padding: 15px;
+    }
+    
+    .card-content h3 {
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    
+    .card-content p {
+      color: #fff;
+    }
 
-body {
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  margin: 0;
-  background-image: url('../images/imagendelfondo3.jpg'),
-		linear-gradient(to bottom, rgba(0, 0, 0, 0.106), rgba(0, 0, 0, 0.203));
-		background-size: cover; /* Asegura que la imagen cubra todo el fondo */
-		background-position: center; /* Centra la imagen */
-		/* Configura que la imagen no se repita */
-		
-		/* Configura el orden de superposición de los fondos */
-		background-blend-mode: overlay;
-  color: #ffffff; /* Asegura que el texto sea legible sobre el fondo oscuro */
-    padding: 0;
-    box-sizing: border-box
-}
-
-.navbar {
-  background-color: #c2dcc838; /* Fondo semitransparente para la barra de navegación */
-  color: #fff;
-  padding: 10px 20px;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar-container .imagen {
-  flex: 1;
-}
-
-.nav-menu {
-  list-style: none;
-  display: flex;
-  flex: 2;
-  justify-content: center;
-}
-
-.nav-item {
-  margin-left: 20px;
-  position: relative; /* Añadido para alinear los íconos */
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 18px;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: #ff6347;
-}
-
-
-/* Estilos para la tabla */
-.table-container {
-  margin-top: 100px; /* Ajustado para separar la tabla del menú */
-  margin-bottom: 20px; /* Añadido margen inferior para separar del borde inferior */
-  width: 80%;
-  margin-left: auto; /* Centra la tabla en dispositivos grandes */
-  margin-right: auto; /* Centra la tabla en dispositivos grandes */
-  background-color: #2b6535c8;
-}
-
-.custom-table {
-  width: 100%;
-  border-collapse: collapse;
-  color: black;
-}
-
-.custom-table td {
-  border: 1px solid #ffffff;
-  padding: 10px;
-  text-align: center;
-}
-
-.custom-table tr:first-child td {
-  border-top: none; /* Elimina la línea superior de la primera fila */
-}
-a {
-            text-decoration: none;
-            color: #fffcfc; /* Color del texto */
-            font-weight: bold;
-        }
-        a:hover {
-            color: #000000ec; /* Color del texto al pasar el mouse por encima */
-        }
-/* Estilos para las tarjetas */
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  width: 90%;
-}
-
-.card {
-  background-color: rgba(43, 205, 73, 0.9); /* Fondo semitransparente para las tarjetas */
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-10px);
-}
-
-.card-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.card-content {
-  padding: 15px;
-}
-
-.card-content h3 {
-  margin-bottom: 10px;
-  color: #fff;
-}
-
-.card-content p {
-  color: #fff;
-}
 /*chatttttt booooot*/
-
+/* Contenedor del chatbot */
 .chatbot {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    bottom: 0;
-    right: 20px;
-    width: 300px;
-    height: 400px;
-    border: 1px solid #ccc;
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0 4px 8px rgba(227, 199, 199, 0.2);
-    background-color: white;
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  width: 280px; /* Reducir el ancho del chatbot */
+  height: 400px;
+  border: 1px solid #ccc;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 4px 8px rgba(227, 199, 199, 0.2);
+  background-color: #ffffff; /* Fondo blanco para el chatbot */
+  font-family: Arial, sans-serif; /* Fuente limpia y moderna */
 }
 
+/* Cabecera del chatbot */
 .chatbot-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    border-radius: 10px 10px 0 0;
-    text-align: center;
-    font-weight: bold;
-    position: relative;
+  background-color: #4CAF50; /* Verde principal */
+  color: white;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  text-align: center;
+  font-weight: bold;
+  position: relative;
 }
 
+/* Botón de cierre del chatbot */
 .close-btn {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  font-size: 18px; /* Tamaño del icono de cierre */
 }
 
+/* Cuerpo del chatbot */
 .chatbot-body {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #f5f5f5; /* Fondo gris claro para el cuerpo del chat */
 }
 
+/* Contenedor del mensaje con avatar */
+.message-container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+/* Avatar del usuario y del bot */
+.avatar {
+  width: 30px; /* Tamaño pequeño para los avatares */
+  height: 30px;
+  border-radius: 50%; /* Hacer los avatares circulares */
+  margin-right: 10px; /* Espacio entre el avatar y el mensaje */
+}
+
+/* Mensajes del usuario y del bot */
 .user-message, .bot-message {
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
+  padding: 8px; /* Reducir el padding para los mensajes */
+  margin: 0; /* Eliminar margen en el contenedor de mensajes */
+  border-radius: 5px;
+  max-width: 80%; /* Limitar el ancho de los mensajes */
+  font-size: 12px; /* Tamaño de fuente reducido */
+  position: relative;
 }
 
+/* Mensajes del usuario */
 .user-message {
-    background-color: #6be600;
-    align-self: flex-end;
+  background-color: #4CAF50; /* Verde que combina con el header */
+  color: white;
+  align-self: flex-end;
 }
 
+/* Mensajes del bot */
 .bot-message {
-    background-color: #03b7369c;
-    align-self: flex-start;
+  background-color: #eaf8e4; /* Verde claro para el bot */
+  color: #333333; /* Texto oscuro para mejor legibilidad */
+  align-self: flex-start;
 }
 
+/* Pie de página del chatbot */
 .chatbot-footer {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #d58282;
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #d58282;
+  background-color: #ffffff; /* Fondo blanco para el pie de página */
 }
 
+/* Campo de entrada del pie de página */
 .chatbot-footer input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
+/* Botón de envío del pie de página */
 .chatbot-footer button {
-    margin-left: 10px;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  margin-left: 10px;
+  padding: 10px;
+  background-color: #4CAF50; /* Verde principal */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
+/* Botón de apertura del chatbot */
 .open-btn {
-    background-image: url('../images/logoEcoHuerto.png'); /* Reemplaza con la ruta a tu imagen */
-    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el botón */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    background-position: center; /* Centra la imagen dentro del botón */
-  
-    border: none; /* Elimina el borde del botón */
-    cursor: pointer; /* Cambia el cursor cuando el ratón está sobre el botón */
-    /* Otros estilos opcionales */
-    outline: none; /* Elimina el contorno al hacer clic */
-    padding: 0; /* Elimina el relleno */
-    margin: 0; /* Elimina el margen */
-
-
-
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 16px;
-    cursor: pointer;
+  background-image: url('../images/logoEcoHuerto.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 16px;
 }
 
-@media (max-width: 600px) {
-    .chatbot {
-        width: 90%;
-        height: 300px;
-        right: 5%;
-        bottom: 5%;
-        border-radius: 10px;
+/* Estilo para las opciones del menú */
+.menu-options-container {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #eaf8e4; /* Fondo verde claro para el contenedor de opciones */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Opción de menú flotante */
+.menu-option-message {
+  padding: 8px 12px;
+  margin: 5px 0;
+  border-radius: 5px;
+  background-color: #4CAF50; /* Fondo verde para opciones */
+  color: white;
+  cursor: pointer;
+  font-size: 12px; /* Tamaño de fuente reducido */
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Efecto al pasar el mouse sobre las opciones del menú */
+.menu-option-message:hover {
+  background-color: #45a049; /* Verde más oscuro al pasar el ratón */
+  transform: scale(1.05); /* Ligera ampliación */
+}
+
+
+    
+    /* Estilos responsivos */
+    @media (max-width: 768px) {
+    
+      .nav-link span {
+        display: none; /* Ocultar el texto de los enlaces en dispositivos móviles */
+      }
+    
+      .imagen {
+        display: none; /* Ocultar el logo en dispositivos móviles */
+      }
+    
+      .nav-item {
+        position: relative;
+      }
+    
+      .nav-menu {
+        gap: 10px;
+      }
+    
+      .nav-link i {
+        font-size: 30px; /* Ajustar tamaño de íconos en dispositivos móviles */
+      }
     }
-
-    .open-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 14px;
-    }
-}
-/*fin  hat*/
-
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
-
-  .nav-link span {
-    display: none; /* Ocultar el texto de los enlaces en dispositivos móviles */
-  }
-
-  .imagen {
-    display: none; /* Ocultar el logo en dispositivos móviles */
-  }
-
-  .nav-item {
-    position: relative;
-  }
-
-  .nav-menu {
-    gap: 10px;
-  }
-
-  .nav-link i {
-    font-size: 30px; /* Ajustar tamaño de íconos en dispositivos móviles */
-  }
-}
-
-
+    
+    
+    

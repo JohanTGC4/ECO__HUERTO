@@ -53,6 +53,7 @@ class PerfilController extends Controller
         $direccion->save();
     
         return redirect()->back()->with('success', 'Dirección agregada correctamente.');
+        
     }
     public function update(Request $request)
     {

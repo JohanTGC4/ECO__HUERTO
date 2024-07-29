@@ -29,7 +29,6 @@
 <div class="profile-container">
     <h2 class="h2">Perfil de {{ $usuario->usuario }}</h2>
     <div class="profile-info">
-<<<<<<< Updated upstream
       <img src="{{ asset('storage/' . $usuario->fotoperfil) }}" alt="Foto de Perfil" class="profile-img">
         <div class="info">
             <p><strong>Nombre:</strong> <span id="userName">{{ $usuario->usuario }}</span></p>
@@ -55,17 +54,41 @@
             <button class="edit-btn" onclick="openEditModal()">Editar Información</button>
             <button onclick="window.location.href='{{ route('login') }}'" class="salir-btn">Cerrar sesión</button>
         </div>
-=======
-      <img src="{{ asset('images/avatar1.jpg') }}" alt="Foto de Perfil" class="profile-img">
-      <div class="info">
-        <p><strong>Nombre:</strong> <span id="userName">{{$user['usuario']}}</span></p>
-        <p><strong>Correo Electrónico :</strong> <span id="userEmail">{{$user['email']}}</span></p>
-        <p><strong>Dirección:</strong> <span id="userEmail">{{$user['direccion']}}</span></p>
-        <button class="edit-btn" onclick="openEditModal()">Editar Información</button>
-
-      </div>
->>>>>>> Stashed changes
     </div>
+    <!-- Tabla de Direcciones -->
+<div class="direccion-container">
+    <h2>Direcciones</h2>
+
+    <button class="agregar-btn" onclick="openAddModal()">Agregar Dirección</button>
+    @if ($direcciones->isNotEmpty())
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dirección</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($direcciones as $direccion)
+                        <tr>
+                            <td>{{ $direccion->calle }}, {{ $direccion->numero }}, {{ $direccion->colonia }}, {{ $direccion->municipio }}, {{ $direccion->estado }}</td>
+                            <td>
+                                <form action="{{ route('direccion.destroy', $direccion->id_direccion) }}" method="POST" onsubmit="return confirm('¿Está seguro de que desea eliminar esta dirección?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    @else
+        <p>No hay direcciones registradas.</p>
+    @endif
+</div>
 </div>
 
 <!-- Modal para editar información -->
@@ -81,7 +104,6 @@
             <label for="email">Correo Electrónico:</label>
             <input type="email" name="email" id="email" value="{{ $usuario->email }}" required>
 
-<<<<<<< Updated upstream
             <label for="profile_photo">Foto de Perfil:</label>
             <input type="file" name="fotoperfil" id="fotoperfil">
             
@@ -94,14 +116,6 @@
      
             <button type="submit">Guardar</button>
         </form>
-=======
-        <label for="editEmail">Dirección:</label>
-        <input type="text" id="editEmail" name="editEmail" value="juan.perez@example.com">
-        
-        <button type="button" onclick="saveChanges()">Guardar Cambios</button>
-      </form>
-      
->>>>>>> Stashed changes
     </div>
 </div>
 <style>
@@ -113,9 +127,10 @@
   text-align: center; /* Centrar el contenido dentro del contenedor */
 }
 
-.direccion-container h3 {
+.direccion-container h2 {
   font-size: 1.5em;
   margin-bottom: 10px;
+  color: black
 }
 
 .agregar-btn {
@@ -138,24 +153,28 @@
 }
 
 table {
-  width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+  width: 50%; /* Asegura que la tabla ocupe todo el ancho disponible */
   border-collapse: separate; /* Separación de bordes */
   border-spacing: 0; /* Espacio entre bordes */
-  background-color: white; /* Fondo blanco */
+  background-color: rgba(255, 255, 255, 0.718); /* Fondo blanco */
   color: #333; /* Color del texto */
   border-radius: 10px; /* Bordes redondeados */
   overflow: hidden; /* Ocultar cualquier desbordamiento */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  justify-content: center;
+  text-align: center;
+
+  margin: 0 auto; /* Centra la tabla horizontalmente */
 }
 
 table th, table td {
-  border: 1px solid #5dc764;
+  border: 1px solid #FFFFFF;
   padding: 8px;
   text-align: center;
 }
 
 table th {
-  background-color: #f2f2f280;
+  background-color: #F2F2F208;
 }
 
 table tr:nth-child(even) {
@@ -196,47 +215,7 @@ table td form button:hover {
 
 </style>
 
-<!-- Tabla de Direcciones -->
-<div class="direccion-container">
-    <h3>Direcciones</h3>
-    <button class="agregar-btn" onclick="openAddModal()">Agregar Dirección</button>
-    @if ($direcciones->isNotEmpty())
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Calle</th>
-                        <th>Número</th>
-                        <th>Colonia</th>
-                        <th>Municipio</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($direcciones as $direccion)
-                        <tr>
-                            <td>{{ $direccion->calle }}</td>
-                            <td>{{ $direccion->numero }}</td>
-                            <td>{{ $direccion->colonia }}</td>
-                            <td>{{ $direccion->municipio }}</td>
-                            <td>{{ $direccion->estado }}</td>
-                            <td>
-                                <form action="{{ route('direccion.destroy', $direccion->id_direccion) }}" method="POST" onsubmit="return confirm('¿Está seguro de que desea eliminar esta dirección?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    @else
-        <p>No hay direcciones registradas.</p>
-    @endif
-</div>
+
 
 <!-- Modal para agregar dirección -->
 <div id="addModal" class="modal">
