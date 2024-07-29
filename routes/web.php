@@ -78,6 +78,11 @@ Route::get('/misplantas', [MisPlantasController::class, 'index'])->name('misplan
     Route::get('/home', function () { 
         return view('home');
 })->name('home');
+
+  // Nueva ruta para el modelo Teachable Machine
+  Route::get('/teachable', function () {
+    return view('usuario.teachable'); // Asegúrate de que esta vista existe
+})->name('usuario.teachable');
   
    
 });
