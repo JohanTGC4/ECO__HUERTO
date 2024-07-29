@@ -185,7 +185,7 @@
 
             if (categoria_id) {
                 $.ajax({
-                    url: '{{ route('misPlantas.index') }}',
+                    url: "{{ route('misPlantas.index') }}",
                     type: 'GET',
                     data: {
                         categoria: categoria_id
@@ -219,7 +219,7 @@
 
             // Realizar la solicitud AJAX para guardar la planta
             $.ajax({
-                url: '{{ route('misPlantas.store') }}',
+                url: "{{ route('misPlantas.store') }}",
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -250,7 +250,7 @@
 
             // Realizar la solicitud AJAX para guardar la planta
             $.ajax({
-                url: '{{ route('misPlantas.store') }}',
+                url: "{{ route('misPlantas.store') }}",
                 type: 'POST',
                 data: formData,
                 contentType: false,
