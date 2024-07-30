@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use App\Models\usuario;
 class MisplantasController extends Controller
 {
    /* public function index(Request $request)
@@ -32,7 +33,6 @@ class MisplantasController extends Controller
 
            // Obtener las plantas del usuario autenticado
     $misplantas = MisPlantas::where('usuario_id_usuario', $userId)
-    
     ->with('planta') // Cargar la relación planta
     ->get();
 
@@ -52,31 +52,84 @@ class MisplantasController extends Controller
                 return response()->json([], 400);
             }
         }
-      
+    
         // Si no es una solicitud AJAX, renderizar la vista con las categorías
         return view('misplantas', compact('categorias','misplantas'));
     }
+    public function getPlantaDetails(Request $request)
+{
+    $planta = Planta::find($request->planta_id);
+
+    if ($planta) {
+        return response()->json([
+            'nombre' => $planta->nombre,
+            'imagen' => Storage::url($planta->imagen), // Asegúrate de que el campo imagen esté en el modelo
+        ]);
+    }
+
+    return response()->json([], 404);
+}
+
        // Método para almacenar una nueva planta del usuario
        public function store(Request $request)
        {
-        $userId = Auth::id();
-           // Obtener la planta seleccionada por su ID
-           $planta = Planta::findOrFail($request->planta);
        
-       
-           // Guardar la relación en misplantas
-           MisPlantas::create([
-               'planta_id_planta' => $planta->id_planta,
-               'usuario_id_usuario' => $userId,
-           ]);
-           
-         // Obtener las plantas del usuario actualizadas
-    $misplantas = MisPlantas::where('usuario_id_usuario', $userId)
-    ->with('planta') // Cargar la relación planta
-    ->get();
-           // Redireccionar o devolver una respuesta según tu lógica
-           
-           return redirect()->route('misPlantas.index')->with('success', 'Planta agregada correctamente');
+           // Obtener el usuario autenticado
+    $usuario = Auth::user(); // Obtiene el objeto del usuario autenticado
+
+    // Obtener la planta seleccionada por su ID
+    $planta = Planta::findOrFail($request->planta);
+
+    // Guardar la relación en misplantas
+    MisPlantas::create([
+        'planta_id_planta' => $planta->id_planta,
+        'usuario_id_usuario' => $usuario->id_usuario, // Utiliza el ID del usuario autenticado
+    ]);
+
+    // Redireccionar o devolver una respuesta según tu lógica
+    return redirect()->route('misplantas.index')->with('success', 'Planta se agregada correctamente');
        }
+
+       public function show($id)
+       {
+           $planta = Planta::find($id);
+   
+           if ($planta) {
+               return response()->json([
+                   'nombre' => $planta->nombre,
+                   'descripcion' => $planta->descripcion,
+                   'imagen' => $planta->imagen ? Storage::url($planta->imagen) : null, // Asegúrate de que esta línea devuelva la URL correcta de la imagen
+               ]);
+           } else {
+               return response()->json(['error' => 'Planta no encontrada.'], 404);
+           }
+       }
+
+       public function destroy($id_misplantas)
+       {
+           // Encuentra la planta por ID
+           $misPlanta = MisPlantas::find($id_misplantas);
        
+           // Verifica si la planta existe
+           if ($misPlanta) {
+               // Elimina la planta
+               $misPlanta->delete();
+       
+               // Redirige con mensaje de éxito
+               return redirect()->route('misplantas.index')->with('success', 'Planta eliminada correctamente');
+           }
+       
+           // Redirige con mensaje de error si la planta no fue encontrada
+           return redirect()->route('misplantas.index')->with('error', 'Planta no encontrada');
+       }
+      
+
+       public function search(Request $request)
+       {
+           $query = $request->input('query');
+           $results = Planta::where('nombre', 'like', '%' . $query . '%')->get();
+           
+           return response()->json($results);
+       }
 }
+

@@ -7,7 +7,6 @@
   <link rel="icon" href="{{ asset('images/logoEcoHuerto.png') }}" type="image/x-icon">
  <link rel="stylesheet" href="{{ asset('css/home.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  @laravelPWA
 
 </head>
 <body>
@@ -17,7 +16,7 @@
       <ul class="nav-menu">
         <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
-        <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Blog</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Publicaciones</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('usuario.teachable') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
       </ul>
@@ -31,7 +30,7 @@
       <tr>
         
         <td><a href="{{ route('home') }}">Por hacer <i class="fa fa-history" aria-hidden="true"></i></a></td>
-        <td><a href="{{ route('misplantas') }}">Mis plantas <i class="fa fa-leaf" aria-hidden="true"></i></a></td>
+        <td><a href="{{ route('misplantas.index') }}">Mis plantas <i class="fa fa-leaf" aria-hidden="true"></i></a></td>
       </tr>
     </table>
   </div>
@@ -68,87 +67,108 @@
         <button id="sendBtn">Enviar</button>
     </div>
 </div>
-<button class="open-btn"> </button>
+<button class="open-btn"></button>
+
 </body>
 </html>
 
-
-
-
 <script>
-      const hamburger = document.querySelector('.hamburger');
-  const navMenu = document.querySelector('.nav-menu');
-
-  hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-  });
-
-  /**chat bor**/
   document.addEventListener("DOMContentLoaded", function () {
-      const chatbot = document.querySelector(".chatbot");
-      const openBtn = document.querySelector(".open-btn");
-      const closeBtn = document.querySelector(".close-btn");
-      const sendBtn = document.getElementById("sendBtn");
-      const userInput = document.getElementById("userInput");
-      const chatbotMessages = document.querySelector(".chatbot-messages");
+    const chatbot = document.querySelector(".chatbot");
+    const openBtn = document.querySelector(".open-btn");
+    const closeBtn = document.querySelector(".close-btn");
+    const sendBtn = document.getElementById("sendBtn");
+    const userInput = document.getElementById("userInput");
+    const chatbotMessages = document.querySelector(".chatbot-messages");
 
-      openBtn.addEventListener("click", () => {
-          chatbot.style.display = "flex";
-          openBtn.style.display = "none";
-          showMenuOptions();
-      });
+    let menuOptionsContainer;
 
-      closeBtn.addEventListener("click", () => {
-          chatbot.style.display = "none";
-          openBtn.style.display = "block";
-      });
+    openBtn.addEventListener("click", () => {
+        chatbot.style.display = "flex";
+        openBtn.style.display = "none";
+        if (!menuOptionsContainer) {
+            showMenuOptions();
+        }
+    });
 
-      sendBtn.addEventListener("click", () => {
-          const message = userInput.value.trim();
-          if (message) {
-              addMessage("user", message);
-              userInput.value = '';
-              setTimeout(() => {
-                  addMessage("bot", getBotResponse(message));
-                  showMenuOptions();
-              }, 500);
-          }
-      });
+    closeBtn.addEventListener("click", () => {
+        chatbot.style.display = "none";
+        openBtn.style.display = "block";
+    });
 
-      function showMenuOptions() {
-          const menuOptions = document.createElement("div");
-          menuOptions.className = "bot-message";
-          menuOptions.innerHTML = `
-              <button class="menu-option" data-value="¿Quienes somos?">¿Quienes somos?</button>
-              <button class="menu-option" data-value="¿Como se hace el cultivo?">¿Como se hace el cultivo?</button>
-              <button class="menu-option" data-value="¿Como puedo agregar planta?">¿Como puedo agregar planta?</button>
-          `;
-          chatbotMessages.appendChild(menuOptions);
-          chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    sendBtn.addEventListener("click", () => {
+        const message = userInput.value.trim();
+        if (message) {
+            addMessage("user", message);
+            userInput.value = '';
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addMessage("bot", response);
+                // Keep the menu options visible after sending a message
+                if (response === "Lo siento, no entiendo tu pregunta.") {
+                    showMenuOptions();
+                }
+            }, 500);
+        }
+    });
 
-          const options = menuOptions.querySelectorAll('.menu-option');
-          options.forEach(option => {
-              option.addEventListener('click', () => {
-                  userInput.value = option.getAttribute('data-value');
-              });
-          });
-      }
+    function showMenuOptions() {
+        if (menuOptionsContainer) return; // If menu options container is already created, do nothing
 
-      function addMessage(sender, text) {
-          const messageElem = document.createElement("div");
-          messageElem.className = sender === "user" ? "user-message" : "bot-message";
-          messageElem.textContent = text;
-          chatbotMessages.appendChild(messageElem);
-          chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-      }
+        menuOptionsContainer = document.createElement("div");
+        menuOptionsContainer.className = "menu-options-container";
+        chatbotMessages.appendChild(menuOptionsContainer);
 
-      function getBotResponse(message) {
-          const responses = {
-              "¿Quienes somos?": "Somos una empresa dedicada a la agricultura sostenible.",
-              "¿Como se hace el cultivo?": "El cultivo se realiza mediante técnicas orgánicas para asegurar la mejor calidad.",
-              "¿Como puedo agregar planta?": "Para agregar una planta, visita nuestra sección de agregar plantas en el sitio web."
-          };
-          return responses[message] || "Lo siento, no entiendo tu pregunta.";
-      }
-  });
+        const options = [
+            "¿Dónde reviso la información del riego de mi planta?",
+            "¿Por qué no me deja agregar más plantas?",
+            "¿Hay devolución en alguna compra?",
+            "¿Aceptan cualquier tarjeta?",
+            "¿Cómo los contacto?"
+        ];
+
+        options.forEach(optionText => {
+            const menuOption = document.createElement("div");
+            menuOption.className = "menu-option-message";
+            menuOption.textContent = optionText;
+            menuOptionsContainer.appendChild(menuOption);
+            menuOption.addEventListener('click', () => {
+                userInput.value = optionText;
+                sendBtn.click();
+            });
+        });
+
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function addMessage(sender, text) {
+        const messageElem = document.createElement("div");
+        messageElem.className = "message-container";
+
+        const avatarElem = document.createElement("img");
+        avatarElem.className = "avatar";
+        avatarElem.src = sender === "user" ? "../images/avatarusuario.png" : "../images/logoEcoHuerto.png";
+
+        const textElem = document.createElement("div");
+        textElem.className = sender === "user" ? "user-message" : "bot-message";
+        textElem.textContent = text;
+
+        messageElem.appendChild(avatarElem);
+        messageElem.appendChild(textElem);
+        chatbotMessages.appendChild(messageElem);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function getBotResponse(message) {
+        const responses = {
+            "¿Dónde reviso la información del riego de mi planta?": "En la parte de 'Mis Plantas', en el botón de ver más información se encuentra el riego que lleva su planta.",
+            "¿Por qué no me deja agregar más plantas?": "Solo se pueden agregar 15 plantas por usuario.",
+            "¿Hay devolución en alguna compra?": "Por el momento no contamos con ninguna devolución.",
+            "¿Aceptan cualquier tarjeta?": "Solo PayPal, por el momento.",
+            "¿Cómo los contacto?": "Por correo electrónico: ecohuerto10@gmail.com"
+        };
+        return responses[message] || "Lo siento, no entiendo tu pregunta.";
+    }
+});
+
 </script>

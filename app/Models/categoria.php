@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class categoria extends Model
 {
-    protected $table = 'categoria_planta';
     use HasFactory;
-   
-
+    protected $table = 'categoria_planta';
     protected $primaryKey = 'id_categoriaplanta'; // especifica la clave primaria
-
-    public $timestamps = false; // si no usas timestamps
-
     // si es necesario, especifica las columnas fillable
     protected $fillable = ['nombre'];
+
+    public function planta()
+    {
+        return $this->hasMany(Planta::class, 'id_categoriaplanta');
+    }
 }

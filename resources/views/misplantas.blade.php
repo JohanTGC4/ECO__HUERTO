@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <title>Mis plantas</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EcoHuerto</title>
-  <link rel="icon" href="{{ asset('css/images/logoEcoHuerto.png') }}" type="image/x-icon">
+  <link rel="icon" href="{{ asset('images/logoEcoHuerto.png') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ asset('css/misplantas.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  @laravelPWA
 </head>
 <body>
   <nav class="navbar">
@@ -18,21 +18,37 @@
         <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Blog</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
-        <li class="nav-item"><a href="{{ route('usuario.teachable') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i>
-    </a>
-</li>      </ul>
+      </ul>
     </div>
   </nav>
   <br>
-  <div class="search-container">
+  <br>
+  <br>
+ 
+<div class="search-container">
     <input type="text" class="search-input" placeholder="Buscar...">
     <button class="search-button"><i class="fa fa-search"></i></button>
-  </div>
-  
+</div>
+<div class="search-results"></div>
+
   <!-- Botón para agregar plantas -->
   <div class="add-plant-container">
     <button id="open-modal-btn" class="add-plant-button"><i class="fa fa-plus"></i> Agregar Planta</button>
   </div>
+  <!-- Mostrar alertas si existen mensajes en la sesión -->
+  @if(session('success'))
+  <div class="alert alert-success">
+      {{ session('success') }}
+      <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+@endif
+
+@if(session('error'))
+  <div class="alert alert-danger">
+      {{ session('error') }}
+      <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+@endif
 
   <!-- Modal -->
   <div id="plant-modal" class="modal">
@@ -62,78 +78,246 @@
            
           </select>
         </div>
-        <div class="form-group">
-          <label for="imagen">Imagen:</label>
-          <img id="preview-image" src="#" alt="Vista previa de la imagen seleccionada" width="100" height="100">
-        </div>
+        <label for="imagen">Imagen:</label>
+        <!-- Imagen cargada desde la base de datos -->
+        <img id="preview-image" src="#" alt="Vista previa de la imagen" style="display:block; width:150px; height:auto;">
         <button type="submit">Agregar Planta</button>
       </form>
     </div>
   </div>
-
-
 
   <!-- Contenedor de la tabla -->
   <div class="table-container">
     <table class="custom-table">
       <tr>
         <td><a href="{{ route('home') }}">Por hacer <i class="fa fa-history" aria-hidden="true"></i></a></td>
-        <td><a href="{{ route('misplantas') }}" >Mis plantas <i class="fa fa-leaf" aria-hidden="true"></i></a></td>
+        <td><a href="{{ route('misplantas.index') }}" >Mis plantas <i class="fa fa-leaf" aria-hidden="true"></i></a></td>
       </tr>
     </table>
   </div>
 
-  <div class="card-container">
-    @foreach ($misplantas as $misplanta)
-    <div class="card">
-        {{-- Imagen predeterminada si no hay imagen en la base de datos --}}
-        <img src="{{ asset('images/zanahoria.jpg') }}" width="150" alt="Imagen Predeterminada" class="card-img">
-        <div class="card-content">
-            @if ($misplanta->planta)
-                <p>{{ $misplanta->planta->nombre }}</p>
-            @endif
-            <div class="button-group">
-                <button class="custom-button details-button" type="button" data-toggle="modal" data-target="#modal-planta-{{ $misplanta->id }}">Detalles</button>
-                <button class="custom-button info-button" type="button">Ver más información</button>
+  <!-- Sección de tarjetas -->
+   <!-- Sección de tarjetas -->
+   @foreach ($misplantas as $misplanta)
+        <div class="card-container">
+            <div class="card">
+                {{-- Si tienes imagen --}}
+                <img src="{{ asset(Storage::url($misplanta->planta->imagen)) }}" width="50" alt="{{ $misplanta->planta->nombre }}" class="card-img"> 
+                <div class="card-content">
+                    <p>{{ $misplanta->planta->nombre }}</p>
+                </div>
+                <button class="button button-detalles" 
+                data-id="{{ $misplanta->planta->id_planta }}">
+            Detalles
+        </button>
+                <button class="button button-info">Más información</button>
+                <form action="{{ route('misplantas.destroy', $misplanta->id_misplantas) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="button button-danger">Eliminar</button>
+                </form>
             </div>
         </div>
-    </div>
-
-    {{-- Modal para detalles de la planta --}}
-    <div class="modal fade" id="modal-planta-{{ $misplanta->id }}" tabindex="-1" role="dialog" aria-labelledby="modalPlantaLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalPlantaLabel">{{ $misplanta->planta->nombre }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <img src="{{ asset('images/zanahoria.jpg') }}" width="100%" alt="Imagen de la planta">
-                    <p>{{ $misplanta->planta->descripcion }}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
     @endforeach
+    <style>
+        /* Estilos para botones */
+        .button {
+          background-color: #28a745; /* Verde */
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+          border-radius: 4px;
+        }
+        
+        .button-info {
+          background-color: #DB8638; /* Azul */
+        }
+        .button-detalles {
+          background-color: #17B822; /* Azul */
+        }
+        .button-danger {
+          background-color: #dc3545; /* Rojo */
+        }
+    
+        .button-warning {
+          background-color: #ffc107; /* Amarillo */
+        }
+    
+        /* Estilos para alertas */
+        .alert {
+            padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 4px;
+        position: fixed; /* Asegura que la alerta permanezca en su lugar incluso al hacer scroll */
+        top: 270px; /* Ajusta la distancia desde la parte superior */
+        left: 50%; /* Posiciona la alerta en el centro horizontal */
+        transform: translateX(-50%); /* Ajusta la alerta para que esté completamente centrada */
+        width: auto; /* Ajusta el ancho según el contenido */
+        max-width: 80%; /* Opcional: Limita el ancho máximo */
+        z-index: 1000; /* Asegura que la alerta esté sobre otros elementos */
+        }
+    
+        .alert-success {
+          color: #155724;
+          background-color: #d4edda;
+          border-color: #c3e6cb;
+        }
+    
+        .alert-error {
+          color: #721c24;
+          background-color: #f8d7da;
+          border-color: #f5c6cb;
+        }
+        /* Estilos del modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+}
+
+.modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+      </style>
+ <!-- Modal para detalles de la planta -->
+ <div id="plant-details-modal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <div class="modal-body">
+            <img id="modal-image" src="" alt="Imagen de la planta" class="modal-img">
+            <h2 id="modal-name"></h2>
+            <p id="modal-description"></p>
+        </div>
+    </div>
 </div>
 
-  
+ <!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const openModalBtn = document.getElementById('open-modal-btn');
+    const modal = document.getElementById('plant-modal');
+    const closeModalBtn = document.querySelector('.close');
+    const categoriaSelect = document.getElementById('categoria');
+    const plantaSelect = document.getElementById('planta');
+    const previewImage = document.getElementById('preview-image');
 
-  <!-- Modal para detalles de planta -->
-  <div id="plantModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <div id="modal-content" class="modal-info">
-        <!-- Aquí se llenará dinámicamente la información de la planta -->
-      </div>
-    </div>
-  </div>
+    // Función para abrir el modal al hacer clic en "Agregar Planta"
+    openModalBtn.addEventListener('click', function() {
+        modal.style.display = 'block';
+    });
 
+    // Función para cerrar el modal al hacer clic en la X
+    closeModalBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+
+    // Cerrar el modal haciendo clic fuera del contenido
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // Previsualizar imagen seleccionada
+    const fileInput = document.getElementById('imagen');
+    fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Cargar plantas basado en la categoría seleccionada
+    categoriaSelect.addEventListener('change', function() {
+        const categoriaId = this.value;
+        fetch('{{ route('misplantas.getPlantasByCategoria') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ categoria_id: categoriaId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            plantaSelect.innerHTML = '<option value="" disabled selected>Selecciona la planta</option>';
+            data.forEach(planta => {
+                plantaSelect.innerHTML += `<option value="${planta.id}">${planta.nombre}</option>`;
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching plantas:', error);
+        });
+    });
+
+    // Obtener detalles de la planta seleccionada
+    plantaSelect.addEventListener('change', function() {
+        const plantaId = this.value;
+        fetch('{{ route('misplantas.getPlantaDetails') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ planta_id: plantaId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            previewImage.src = '{{ asset('storage/images/') }}/' + data.imagen;
+        })
+        .catch(error => {
+            console.error('Error fetching planta details:', error);
+        });
+    });
+});-->
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -147,7 +331,9 @@
         const fileInput = $('#imagen');
         const categoriaIdInput = $('#categoria_id'); // Selector para el campo oculto
         const agregarPlantaForm = $('#agregarPlantaForm');
-  
+        const modalImage = document.getElementById('modal-image');
+    const modalName = document.getElementById('modal-name');
+    const modalDescription = document.getElementById('modal-description');
 
         openModalBtn.on('click', function() {
             console.log('Modal abierto');
@@ -185,7 +371,7 @@
 
             if (categoria_id) {
                 $.ajax({
-                    url: "{{ route('misPlantas.index') }}",
+                    url: "{{ route('misplantas.index') }}",
                     type: 'GET',
                     data: {
                         categoria: categoria_id
@@ -210,7 +396,34 @@
             }
         });
      
-      
+        plantaSelect.on('change', function() {
+            var planta_id = $(this).val();
+            console.log('Planta seleccionada:', planta_id);
+
+            if (planta_id) {
+                $.ajax({
+                    url: "{{ route('misplantas.getPlantaDetails') }}",
+                    type: 'POST',
+                    data: {
+                        planta_id: planta_id,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log('Detalles de la planta:', data);
+                        previewImage.attr('src', data.imagen); // Muestra la imagen en la vista previa
+                        plantModalContent.html(`
+                            <h3>${data.nombre}</h3>
+                            <img src="${data.imagen}" alt="${data.nombre}" width="150">
+                        `);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al obtener detalles de la planta:', error);
+                    }
+                });
+            }
+        });
+
         agregarPlantaForm.on('submit', function(event) {
             event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
 
@@ -229,7 +442,8 @@
                     // Aquí podrías realizar acciones adicionales, como actualizar la lista de plantas, etc.
                     // Limpiar el formulario después de agregar la planta
                     agregarPlantaForm[0].reset();
-
+                    previewImage.hide(); // Ocultar la vista previa de la imagen después de agregar la planta
+                    // Implementar la lógica para actualizar la vista con la nueva planta si es necesario
                     // Actualizar la lista de plantas mostradas si es necesario
                     // Puedes implementar esta lógica según tus necesidades
                 },
@@ -239,53 +453,88 @@
             });
         });
     });
-    $(document).ready(function() {
-        const agregarPlantaForm = $('#agregarPlantaForm');
 
-        agregarPlantaForm.on('submit', function(event) {
-            event.preventDefault();
+    document.addEventListener('DOMContentLoaded', function() {
+            // Ocultar la alerta de éxito después de 5 segundos
+            const successAlert = document.getElementById('success-alert');
+            if (successAlert) {
+                setTimeout(() => {
+                    successAlert.style.display = 'none';
+                }, 5000);
+            }
 
-            // Obtener los datos del formulario
-            const formData = new FormData(this);
-
-            // Realizar la solicitud AJAX para guardar la planta
-            $.ajax({
-                url: "{{ route('misPlantas.store') }}",
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log('Planta agregada correctamente:', response);
-
-                    // Limpiar el contenedor de tarjetas
-                    $('#card-container').empty();
-
-                    // Recorrer las plantas devueltas y agregarlas como tarjetas
-                    $.each(response, function(index, misplanta) {
-                        const cardHtml = `
-                            <div class="card">
-                                <img src="{{ asset(Storage::url('')) }}/${misplanta.planta.imagen}" width="150" alt="${misplanta.planta.nombre}" class="card-img">
-                                <div class="card-content">
-                                    <p>${misplanta.planta.nombre}</p>
-                                </div>
-                            </div>
-                        `;
-                        $('#card-container').append(cardHtml);
+            // Ocultar la alerta de error después de 5 segundos
+            const errorAlert = document.getElementById('error-alert');
+            if (errorAlert) {
+                setTimeout(() => {
+                    errorAlert.style.display = 'none';
+                }, 5000);
+            }
+        });
+     /*** buscador***/
+     $(document).ready(function() {
+    // Manejar el evento de entrada en el campo de búsqueda
+    $('.search-input').on('input', function() {
+        // Obtener el valor de búsqueda
+        var query = $(this).val();
+        
+        // Enviar una solicitud AJAX para buscar plantas
+        $.ajax({
+            url: "{{ route('search') }}",
+            type: 'GET',
+            data: { query: query },
+            success: function(data) {
+                // Procesar los resultados de la búsqueda
+                var resultsContainer = $('.search-results');
+                resultsContainer.empty();
+                
+                if (data.length > 0) {
+                    data.forEach(function(planta) {
+                        resultsContainer.append('<div>' + planta.nombre + '</div>');
                     });
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error al agregar planta:', error);
+                } else {
+                    resultsContainer.append('<div>No se encontraron resultados.</div>');
                 }
-            });
+            },
+            error: function() {
+                $('.search-results').append('<div>Hubo un error al realizar la búsqueda.</div>');
+            }
+        });
+    });
+});
+
+document.querySelectorAll('.button-detalles').forEach(button => {
+        button.addEventListener('click', function () {
+            const card = this.closest('.card');
+            const plantId = this.getAttribute('data-id');
+
+            fetch(`/plantas/${plantId}`)
+                .then(response => response.json())
+                .then(data => {
+                    modalImage.src = data.image;
+                    modalName.innerText = data.name;
+                    modalDescription.innerText = data.description;
+
+                    modal.style.display = 'block';
+                })
+                .catch(error => console.error('Error:', error));
         });
     });
 
-   
-</script>
+    closeBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
 
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+</script>
 
 
 
 </body>
 </html>
+

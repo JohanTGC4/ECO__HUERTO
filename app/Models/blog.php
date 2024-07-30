@@ -10,14 +10,14 @@ class blog extends Model
 {
     use HasFactory;
     protected $table = 'blog';
+    protected $primaryKey = 'id_blog'; // Suponiendo que la clave primaria se llama 'id'
     protected $fillable = [
         'imagen',
         'comentario', // Nombre de la columna en la base de datos
-        
+        'usuario_id_usuario', // Añadido para permitir la asignación masiva
+        'fecha',
+        'hora',
     ];
-    use HasFactory;
-
-   
     public function usuario()
 {
     return $this->belongsTo(usuario::class, 'usuario_id_usuario', 'id_usuario');

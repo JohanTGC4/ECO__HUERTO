@@ -52,17 +52,10 @@ body {
 
 .nav-link {
   text-decoration: none;
-  color: #fff;
+  color: #ffffff;
   font-size: 18px;
   transition: color 0.3s ease;
-  display: flex;
-  align-items: center;
 }
-
-.nav-link i {
-  margin-left: 5px;
-}
-
 .nav-link:hover {
   color: #ff6347;
 }
@@ -103,6 +96,32 @@ body {
 }
 
 .edit-btn:hover {
+  background-color: #555;
+}
+
+.salir-btn {
+  padding: 10px 20px;
+  background-color: #8c0000ec; /* Fondo semitransparente para la barra de navegación */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.salir-btn:hover {
+  background-color: #555;
+}
+
+.agregar-btn {
+  padding: 10px 20px;
+  background-color: #2bcd49ec; /* Fondo semitransparente para la barra de navegación */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.agregar-btn:hover {
   background-color: #555;
 }
 
@@ -179,8 +198,52 @@ form input[type="file"] {
   box-sizing: border-box;
 }
 
+
+
+/* Ajustes para el modal de agregar y editar dirección */
+#addModal .modal-content,
+#editModal .modal-content {
+  background-color: #2bcd49ec; /* Fondo del modal */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#addModal label,
+#editModal label {
+  margin-top: 10px;
+  color: #333;
+}
+
+#addModal input,
+#editModal input,
+#addModal select,
+#editModal select {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#addModal button,
+#editModal button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#addModal button:hover,
+#editModal button:hover {
+  background-color: #555;
+}
+
 /* Media queries para responsividad */
 @media screen and (max-width: 768px) {
+  
   .nav-link span {
     display: none; /* Ocultar el texto de los enlaces en dispositivos móviles */
   }
@@ -188,7 +251,6 @@ form input[type="file"] {
   .imagen {
     display: none; /* Ocultar el logo en dispositivos móviles */
   }
-
   .nav-item {
     position: relative;
   }
