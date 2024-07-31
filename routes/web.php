@@ -70,14 +70,19 @@ Route::group(['prefix' => 'usuarios', 'middleware' => 'auth:usuario'], function(
     Route::put('/blog/{id_blog}', [BlogController::class, 'update'])->name('blog.update');
     Route::delete('/blog/{id_blog}', [BlogController::class, 'destroy'])->name('blog.destroy');
 
-    Route::resource('misplantas', MisplantasController::class);
+
     Route::get('/misplantas', [MisplantasController::class, 'index'])->name('misplantas.index');
     Route::post('/misplantas/getPlantasByCategoria', [MisplantasController::class, 'getPlantasByCategoria'])->name('misplantas.getPlantasByCategoria');
     Route::post('/misplantas/getPlantaDetails', [MisplantasController::class, 'getPlantaDetails'])->name('misplantas.getPlantaDetails');
     Route::post('/misplantas', [MisplantasController::class, 'store'])->name('misPlantas.store');
     Route::delete('/misplantas/{id_misplanta}', [MisplantasController::class, 'destroy'])->name('misplantas.destroy');
-    Route::get('/search', [MisplantasController::class, 'search'])->name('search');
+    Route::get('/search', [MisplantasController::class, 'search'])->name('search'); 
+    Route::get('/misplantas/{id_planta}/detalles', [MisplantasController::class, 'showDetails']);
+
     
+
+
+
   
 
     /*
