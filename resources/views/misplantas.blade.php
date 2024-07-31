@@ -17,6 +17,7 @@
         <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Blog</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a href="{{ route('teachable') }}" class="nav-link"><span>Salud</span><i class="fa fa-heartbeat" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
       </ul>
     </div>
@@ -358,7 +359,7 @@
 
             if (categoria_id) {
                 $.ajax({
-                    url: '{{ route('misplantas.index') }}',
+                    url: "{{ route('misplantas.index') }}",
                     type: 'GET',
                     data: {
                         categoria: categoria_id
@@ -389,7 +390,7 @@
 
             if (planta_id) {
                 $.ajax({
-                    url: '{{ route('misplantas.getPlantaDetails') }}',
+                    url: "{{ route('misplantas.getPlantaDetails') }}",
                     type: 'POST',
                     data: {
                         planta_id: planta_id,
@@ -419,7 +420,7 @@
 
             // Realizar la solicitud AJAX para guardar la planta
             $.ajax({
-                url: '{{ route('misPlantas.store') }}',
+                url: "{{ route('misPlantas.store') }}",
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -442,14 +443,51 @@
     });
 /*alertas*/
     document.addEventListener('DOMContentLoaded', function() {
-    var alerts = document.querySelectorAll('.alert');
-    alerts.forEach(function(alert) {
-        setTimeout(function() {
-            alert.style.opacity = '0';
-            setTimeout(function() {
-                alert.style.display = 'none';
-            }, 500); // Espera a que la transición de opacidad termine
-        }, 5000); // Tiempo de espera antes de ocultar la alerta
+            // Ocultar la alerta de éxito después de 5 segundos
+            const successAlert = document.getElementById('success-alert');
+            if (successAlert) {
+                setTimeout(() => {
+                    successAlert.style.display = 'none';
+                }, 5000);
+            }
+
+            // Ocultar la alerta de error después de 5 segundos
+            const errorAlert = document.getElementById('error-alert');
+            if (errorAlert) {
+                setTimeout(() => {
+                    errorAlert.style.display = 'none';
+                }, 5000);
+            }
+        });
+     /*** buscador***/
+     $(document).ready(function() {
+    // Manejar el evento de entrada en el campo de búsqueda
+    $('.search-input').on('input', function() {
+        // Obtener el valor de búsqueda
+        var query = $(this).val();
+        
+        // Enviar una solicitud AJAX para buscar plantas
+        $.ajax({
+            url: "{{ route('search') }}",
+            type: 'GET',
+            data: { query: query },
+            success: function(data) {
+                // Procesar los resultados de la búsqueda
+                var resultsContainer = $('.search-results');
+                resultsContainer.empty();
+                
+                if (data.length > 0) {
+                    data.forEach(function(planta) {
+                        resultsContainer.append('<div>' + planta.nombre + '</div>');
+                    });
+                } else {
+                    resultsContainer.append('<div>No se encontraron resultados.</div>');
+                }
+            },
+            error: function() {
+                $('.search-results').append('<div>Hubo un error al realizar la búsqueda.</div>');
+            }
+        });
     });
 });
 /*MODAL DE DETALLES*/

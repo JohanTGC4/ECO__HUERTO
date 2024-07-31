@@ -17,6 +17,7 @@
         <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Blog</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a href="{{ route('teachable') }}" class="nav-link"><span>Salud</span><i class="fa fa-heartbeat" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
       </ul>
     </div>
@@ -44,7 +45,7 @@
               <option value="9">9</option>
               <option value="10">10</option>
             </select>
-            <button class="add-to-cart-btn" data-name="Tierra para su plantita" data-price="300.00">Agregar al carrito</button>
+            <button class="add-cart-btn" data-name="Tierra para su plantita" data-price="300.00">Agregar al carrito</button>
           </div>
         </div>
       </div>
@@ -67,7 +68,7 @@
               <option value="9">9</option>
               <option value="10">10</option>
             </select>
-            <button class="add-to-cart-btn" data-name="Pala para plantar" data-price="250.00">Agregar al carrito</button>
+            <button class="add-cart-btn" data-name="Pala para plantar" data-price="250.00">Agregar al carrito</button>
           </div>
         </div>
       </div>
@@ -90,7 +91,7 @@
               <option value="9">9</option>
               <option value="10">10</option>
             </select>
-            <button class="add-to-cart-btn" data-name="Maceta grande para plantas" data-price="500.00">Agregar al carrito</button>
+            <button class="add-cart-btn" data-name="Maceta grande para plantas" data-price="500.00">Agregar al carrito</button>
           </div>
         </div>
       </div>

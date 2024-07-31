@@ -320,6 +320,7 @@ main {
     background-color: #218838;
 }
 
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -410,3 +411,25 @@ main {
       font-size: 30px; /* Ajustar tamaño de íconos en dispositivos móviles */
     }
 }  
+
+
+/* ::::::::::::::::: BOTON DE PUBLICAR :::::::::::::::::*/
+.bott-public{
+    background-color: #fff;
+    color: #2bcd49;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+    display: block;
+    margin: 20px auto;
+}
+
+.bott-public:hover {
+    background-color: #2bcd49;
+    color: #fff;
+    transform: scale(1.1);
+}

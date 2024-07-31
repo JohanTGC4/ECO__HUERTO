@@ -17,6 +17,7 @@
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
             <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
             <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Publicaciones</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+            <li class="nav-item"><a href="{{ route('teachable') }}" class="nav-link"><span>Salud</span><i class="fa fa-heartbeat" aria-hidden="true"></i></a></li>
             <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
         </ul>
     </div>
@@ -59,7 +60,7 @@
 <div class="direccion-container">
     <h2>Direcciones</h2>
 
-    <button class="agregar-btn" onclick="openAddModal()">Agregar Dirección</button>
+    <button class="but-agregar" onclick="openAddModal()">Agregar Dirección</button>
     @if ($direcciones->isNotEmpty())
         <div class="table-responsive">
             <table>
@@ -77,7 +78,7 @@
                                 <form action="{{ route('direccion.destroy', $direccion->id_direccion) }}" method="POST" onsubmit="return confirm('¿Está seguro de que desea eliminar esta dirección?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit">Eliminar</button>
+                                    <button class="elim-direc" type="submit">Eliminar</button>
                                 </form>
                             </td>
                         </tr>
