@@ -45,7 +45,7 @@
               <option value="9">9</option>
               <option value="10">10</option>
             </select>
-            <button class="add-to-cart-btn" data-name="Tierra para su plantita" data-price="300.00">Agregar al carrito</button>
+            <button class="add-cart-btn" data-name="Tierra para su plantita" data-price="300.00">Agregar al carrito</button>
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@
               <option value="9">9</option>
               <option value="10">10</option>
             </select>
-            <button class="add-to-cart-btn" data-name="Pala para plantar" data-price="250.00">Agregar al carrito</button>
+            <button class="add-cart-btn" data-name="Pala para plantar" data-price="250.00">Agregar al carrito</button>
           </div>
         </div>
       </div>
@@ -91,7 +91,7 @@
               <option value="9">9</option>
               <option value="10">10</option>
             </select>
-            <button class="add-to-cart-btn" data-name="Maceta grande para plantas" data-price="500.00">Agregar al carrito</button>
+            <button class="add-cart-btn" data-name="Maceta grande para plantas" data-price="500.00">Agregar al carrito</button>
           </div>
         </div>
       </div>

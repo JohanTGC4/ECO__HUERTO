@@ -60,7 +60,7 @@
 <div class="direccion-container">
     <h2>Direcciones</h2>
 
-    <button class="agregar-btn" onclick="openAddModal()">Agregar Dirección</button>
+    <button class="but-agregar" onclick="openAddModal()">Agregar Dirección</button>
     @if ($direcciones->isNotEmpty())
         <div class="table-responsive">
             <table>
@@ -78,7 +78,7 @@
                                 <form action="{{ route('direccion.destroy', $direccion->id_direccion) }}" method="POST" onsubmit="return confirm('¿Está seguro de que desea eliminar esta dirección?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit">Eliminar</button>
+                                    <button class="elim-direc" type="submit">Eliminar</button>
                                 </form>
                             </td>
                         </tr>

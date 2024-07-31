@@ -205,7 +205,7 @@
                     <div class="form-group">
                         <input type="file" name="imagen" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary">Publicar</button>
+                    <button type="submit" class="bott-public">Publicar</button>
                 </form>
                 <div class="container">
                     <h1>Publicaciones </h1>
