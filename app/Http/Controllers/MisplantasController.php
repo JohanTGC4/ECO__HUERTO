@@ -122,14 +122,24 @@ class MisplantasController extends Controller
            // Redirige con mensaje de error si la planta no fue encontrada
            return redirect()->route('misplantas.index')->with('error', 'Planta no encontrada');
        }
-      
-
-       public function search(Request $request)
+       /*public function showDetails($id)
        {
-           $query = $request->input('query');
-           $results = Planta::where('nombre', 'like', '%' . $query . '%')->get();
-           
-           return response()->json($results);
+           $planta = Planta::findOrFail($id);
+           return view('detalles', compact('planta'));
+       }*/
+       public function showDetails($id_planta)
+       {
+           $planta = Planta::findOrFail($id_planta);
+           return response()->json([
+               'imagen' => Storage::url($planta->imagen),
+               'nombre' => $planta->nombre,
+               'descripcion' => $planta->descripcion
+           ]);
        }
+       
+       
+       
+       
+
 }
 
