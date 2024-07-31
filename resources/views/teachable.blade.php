@@ -133,11 +133,39 @@
 
                 switch (highestPrediction.index) {
                     case 0:
-                        message = "Daño por causa de sol";
+                        message = "Daño por Alternaria";
                         message2 = "Utiliza azúcar";
                         break;
                     case 1:
+                        message = "Daño por Congelación";
+                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        break;
+                    case 2:
                         message = "Daño por falta de agua";
+                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        break;
+                    case 3:
+                        message = "Daño por Mildiu";
+                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        break;
+                    case 4:
+                        message = "Daño por Moho Polvoriento";
+                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        break;
+                    case 5:
+                        message = "Daño por Pudricion Bacteriana";
+                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        break;
+                    case 6:
+                        message = "Daño por Quemadura de sol";
+                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        break;
+                    case 7:
+                        message = "Daño por Roya";
+                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        break;
+                    case 8:
+                        message = "Daño por virus de mosaico";
                         message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
                         break;
                     default:

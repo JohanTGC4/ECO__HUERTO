@@ -60,6 +60,17 @@
             </script>
             @endif
 
+            @if(session('error'))
+            <script>
+           Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            text: "{{ session('error') }}",
+            confirmButtonColor: '#d33',
+            });
+           </script>
+            @endif
+
             <!----- Aquí empieza el div de las tablas ----->
             <div class="table">
                 <div class="table-header">
@@ -243,28 +254,27 @@ document.getElementById('edit-form').addEventListener('submit', function(event) 
     // :::::::::::::::::::::::: ELIMINAR PLANTA ::::::::::::::::::::::::::
 
     document.querySelectorAll('.delete').forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.preventDefault(); 
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
 
-            const form = this.closest('.delete-form'); 
+                const form = this.closest('.delete-form');
 
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "¡No podrás revertir esto!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminar!',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit(); 
-                }
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡No podrás revertir esto!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminar!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
             });
         });
-    });
-
 </script>
     <script src="{{ asset('js/Sidebar.js')}}"></script>
     @include('admin.Plantas.plantaCreate')
