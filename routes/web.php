@@ -39,6 +39,12 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+Route::get('/teachable', function () {
+    return view('teachable');
+})->name('teachable');
+
+
+
 // Route::get('/misPlantas', function () {
 //     return view('misplantas');
 // })->name('misplantas');
@@ -105,6 +111,8 @@ Route::delete('/misplantas/{id}', [MisPlantasController::class, 'destroy'])->nam
                     Route::get('/home', function () { 
                     return view('home');
             })->name('home');
+
+
             
             
             });

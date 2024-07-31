@@ -208,7 +208,7 @@
                 <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link">Comprar </a><i class="fa fa-shopping-bag" aria-hidden="true"></i></li>
                 <li class="nav-item"><a href="{{ route('blog') }}" class="nav-link">Blog </a><i class="fa fa-tag" aria-hidden="true"></i></li>
                 <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link">Perfil </i></a><i class="fa fa-user-circle" aria-hidden="true"></i></li>
-                <li class="nav-item"><a href="{{ route('usuario.teachable') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
+                <li class="nav-item"><a href="{{ route('teachable') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
               </ul>
             <div class="hamburger">
                 <span class="bar"></span>
