@@ -25,6 +25,7 @@
 
     <div class="titulo-teach"> Un Curita Para Tu Planta </div>
     <button id="start-button" class="butt-init" type="button" onclick="init()">Comenzar</button>
+    <button id="toggle-camera-button" class="butt-init" type="button" style="display: none;" onclick="toggleCamera()">Cambiar Cámara</button>
     <div class="loader" id="loader">
         <span class="item"></span>
         <span class="item"></span>
@@ -51,6 +52,7 @@
         const URL = "./my_model/";
 
         let model, webcam, labelContainer, maxPredictions;
+        let usingBackCamera = true;
 
         async function init() {
             try {
@@ -65,40 +67,62 @@
                 model = await tmImage.load(modelURL, metadataURL);
                 maxPredictions = model.getTotalClasses();
 
-                console.log("Configurando webcam...");
-                const flip = true; 
-                const width = 600;  
-                const height = 400; 
-                webcam = new tmImage.Webcam(width, height, flip);
-                await webcam.setup(); 
-                await webcam.play();
-                window.requestAnimationFrame(loop);
-
-                const webcamContainer = document.getElementById("webcam-container");
-                webcamContainer.appendChild(webcam.canvas);
-                webcamContainer.classList.add("active");
-
-                // Oculta el botón y la carta después de iniciar la webcam
-                const startButton = document.getElementById("start-button");
-                if (startButton) {
-                    startButton.style.display = "none";
-                    console.log("Botón ocultado.");
-                } else {
-                    console.error("Botón no encontrado.");
-                }
-
-                document.getElementById("loader").style.display = "none";
-
-                labelContainer = document.getElementById("label-container");
-                for (let i = 0; i < maxPredictions; i++) {
-                    labelContainer.appendChild(document.createElement("div"));
-                }
-                console.log("Modelo y webcam configurados correctamente.");
+                await setupWebcam();
             } catch (error) {
                 console.error("Error durante la inicialización:", error);
                 document.getElementById("loader").style.display = "none";
                 document.getElementById("info-card").style.display = "block";
             }
+        }
+
+        async function setupWebcam() {
+            if (webcam) {
+                webcam.stop();
+                webcam.webcam.srcObject.getTracks().forEach(track => track.stop());
+            }
+
+            const flip = true;
+            const width = 600;
+            const height = 400;
+
+            const constraints = {
+                video: {
+                    facingMode: usingBackCamera ? { exact: "environment" } : "user"
+                }
+            };
+
+            webcam = new tmImage.Webcam(width, height, flip, constraints);
+            await webcam.setup();
+            await webcam.play();
+            window.requestAnimationFrame(loop);
+
+            const webcamContainer = document.getElementById("webcam-container");
+            webcamContainer.innerHTML = '';
+            webcamContainer.appendChild(webcam.canvas);
+            webcamContainer.classList.add("active");
+
+            const startButton = document.getElementById("start-button");
+            const toggleCameraButton = document.getElementById("toggle-camera-button");
+            if (startButton) {
+                startButton.style.display = "none";
+            }
+            if (toggleCameraButton) {
+                toggleCameraButton.style.display = "block";
+            }
+
+            document.getElementById("loader").style.display = "none";
+
+            labelContainer = document.getElementById("label-container");
+            labelContainer.innerHTML = '';
+            for (let i = 0; i < maxPredictions; i++) {
+                labelContainer.appendChild(document.createElement("div"));
+            }
+            console.log("Modelo y webcam configurados correctamente.");
+        }
+
+        function toggleCamera() {
+            usingBackCamera = !usingBackCamera;
+            setupWebcam();
         }
 
         async function loop() {
