@@ -3,7 +3,7 @@
 <>
   <title>EcoHuerto</title>
   <link rel="icon" href="{{ asset('images/logoEcoHuerto.png') }}" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="slide navbar style.css">
+
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/login.css') }}">
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">

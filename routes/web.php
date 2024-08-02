@@ -82,7 +82,7 @@ Route::group(['prefix' => 'usuarios', 'middleware' => 'auth:usuario'], function(
     Route::post('/misplantas/getPlantaDetails', [MisplantasController::class, 'getPlantaDetails'])->name('misplantas.getPlantaDetails');
     Route::post('/misplantas', [MisplantasController::class, 'store'])->name('misPlantas.store');
     Route::delete('/misplantas/{id_misplanta}', [MisplantasController::class, 'destroy'])->name('misplantas.destroy');
-    Route::get('/search', [MisplantasController::class, 'search'])->name('search'); 
+    Route::get('/buscar-planta', [MisplantasController::class, 'buscar'])->name('buscar-planta');
     Route::get('/misplantas/{id_planta}/detalles', [MisplantasController::class, 'showDetails']);
 
     

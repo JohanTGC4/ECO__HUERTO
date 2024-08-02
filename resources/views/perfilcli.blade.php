@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <title>Perfil</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoHuerto</title>
@@ -15,11 +16,11 @@
     <div class="navbar-container">
         <a href="#" class="imagen"><img src="{{ asset('images/logoEcoHuerto2-removebg-preview.png') }}" style="border-radius: 50%; width: 60px;" alt=""></a>
         <ul class="nav-menu">
-            <li class="nav-item"><a href="{{ route('home') }}" class="nav-link"><span>Mi Huerto</span><i class="fa fa-home" aria-hidden="true"></i></a></li>
-            <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
-            <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Publicaciones</span><i class="fa fa-tag" aria-hidden="true"></i></a></li>
-            <li class="nav-item"><a href="{{ route('teachable') }}" class="nav-link"><span>Salud</span><i class="fa fa-heartbeat" aria-hidden="true"></i></a></li>
-            <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span><i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
+          <li class="nav-item"><a href="{{ route('misplantas.index') }}" class="nav-link"><span>Mi plantas</span>  <i class="fa fa-leaf" aria-hidden="true"></i></a></li>
+            <li class="nav-item"><a href="{{ route('comprar') }}" class="nav-link"><span>Comprar</span> <i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+            <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link"><span>Publicaciones</span> <i class="fa fa-tag" aria-hidden="true"></i></a></li>
+            <li class="nav-item"><a href="{{ route('teachable') }}" class="nav-link"><span>Salud</span> <i class="fa fa-heartbeat" aria-hidden="true"></i></a></li>
+            <li class="nav-item"><a href="{{ route('perfilcli') }}" class="nav-link"><span>Perfil</span> <i class="fa fa-user-circle" aria-hidden="true"></i></a></li>
         </ul>
     </div>
 </nav>
