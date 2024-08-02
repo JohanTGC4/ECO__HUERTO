@@ -99,3 +99,26 @@ button:hover{
 	transform: scale(.6);
 }
 
+@media (max-width: 600px) {
+ 
+	label {
+        font-size: 1.8em;
+    }
+
+    .main {
+		width: 500px;
+		height: 800px;
+    }
+
+    input {
+        height: 45px;
+    }
+
+    button {
+        font-size: 0.9em;
+    }
+
+    .login {
+        border-radius: 50% / 20%;
+    }
+}

@@ -22,9 +22,14 @@
             </ul>
         </div>
     </nav>
+    <br>
+    <br>
+    <br>
 
     <div class="titulo-teach"> Un Curita Para Tu Planta </div>
     <button id="start-button" class="butt-init" type="button" onclick="init()">Comenzar</button>
+    <br>
+    <br>
     <button id="toggle-camera-button" class="butt-init" type="button" style="display: none;" onclick="toggleCamera()">Cambiar Cámara</button>
     <div class="loader" id="loader">
         <span class="item"></span>
@@ -34,7 +39,7 @@
     </div>
     <div id="webcam-container"></div>
     <div id="label-container"></div>
-    <div id="result-container"></div>
+    <div id="result-container" style="padding: 10px; box-sizing: border-box;"></div>
 
     <!-- ::::::::: CARD ::::::::::::::::::::::: -->
     <div id="info-card" class="card">
@@ -158,39 +163,39 @@
                 switch (highestPrediction.index) {
                     case 0:
                         message = "Daño por Alternaria";
-                        message2 = "Utiliza azúcar";
+                        message2 = "1. Regar las plantas en la base en lugar de las hojas para reducir la humedad, lo que puede limitar la propagación del hongo. <br> 2. Retirar y destruir las partes de las plantas afectadas para evitar la propagación de esporas. <br> 3. Asegurar un buen flujo de aire alrededor de las plantas espaciándolas adecuadamente.";
                         break;
                     case 1:
                         message = "Daño por Congelación";
-                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        message2 = "1. Utiliza coberturas como mantas de jardín, telas antiheladas o mulch (acolchado) para proteger las plantas durante las heladas. <br>  2. Realiza una poda cuidadosa para eliminar las partes dañadas de la planta. <br> 3.Usa fertilizantes ricos en potasio, que pueden ayudar a aumentar la resistencia de las plantas al frío y mejorar su recuperación.";
                         break;
                     case 2:
                         message = "Daño por falta de agua";
-                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        message2 = "1. Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto <br> 2. Cubre el suelo alrededor de las plantas con mulch (acolchado) para conservar la humedad y reducir la evaporación. <br> 3. No riegues en exceso, ya que esto puede provocar problemas de raíz y aumentar el riesgo de enfermedades.";
                         break;
                     case 3:
                         message = "Daño por Mildiu";
-                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        message2 = "1. Riega las plantas en la base y evita mojar las hojas <br> 2. Retira y destruye las partes de las plantas que muestran signos de mildiu para reducir la fuente de inóculo. <br> 3. Aplicación de mulch para mantener el suelo húmedo y reducir el riesgo de esporas del mildiu ";
                         break;
                     case 4:
                         message = "Daño por Moho Polvoriento";
-                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        message2 = "1. Aplica fungicidas específicos para el moho polvoriento, como aquellos que contienen azufre, bicarbonato de potasio o miconazol. <br> 2. Mantén una buena ventilación y controla la humedad en el área de cultivo. <br> 3. Retira y destruye las partes de las plantas que muestran signos de moho polvoriento";
                         break;
                     case 5:
                         message = "Daño por Pudricion Bacteriana";
-                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        message2 = "1. Evita el riego excesivo, ya que el exceso de agua puede promover la proliferación de bacterias. <br> 2. Espacia las plantas adecuadamente para mejorar la ventilación y reducir la humedad ";
                         break;
                     case 6:
                         message = "Daño por Quemadura de sol";
-                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        message2 = "1. Utiliza sombrillas, redes de sombra, o estructuras de sombra o reubica las plantas en áreas donde reciban luz solar indirecta <br> 2. Aplica una capa de mulch (acolchado) alrededor de la base de las plantas para ayudar a mantener la humedad del suelo y moderar las temperaturas extremas del suelo.";
                         break;
                     case 7:
                         message = "Daño por Roya";
-                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        message2 = "1. Realiza y bierte una mezcla de leche y agua (1 parte de leche por 9 partes de agua). <br> 2. Asegura un buen espaciado entre las plantas para mejorar la ventilación y reducir la humedad, lo que puede limitar el desarrollo del hongo";
                         break;
                     case 8:
                         message = "Daño por virus de mosaico";
-                        message2 = "Asegúrate de agregar agua manualmente y desde los detalles observar cuando tengas el nivel de humedad correcto";
+                        message2 = "Infusión de Ajo: Mezcla 3-4 dientes de ajo triturados con 1 litro de agua y deja reposar durante 24 horas. Cuela la mezcla y aplícalo en las plantas para repeler insectos vectores como los áfidos.";
                         break;
                     default:
                         message = "Clase no reconocida";
