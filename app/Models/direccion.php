@@ -10,7 +10,7 @@ class Direccion extends Model
     protected $primaryKey = 'id_direccion';
 
     protected $fillable = [
-        'calle', 'numero', 'colonia', 'municipio', 'estado', 'usuario_id_usuario'
+        'calle', 'numero', 'numero_e','colonia', 'municipio', 'estado', 'usuario_id_usuario'
     ];
 
     public function usuario()
