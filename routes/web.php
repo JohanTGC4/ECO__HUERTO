@@ -175,8 +175,6 @@ Route::delete('/administradores/productDestroy/{id}', [ProductosController::clas
 
 Route::post('/loginUsuario', [UsuarioController::class, 'login'])->name('loginUsuario');
 
-
 Route::post('/registrar', [UsuarioController::class, 'register'])->name('registrar');
 
-
-Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
+Route::get('/logout', [UsuarioController::class, 'logout'])->name('login');

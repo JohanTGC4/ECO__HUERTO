@@ -103,6 +103,7 @@ button:hover{
 	transform: scale(.6);
 }
 
+<<<<<<< HEAD
 @media (max-width: 768px) {
     /* Estilos específicos para dispositivos móviles */
     .main {
@@ -110,4 +111,28 @@ button:hover{
         /* ...otros estilos... */
     }
     /* ...otros estilos específicos... */
+=======
+@media (max-width: 600px) {
+ 
+	label {
+        font-size: 1.8em;
+    }
+
+    .main {
+		width: 500px;
+		height: 800px;
+    }
+
+    input {
+        height: 45px;
+    }
+
+    button {
+        font-size: 0.9em;
+    }
+
+    .login {
+        border-radius: 50% / 20%;
+    }
+>>>>>>> 356926a72d3bad00a7f1d3137ed219e9654ec4e3
 }

@@ -99,6 +99,6 @@ class PlantaController extends Controller
         $cat = planta::findOrFail($id);
         planta::where('id_categoriaplanta', $id)->delete();
         $cat->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Planta eliminada exitosamente');
     }
 }

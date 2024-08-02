@@ -143,8 +143,13 @@ main {
 .titulo-teach {
     margin-top: 60px;
     font-size: 30px;
+    position: sticky;
 }
-
+@media (max-width: 375px) {
+    .titulo-teach {
+        margin-top: 120px;
+    }
+}
 .butt-init {
     background-color: #fff;
     color: #2bcd49;
@@ -168,7 +173,7 @@ main {
 /* Estilos del Recuadro de la Cámara */
 #webcam-container {
     width: 600px;
-    height: 400px;
+    height: 350px;
     border: 2px solid transparent;
     border-radius: 20px;
     margin-top: 20px;
@@ -290,7 +295,7 @@ main {
     }
 
     .card {
-        margin-top: 100px;
+        margin-top: 160px;
         width: 80%;
         height: auto;
         max-height: none;
@@ -343,6 +348,14 @@ main {
     background: var(--gradient);
     transition: transform 300ms ease;
     z-index: 4;
+}
+
+@media (max-width: 768px) {
+    .notification {
+        width: 100%;
+        height: auto; /* Ajusta la altura automáticamente */
+        font-size: 14px; /* Ajusta el tamaño de la fuente si es necesario */
+    }
 }
 
 .notititle {
@@ -458,4 +471,46 @@ main {
     100% {
         transform: scale(1) rotate(360deg);
     }
+}
+
+/* Media Query para el iPhone SE (1ª y 2ª generación) */
+@media only screen and (max-width: 640px) {
+    body {
+        padding: 10px; /* Ajusta el padding para mejor ajuste en pantallas pequeñas */
+    }
+
+
+    .titulo-teach {
+        
+        font-size: 24px; /* Ajusta el tamaño del texto del título */
+    }
+
+    
+    .butt-init {
+        font-size: 16px; /* Ajusta el tamaño del texto del botón */
+        padding: 8px 16px; /* Ajusta el padding del botón */
+    }
+
+    #webcam-container {
+        width: 100%; /* Asegúrate de que el contenedor de la cámara usa todo el ancho disponible */
+        height: auto; /* Ajusta la altura automáticamente */
+    }
+
+    .card {
+        width: 90%; /* Ajusta el ancho de la tarjeta */
+        margin-top: 120px; /* Ajusta el margen superior para móviles */
+        height: auto; /* Ajusta la altura automáticamente */
+        padding: 10px; /* Añade padding para mejor ajuste */
+    }
+
+    .info-content {
+        font-size: 14px; /* Ajusta el tamaño de la fuente en la tarjeta */
+    }
+
+    .notification {
+        width: 100%; /* Asegúrate de que la notificación usa todo el ancho disponible */
+        font-size: 14px; /* Ajusta el tamaño de la fuente */
+        height: auto; /* Ajusta la altura automáticamente */
+    }
+
 }

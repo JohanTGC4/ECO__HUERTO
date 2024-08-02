@@ -8,6 +8,7 @@
     <link rel="icon" href="{{ asset('images/logoEcoHuerto.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/perfilcli.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -60,9 +61,41 @@
     <!-- Tabla de Direcciones -->
 <div class="direccion-container">
     <h2>Direcciones</h2>
-
+   
     <button class="but-agregar" onclick="openAddModal()">Agregar Dirección</button>
     @if ($direcciones->isNotEmpty())
+    @if(session('success'))
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Éxito!',
+                        text: "{{ session('success') }}",
+                        confirmButtonColor: '#3085d6',
+                    });
+                </script>
+            @endif
+
+            @if($errors->any())
+             <script>
+               Swal.fire({
+                 icon: 'error',
+                 title: '¡Error!',
+                 text: '{{ $errors->first() }}',
+                 confirmButtonColor: '#d33',
+            });
+            </script>
+            @endif
+
+            @if(session('error'))
+            <script>
+           Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            text: "{{ session('error') }}",
+            confirmButtonColor: '#d33',
+            });
+           </script>
+            @endif
         <div class="table-responsive">
             <table>
                 <thead>
@@ -72,18 +105,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($direcciones as $direccion)
-                        <tr>
-                            <td>{{ $direccion->calle }}, {{ $direccion->numero }}, {{ $direccion->colonia }}, {{ $direccion->municipio }}, {{ $direccion->estado }}</td>
-                            <td>
-                                <form action="{{ route('direccion.destroy', $direccion->id_direccion) }}" method="POST" onsubmit="return confirm('¿Está seguro de que desea eliminar esta dirección?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="elim-direc" type="submit">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
+                @foreach ($direcciones as $direccion)
+<tr>
+    <td>{{ $direccion->calle }}, {{ $direccion->numero }}, {{ $direccion->colonia }}, {{ $direccion->municipio }}, {{ $direccion->estado }}</td>
+    <td>
+        <form action="{{ route('direccion.destroy', $direccion->id_direccion) }}" method="POST" class="delete-form">
+            @csrf
+            @method('DELETE')
+            <button type="button" class="actions delete" data-id="{{ $direccion->id_direccion}}"><i class="fa-solid fa-trash"></i></button>
+        </form>
+    </td>
+</tr>
+@endforeach
                 </tbody>
             </table>
         </div>
@@ -160,7 +193,7 @@ table {
   border-spacing: 0; /* Espacio entre bordes */
   background-color: rgba(255, 255, 255, 0.718); /* Fondo blanco */
   color: #333; /* Color del texto */
-  border-radius: 10px; /* Bordes redondeados */
+  border-radius: 20px; /* Bordes redondeados */
   overflow: hidden; /* Ocultar cualquier desbordamiento */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
   justify-content: center;
@@ -196,7 +229,7 @@ table td form button {
   background-color: #dc3545;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
@@ -228,8 +261,11 @@ table td form button:hover {
             <label for="calle">Calle:</label>
             <input type="text" name="calle" id="calle" required>
 
-            <label for="numero">Número:</label>
+            <label for="numero">Número interior:</label>
             <input type="text" name="numero" id="numero" required>
+
+            <label for="numero_e">Número exterior:</label>
+            <input type="text" name="numero_e" id="numero_e" required>
 
             <label for="colonia">Colonia:</label>
             <input type="text" name="colonia" id="colonia" required>
@@ -262,7 +298,76 @@ table td form button:hover {
         document.getElementById('addModal').style.display = 'none';
     }
 
-    </script>
+    // :::::::::::: EDITAR DATOS DEL USUARIO :::::::::::::::::::
+    document.addEventListener('DOMContentLoaded', function() {
+        const editForm = document.getElementById('editForm');
+
+        editForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(editForm);
+
+            fetch('{{ route("perfilcli.update") }}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Éxito!',
+                        text: data.success,
+                    }).then(() => {
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Hubo un problema al actualizar el perfil.',
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un problema al actualizar el perfil.',
+                });
+            });
+        });
+    });
+
+    // :::::::::::::::::::::::: ELIMINAR DIRECCION ::::::::::::::::::::::::::
+
+    document.querySelectorAll('.delete').forEach(button => {
+    button.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        const form = this.closest('.delete-form');
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
 </script>
 
 </body>
