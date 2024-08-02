@@ -24,4 +24,6 @@ class usuario extends Authenticatable
       {
           return $this->hasMany(blog::class, 'usuario_id_usuario', 'id_usuario');
       }
+    
+    
 }

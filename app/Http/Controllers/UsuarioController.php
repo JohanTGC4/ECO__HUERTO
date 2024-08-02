@@ -50,40 +50,45 @@ class UsuarioController extends Controller
 
 
     public function login(Request $request)
-{
-    $credenciales = $request->validate([
-        'email' => ['required'],
-        'password' => ['required']
-    ]);
-
-    $credenciales = $request->only('email', 'password');
-
-    if (Auth::guard('usuario')->attempt($credenciales)) {
-        Auth::shouldUse('usuario');
-        $userId = Auth::id();
-        $nombre = session('nombre');
-
-        return response()->json([
-            'success' => true,
-            'redirect' => route('perfilcli')
+    {
+        $credenciales = $request->validate([
+            'email' => ['required'],
+            'password' => ['required']
         ]);
+    
+        $credenciales = $request->only('email', 'password');
+    
+        if (Auth::guard('usuario')->attempt($credenciales)) {
+            Auth::shouldUse('usuario');
+            $user = Auth::user();
+    
+            if (!$user->profile_complete) {
+                return response()->json([
+                    'success' => true,
+                    'showModal' => true,
+                    'redirect' => route('perfilcli')
+                ]);
+            }
+              
+            return response()->json([
+                'success' => true,
+                'redirect' => route('perfilcli')
+            ]);
+        } elseif (Auth::guard('admin')->attempt($credenciales)) {
+            Auth::shouldUse('admin');
+            return response()->json([
+                'success' => true,
+                'redirect' => route('homeAdmin')
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Correo o contraseña incorrectos.'
+            ]);
+        }
     }
-    elseif (Auth::guard('admin')->attempt($credenciales)) {
-        Auth::shouldUse('admin');
-        $userId = Auth::id();
-        $nombre = session('nombre');
+    
 
-        return response()->json([
-            'success' => true,
-            'redirect' => route('homeAdmin')
-        ]);
-    } else {
-        return response()->json([
-            'success' => false,
-            'message' => 'Correo o contraseña incorrectos.'
-        ]);
-    }
-}
 
     public function logout(Request $request)
     {

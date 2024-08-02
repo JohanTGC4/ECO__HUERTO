@@ -51,7 +51,7 @@
 
 	<scr>
 	<script>
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.querySelector("form[action='{{ route('registrar') }}']");
     const loginForm = document.querySelector("form[action='{{ route('loginUsuario') }}']");
 
@@ -117,7 +117,19 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = data.redirect;
+                    if (data.showModal) {
+                        Swal.fire({
+                            title: '¡Casi listo!',
+                            text: 'Si aun no culminas tu perfil, por favor agrega una foto de perfil y una dirección.',
+                            icon: 'info',
+                            confirmButtonText: 'Ir al perfil',
+                            willClose: () => {
+                                window.location.href = data.redirect;
+                            }
+                        });
+                    } else {
+                        window.location.href = data.redirect;
+                    }
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -137,8 +149,9 @@
         });
     }
 });
+</script>
 
-	</script>
+
 </body>
 </html>
 
